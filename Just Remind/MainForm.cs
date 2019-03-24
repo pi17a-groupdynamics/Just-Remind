@@ -83,5 +83,11 @@ namespace Just_Remind
             notifyIcon.Visible = true;
             notifyIcon.ShowBalloonTip(5000);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddNotificationForm addNotificationForm = new AddNotificationForm();
+            addNotificationForm.Show();
+        }
     }
 }

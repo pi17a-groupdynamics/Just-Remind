@@ -48,27 +48,27 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewButtonColumn3 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dataGridViewButtonColumn4 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewButtonColumn5 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dataGridViewButtonColumn6 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Important = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewButtonColumn3 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dataGridViewButtonColumn4 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewButtonColumn5 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dataGridViewButtonColumn6 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -260,6 +260,30 @@
             this.dataGridView1.Size = new System.Drawing.Size(504, 243);
             this.dataGridView1.TabIndex = 0;
             // 
+            // Task
+            // 
+            this.Task.HeaderText = "";
+            this.Task.Name = "Task";
+            this.Task.ReadOnly = true;
+            this.Task.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Task.Width = 441;
+            // 
+            // Important
+            // 
+            this.Important.HeaderText = "";
+            this.Important.Name = "Important";
+            this.Important.Text = "*";
+            this.Important.UseColumnTextForButtonValue = true;
+            this.Important.Width = 30;
+            // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "";
+            this.Delete.Name = "Delete";
+            this.Delete.Text = "-";
+            this.Delete.UseColumnTextForButtonValue = true;
+            this.Delete.Width = 30;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView2);
@@ -288,6 +312,30 @@
             this.dataGridView2.Size = new System.Drawing.Size(504, 243);
             this.dataGridView2.TabIndex = 1;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn1.Width = 441;
+            // 
+            // dataGridViewButtonColumn1
+            // 
+            this.dataGridViewButtonColumn1.HeaderText = "";
+            this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
+            this.dataGridViewButtonColumn1.Text = "*";
+            this.dataGridViewButtonColumn1.UseColumnTextForButtonValue = true;
+            this.dataGridViewButtonColumn1.Width = 30;
+            // 
+            // dataGridViewButtonColumn2
+            // 
+            this.dataGridViewButtonColumn2.HeaderText = "";
+            this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";
+            this.dataGridViewButtonColumn2.Text = "-";
+            this.dataGridViewButtonColumn2.UseColumnTextForButtonValue = true;
+            this.dataGridViewButtonColumn2.Width = 30;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dataGridView3);
@@ -314,6 +362,30 @@
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.Size = new System.Drawing.Size(504, 243);
             this.dataGridView3.TabIndex = 2;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn2.Width = 441;
+            // 
+            // dataGridViewButtonColumn3
+            // 
+            this.dataGridViewButtonColumn3.HeaderText = "";
+            this.dataGridViewButtonColumn3.Name = "dataGridViewButtonColumn3";
+            this.dataGridViewButtonColumn3.Text = "*";
+            this.dataGridViewButtonColumn3.UseColumnTextForButtonValue = true;
+            this.dataGridViewButtonColumn3.Width = 30;
+            // 
+            // dataGridViewButtonColumn4
+            // 
+            this.dataGridViewButtonColumn4.HeaderText = "";
+            this.dataGridViewButtonColumn4.Name = "dataGridViewButtonColumn4";
+            this.dataGridViewButtonColumn4.Text = "-";
+            this.dataGridViewButtonColumn4.UseColumnTextForButtonValue = true;
+            this.dataGridViewButtonColumn4.Width = 30;
             // 
             // tabPage4
             // 
@@ -342,83 +414,6 @@
             this.dataGridView4.Size = new System.Drawing.Size(504, 243);
             this.dataGridView4.TabIndex = 2;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(467, 383);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(65, 59);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(210, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 31);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "поздравить:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(210, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 31);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "отметить:";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn1.Width = 441;
-            // 
-            // dataGridViewButtonColumn1
-            // 
-            this.dataGridViewButtonColumn1.HeaderText = "";
-            this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
-            this.dataGridViewButtonColumn1.Text = "*";
-            this.dataGridViewButtonColumn1.UseColumnTextForButtonValue = true;
-            this.dataGridViewButtonColumn1.Width = 30;
-            // 
-            // dataGridViewButtonColumn2
-            // 
-            this.dataGridViewButtonColumn2.HeaderText = "";
-            this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";
-            this.dataGridViewButtonColumn2.Text = "-";
-            this.dataGridViewButtonColumn2.UseColumnTextForButtonValue = true;
-            this.dataGridViewButtonColumn2.Width = 30;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn2.Width = 441;
-            // 
-            // dataGridViewButtonColumn3
-            // 
-            this.dataGridViewButtonColumn3.HeaderText = "";
-            this.dataGridViewButtonColumn3.Name = "dataGridViewButtonColumn3";
-            this.dataGridViewButtonColumn3.Text = "*";
-            this.dataGridViewButtonColumn3.UseColumnTextForButtonValue = true;
-            this.dataGridViewButtonColumn3.Width = 30;
-            // 
-            // dataGridViewButtonColumn4
-            // 
-            this.dataGridViewButtonColumn4.HeaderText = "";
-            this.dataGridViewButtonColumn4.Name = "dataGridViewButtonColumn4";
-            this.dataGridViewButtonColumn4.Text = "-";
-            this.dataGridViewButtonColumn4.UseColumnTextForButtonValue = true;
-            this.dataGridViewButtonColumn4.Width = 30;
-            // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "";
@@ -443,29 +438,35 @@
             this.dataGridViewButtonColumn6.UseColumnTextForButtonValue = true;
             this.dataGridViewButtonColumn6.Width = 30;
             // 
-            // Task
+            // button1
             // 
-            this.Task.HeaderText = "";
-            this.Task.Name = "Task";
-            this.Task.ReadOnly = true;
-            this.Task.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Task.Width = 441;
+            this.button1.Location = new System.Drawing.Point(467, 383);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(65, 59);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Important
+            // label2
             // 
-            this.Important.HeaderText = "";
-            this.Important.Name = "Important";
-            this.Important.Text = "*";
-            this.Important.UseColumnTextForButtonValue = true;
-            this.Important.Width = 30;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(210, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(167, 31);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "поздравить:";
             // 
-            // Delete
+            // label3
             // 
-            this.Delete.HeaderText = "";
-            this.Delete.Name = "Delete";
-            this.Delete.Text = "-";
-            this.Delete.UseColumnTextForButtonValue = true;
-            this.Delete.Width = 30;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(210, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(136, 31);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "отметить:";
             // 
             // Form1
             // 
