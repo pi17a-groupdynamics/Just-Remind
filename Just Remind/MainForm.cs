@@ -13,10 +13,14 @@ namespace Just_Remind
     public partial class Form1 : Form
     {
         private NotifyIcon notifyIcon = new NotifyIcon();
+        private List<Notification> simpleNotifications = new List<Notification>();
+        private List<Notification> weekNotifications = new List<Notification>();
+        private List<Notification> yearNotifications = new List<Notification>();
 
         public Form1()
         {
             InitializeComponent();
+            // СЕРЕГА, ТЕБЕ НУЖНО ДОПИСАТЬ ЗДЕСЬ
             comboBox1.SelectedIndex = 0;
             tabControl1.SelectedIndex = 1;
             label2.Visible = false;
@@ -33,8 +37,12 @@ namespace Just_Remind
             notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon.Icon = this.Icon;
             //Заполняем таблицы
-            dataGridView2.Rows.Add("Купить майонез");
+            simpleNotifications.Add(new Notification("Позвонить Илону Маску",
+                new DateTime(2019, 07, 15, 23, 00, 00)));
+            simpleNotifications.Add(new Notification("Купить майонез",
+                new DateTime(2019, 08, 16, 09, 00, 00)));
             dataGridView2.Rows.Add("Позвонить Илону Маску");
+            dataGridView2.Rows.Add("Купить майонез");
             dataGridView3.Rows.Add("Надя - 26.02.19");
             dataGridView3.Rows.Add("Катя - 03.03.19");
             dataGridView4.Rows.Add("8 марта - 08.03.19");
@@ -86,8 +94,34 @@ namespace Just_Remind
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddNotificationForm addNotificationForm = new AddNotificationForm();
-            addNotificationForm.Show();
+            Notification notification = new Notification();
+            AddNotificationForm addNotificationForm = new AddNotificationForm(notification);
+            addNotificationForm.ShowDialog();
+            if (addNotificationForm.DialogResult == DialogResult.OK)
+            {
+                int i;
+                bool indexFound = false;
+                double totalSeconds = notification.DateTime.Subtract(
+                    new DateTime(1970, 1, 1)).TotalSeconds;
+                for (i = 0; i < simpleNotifications.Count && !indexFound; i++)
+                {
+                    if (totalSeconds < simpleNotifications[i].DateTime.Subtract(
+                        new DateTime(1970, 1, 1)).TotalSeconds)
+                    {
+                        indexFound = true;
+                    }
+                }
+                i--;
+                simpleNotifications.Insert(i, notification);
+                UpdateTable();
+            }
+        }
+
+        private void UpdateTable()
+        {
+            dataGridView2.Rows.Clear();
+            for (int i = 0; i < simpleNotifications.Count; i++)
+                dataGridView2.Rows.Add(simpleNotifications[i].Text);
         }
     }
 }

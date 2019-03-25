@@ -40,8 +40,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button14 = new System.Windows.Forms.Button();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -57,29 +55,45 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
             this.button15 = new System.Windows.Forms.Button();
             this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.label9 = new System.Windows.Forms.Label();
             this.button26 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -104,6 +118,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox1.Location = new System.Drawing.Point(126, 41);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(358, 134);
@@ -193,9 +208,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.checkBox2);
+            this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.button14);
-            this.panel2.Controls.Add(this.radioButton4);
-            this.panel2.Controls.Add(this.radioButton3);
             this.panel2.Controls.Add(this.button13);
             this.panel2.Controls.Add(this.button12);
             this.panel2.Controls.Add(this.button11);
@@ -212,7 +227,7 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(513, 336);
+            this.panel2.Size = new System.Drawing.Size(513, 333);
             this.panel2.TabIndex = 9;
             this.panel2.Visible = false;
             // 
@@ -226,30 +241,6 @@
             this.button14.Text = "<";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton4.Location = new System.Drawing.Point(260, 236);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(136, 24);
-            this.radioButton4.TabIndex = 22;
-            this.radioButton4.Text = "выходные дни";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton3.Location = new System.Drawing.Point(260, 206);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(114, 24);
-            this.radioButton3.TabIndex = 21;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "будние дни";
-            this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // button13
             // 
@@ -353,6 +344,7 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(29, 68);
+            this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 10;
             // 
@@ -396,19 +388,9 @@
             this.panel3.Controls.Add(this.label10);
             this.panel3.Location = new System.Drawing.Point(12, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(513, 336);
+            this.panel3.Size = new System.Drawing.Size(513, 333);
             this.panel3.TabIndex = 24;
             this.panel3.Visible = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(3, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(377, 25);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Добавление нового напоминания";
             // 
             // button15
             // 
@@ -424,6 +406,7 @@
             // monthCalendar2
             // 
             this.monthCalendar2.Location = new System.Drawing.Point(29, 68);
+            this.monthCalendar2.MaxSelectionCount = 1;
             this.monthCalendar2.Name = "monthCalendar2";
             this.monthCalendar2.TabIndex = 26;
             // 
@@ -448,18 +431,22 @@
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(3, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(377, 25);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Добавление нового напоминания";
+            // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.label13);
-            this.panel4.Controls.Add(this.textBox5);
-            this.panel4.Controls.Add(this.textBox6);
-            this.panel4.Controls.Add(this.label14);
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.textBox7);
-            this.panel4.Controls.Add(this.textBox8);
-            this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.comboBox1);
-            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.panel6);
+            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.radioButton6);
+            this.panel4.Controls.Add(this.radioButton5);
             this.panel4.Controls.Add(this.button16);
             this.panel4.Controls.Add(this.button17);
             this.panel4.Controls.Add(this.label18);
@@ -469,99 +456,30 @@
             this.panel4.TabIndex = 40;
             this.panel4.Visible = false;
             // 
-            // label13
+            // radioButton6
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(344, 125);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(13, 20);
-            this.label13.TabIndex = 48;
-            this.label13.Text = ":";
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton6.Location = new System.Drawing.Point(8, 223);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(224, 24);
+            this.radioButton6.TabIndex = 50;
+            this.radioButton6.Text = "Повторять в течении дня";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
-            // textBox5
+            // radioButton5
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(363, 122);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(40, 26);
-            this.textBox5.TabIndex = 47;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(298, 122);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(40, 26);
-            this.textBox6.TabIndex = 46;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(294, 99);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(212, 20);
-            this.label14.TabIndex = 45;
-            this.label14.Text = "Закончить напоминать в...";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(344, 65);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(13, 20);
-            this.label15.TabIndex = 44;
-            this.label15.Text = ":";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox7.Location = new System.Drawing.Point(363, 62);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(40, 26);
-            this.textBox7.TabIndex = 43;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox8.Location = new System.Drawing.Point(298, 62);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(40, 26);
-            this.textBox8.TabIndex = 42;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(294, 39);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(187, 20);
-            this.label16.TabIndex = 41;
-            this.label16.Text = "Начать напоминать в...";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Каждые 10 минут"});
-            this.comboBox1.Location = new System.Drawing.Point(8, 62);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(192, 28);
-            this.comboBox1.TabIndex = 40;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(22, 39);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(178, 20);
-            this.label17.TabIndex = 39;
-            this.label17.Text = "Интервал повторения";
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Checked = true;
+            this.radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton5.Location = new System.Drawing.Point(8, 193);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(246, 24);
+            this.radioButton5.TabIndex = 49;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "Не повторять в течении дня";
+            this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // button16
             // 
@@ -595,6 +513,377 @@
             this.label18.TabIndex = 36;
             this.label18.Text = "Добавление нового напоминания";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(260, 206);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(115, 24);
+            this.checkBox1.TabIndex = 24;
+            this.checkBox1.Text = "будние дни";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox2.Location = new System.Drawing.Point(260, 236);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(137, 24);
+            this.checkBox2.TabIndex = 25;
+            this.checkBox2.Text = "выходные дни";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.comboBox5);
+            this.panel5.Controls.Add(this.comboBox6);
+            this.panel5.Controls.Add(this.label11);
+            this.panel5.Controls.Add(this.comboBox4);
+            this.panel5.Controls.Add(this.comboBox3);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.comboBox2);
+            this.panel5.Controls.Add(this.label7);
+            this.panel5.Controls.Add(this.label14);
+            this.panel5.Controls.Add(this.label15);
+            this.panel5.Controls.Add(this.label16);
+            this.panel5.Controls.Add(this.comboBox1);
+            this.panel5.Controls.Add(this.label17);
+            this.panel5.Location = new System.Drawing.Point(3, 28);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(507, 159);
+            this.panel5.TabIndex = 51;
+            this.panel5.Visible = false;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Items.AddRange(new object[] {
+            "00",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50"});
+            this.comboBox5.Location = new System.Drawing.Point(365, 94);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(45, 28);
+            this.comboBox5.TabIndex = 71;
+            this.comboBox5.Text = "00";
+            this.comboBox5.Leave += new System.EventHandler(this.comboBox5_Leave);
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Items.AddRange(new object[] {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.comboBox6.Location = new System.Drawing.Point(295, 94);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(45, 28);
+            this.comboBox6.TabIndex = 70;
+            this.comboBox6.Text = "00";
+            this.comboBox6.Leave += new System.EventHandler(this.comboBox6_Leave);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(346, 97);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(13, 20);
+            this.label11.TabIndex = 69;
+            this.label11.Text = ":";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "00",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50"});
+            this.comboBox4.Location = new System.Drawing.Point(365, 34);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(45, 28);
+            this.comboBox4.TabIndex = 68;
+            this.comboBox4.Text = "00";
+            this.comboBox4.Leave += new System.EventHandler(this.comboBox4_Leave);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.comboBox3.Location = new System.Drawing.Point(295, 34);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(45, 28);
+            this.comboBox3.TabIndex = 67;
+            this.comboBox3.Text = "00";
+            this.comboBox3.Leave += new System.EventHandler(this.comboBox3_Leave);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.Location = new System.Drawing.Point(184, 37);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 20);
+            this.label8.TabIndex = 66;
+            this.label8.Text = "минут";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "00",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50"});
+            this.comboBox2.Location = new System.Drawing.Point(133, 34);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(45, 28);
+            this.comboBox2.TabIndex = 65;
+            this.comboBox2.Text = "00";
+            this.comboBox2.Leave += new System.EventHandler(this.comboBox2_Leave);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(74, 37);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 20);
+            this.label7.TabIndex = 64;
+            this.label7.Text = "часов";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(291, 71);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(212, 20);
+            this.label14.TabIndex = 63;
+            this.label14.Text = "Закончить напоминать в...";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(346, 37);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(13, 20);
+            this.label15.TabIndex = 62;
+            this.label15.Text = ":";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Location = new System.Drawing.Point(291, 11);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(187, 20);
+            this.label16.TabIndex = 61;
+            this.label16.Text = "Начать напоминать в...";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.comboBox1.Location = new System.Drawing.Point(23, 34);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(45, 28);
+            this.comboBox1.TabIndex = 60;
+            this.comboBox1.Text = "0";
+            this.comboBox1.Leave += new System.EventHandler(this.comboBox1_Leave);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Location = new System.Drawing.Point(19, 11);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(204, 20);
+            this.label17.TabIndex = 59;
+            this.label17.Text = "Повторять через каждые";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label12);
+            this.panel6.Controls.Add(this.comboBox7);
+            this.panel6.Controls.Add(this.label13);
+            this.panel6.Controls.Add(this.comboBox8);
+            this.panel6.Controls.Add(this.label19);
+            this.panel6.Location = new System.Drawing.Point(3, 28);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(507, 159);
+            this.panel6.TabIndex = 52;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.Location = new System.Drawing.Point(389, 65);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(54, 20);
+            this.label12.TabIndex = 71;
+            this.label12.Text = "минут";
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Items.AddRange(new object[] {
+            "00",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50"});
+            this.comboBox7.Location = new System.Drawing.Point(338, 62);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(45, 28);
+            this.comboBox7.TabIndex = 70;
+            this.comboBox7.Text = "00";
+            this.comboBox7.Leave += new System.EventHandler(this.comboBox7_Leave);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(279, 65);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 20);
+            this.label13.TabIndex = 69;
+            this.label13.Text = "часов";
+            // 
+            // comboBox8
+            // 
+            this.comboBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.comboBox8.Location = new System.Drawing.Point(228, 62);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(45, 28);
+            this.comboBox8.TabIndex = 68;
+            this.comboBox8.Text = "0";
+            this.comboBox8.Leave += new System.EventHandler(this.comboBox8_Leave);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.Location = new System.Drawing.Point(22, 65);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(204, 20);
+            this.label19.TabIndex = 67;
+            this.label19.Text = "Показать напоминание в ";
+            // 
             // AddNotificationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -614,6 +903,10 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -632,8 +925,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button11;
@@ -655,18 +946,32 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox comboBox8;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Panel panel6;
     }
 }
