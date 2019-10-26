@@ -173,7 +173,7 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "Далее";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // button3
             // 
@@ -260,7 +260,7 @@
             this.button14.TabIndex = 23;
             this.button14.Text = "<";
             this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
+            this.button14.Click += new System.EventHandler(this.Button14_Click);
             // 
             // button12
             // 
@@ -378,7 +378,7 @@
             this.button5.TabIndex = 8;
             this.button5.Text = "Далее";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // label3
             // 
@@ -412,7 +412,7 @@
             this.button15.TabIndex = 39;
             this.button15.Text = "<";
             this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.button15.Click += new System.EventHandler(this.Button15_Click);
             // 
             // monthCalendar2
             // 
@@ -440,7 +440,7 @@
             this.button26.TabIndex = 24;
             this.button26.Text = "Далее";
             this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
+            this.button26.Click += new System.EventHandler(this.Button26_Click);
             // 
             // label10
             // 
@@ -505,8 +505,8 @@
             this.comboBox7.Size = new System.Drawing.Size(45, 28);
             this.comboBox7.TabIndex = 70;
             this.comboBox7.Text = "00";
-            this.comboBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox7_KeyPress);
-            this.comboBox7.Leave += new System.EventHandler(this.comboBox7_Leave);
+            this.comboBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox7_KeyPress);
+            this.comboBox7.Leave += new System.EventHandler(this.ComboBox7_Leave);
             // 
             // label13
             // 
@@ -552,8 +552,8 @@
             this.comboBox8.Size = new System.Drawing.Size(45, 28);
             this.comboBox8.TabIndex = 68;
             this.comboBox8.Text = "0";
-            this.comboBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox8_KeyPress);
-            this.comboBox8.Leave += new System.EventHandler(this.comboBox8_Leave);
+            this.comboBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox8_KeyPress);
+            this.comboBox8.Leave += new System.EventHandler(this.ComboBox8_Leave);
             // 
             // label19
             // 
@@ -602,8 +602,8 @@
             this.comboBox5.Size = new System.Drawing.Size(45, 28);
             this.comboBox5.TabIndex = 71;
             this.comboBox5.Text = "00";
-            this.comboBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox5_KeyPress);
-            this.comboBox5.Leave += new System.EventHandler(this.comboBox5_Leave);
+            this.comboBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox5_KeyPress);
+            this.comboBox5.Leave += new System.EventHandler(this.ComboBox5_Leave);
             // 
             // comboBox6
             // 
@@ -639,8 +639,8 @@
             this.comboBox6.Size = new System.Drawing.Size(45, 28);
             this.comboBox6.TabIndex = 70;
             this.comboBox6.Text = "00";
-            this.comboBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox6_KeyPress);
-            this.comboBox6.Leave += new System.EventHandler(this.comboBox6_Leave);
+            this.comboBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox6_KeyPress);
+            this.comboBox6.Leave += new System.EventHandler(this.ComboBox6_Leave);
             // 
             // label11
             // 
@@ -668,8 +668,8 @@
             this.comboBox4.Size = new System.Drawing.Size(45, 28);
             this.comboBox4.TabIndex = 68;
             this.comboBox4.Text = "00";
-            this.comboBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox4_KeyPress);
-            this.comboBox4.Leave += new System.EventHandler(this.comboBox4_Leave);
+            this.comboBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox4_KeyPress);
+            this.comboBox4.Leave += new System.EventHandler(this.ComboBox4_Leave);
             // 
             // comboBox3
             // 
@@ -705,8 +705,8 @@
             this.comboBox3.Size = new System.Drawing.Size(45, 28);
             this.comboBox3.TabIndex = 67;
             this.comboBox3.Text = "00";
-            this.comboBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox3_KeyPress);
-            this.comboBox3.Leave += new System.EventHandler(this.comboBox3_Leave);
+            this.comboBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox3_KeyPress);
+            this.comboBox3.Leave += new System.EventHandler(this.ComboBox3_Leave);
             // 
             // label8
             // 
@@ -734,8 +734,8 @@
             this.comboBox2.Size = new System.Drawing.Size(45, 28);
             this.comboBox2.TabIndex = 65;
             this.comboBox2.Text = "00";
-            this.comboBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox2_KeyPress);
-            this.comboBox2.Leave += new System.EventHandler(this.comboBox2_Leave);
+            this.comboBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox2_KeyPress);
+            this.comboBox2.Leave += new System.EventHandler(this.ComboBox2_Leave);
             // 
             // label7
             // 
@@ -811,8 +811,8 @@
             this.comboBox1.Size = new System.Drawing.Size(45, 28);
             this.comboBox1.TabIndex = 60;
             this.comboBox1.Text = "0";
-            this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
-            this.comboBox1.Leave += new System.EventHandler(this.comboBox1_Leave);
+            this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox1_KeyPress);
+            this.comboBox1.Leave += new System.EventHandler(this.ComboBox1_Leave);
             // 
             // label17
             // 
@@ -834,7 +834,7 @@
             this.radioButton6.TabIndex = 50;
             this.radioButton6.Text = "Повторять в течении дня";
             this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.RadioButton6_CheckedChanged);
             // 
             // radioButton5
             // 
@@ -858,7 +858,7 @@
             this.button16.TabIndex = 38;
             this.button16.Text = "<";
             this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
+            this.button16.Click += new System.EventHandler(this.Button16_Click);
             // 
             // button17
             // 
@@ -869,7 +869,7 @@
             this.button17.TabIndex = 37;
             this.button17.Text = "Сохранить";
             this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
+            this.button17.Click += new System.EventHandler(this.Button17_Click);
             // 
             // label18
             // 

@@ -18,6 +18,11 @@ namespace Just_Remind
         // Которые сбрасывал в конфу Антон. В нескольких последующих методах
         // Прописана обработка событий нажатия кнопок, осовная функция 
         // которых - переключения "экранов" формы.
+        // Я развернул экраны формы на одно большое окно. Разумеется, когда
+        // мы закончим работу - мы свернём это дело обратно в одну небольшую 
+        // красивую формочку. 
+        // Пока что так нужно для удобства.
+        // Если что, изначальный размер окна был 553 x 396.
 
         Notification notification;
         bool simpleNotification;
@@ -29,7 +34,10 @@ namespace Just_Remind
             this.notification = notification;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Нажатие кнопки "Далее" на 1й панели
+        /// </summary>
+        private void Button4_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
             if (radioButton1.Checked)
@@ -44,32 +52,46 @@ namespace Just_Remind
             }
         }
 
-        private void button26_Click(object sender, EventArgs e)
-        {
-            panel3.Visible = false;
-            panel4.Visible = true;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Нажатие кнопки "Далее" на 2й панели
+        /// </summary>
+        private void Button5_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
             panel4.Visible = true;
         }
 
-
-        private void button15_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Нажатие кнопки "Далее" на 3й панели
+        /// </summary>
+        private void Button26_Click(object sender, EventArgs e)
         {
             panel3.Visible = false;
-            panel1.Visible = true;
+            panel4.Visible = true;
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Нажатие кнопки "Назад" на 2й панели
+        /// </summary>
+        private void Button14_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
             panel1.Visible = true;
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Нажатие кнопки "Назад" на 3й панели
+        /// </summary>
+        private void Button15_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panel1.Visible = true;
+        }
+
+        /// <summary>
+        /// Нажатие кнопки "Назад" на 4й панели
+        /// </summary>
+        private void Button16_Click(object sender, EventArgs e)
         {
             panel4.Visible = false;
             if (radioButton1.Checked)
@@ -78,7 +100,10 @@ namespace Just_Remind
                 panel2.Visible = true;
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Нажатие кнопки "Сохранить" на 4й панели
+        /// </summary>
+        private void Button17_Click(object sender, EventArgs e)
         {
             if (simpleNotification)
             {
@@ -142,8 +167,10 @@ namespace Just_Remind
             this.Close();
         }
 
-        // Это обработка радиобаттона на последней (4й) панели
-        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Обработка радиобаттона на последней (4й) панели
+        /// </summary>
+        private void RadioButton6_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton6.Checked)
             {
@@ -158,109 +185,110 @@ namespace Just_Remind
         }
 
         // Запрет на ввод в комбобоксы 4й панели некорректных данных
-
-        private void comboBox3_KeyPress(object sender, KeyPressEventArgs e)
+        #region ComboBoxesPanel4_BanIncorrectData
+        private void ComboBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox3.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox4_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox4.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox6_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox6_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox6.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox5_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox5.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox2.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox7_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox7_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox8_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox8_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 
-        private void comboBox8_Leave(object sender, EventArgs e)
+        private void ComboBox8_Leave(object sender, EventArgs e)
         {
             if (comboBox8.Text == "")
                 comboBox8.Text = "0";
         }
 
-        private void comboBox7_Leave(object sender, EventArgs e)
+        private void ComboBox7_Leave(object sender, EventArgs e)
         {
             if (comboBox7.Text == "")
                 comboBox7.Text = "00";
         }
 
-        private void comboBox1_Leave(object sender, EventArgs e)
+        private void ComboBox1_Leave(object sender, EventArgs e)
         {
             if (comboBox1.Text == "")
                 comboBox1.Text = "0";
         }
 
-        private void comboBox2_Leave(object sender, EventArgs e)
+        private void ComboBox2_Leave(object sender, EventArgs e)
         {
             if (comboBox2.Text == "")
                 comboBox2.Text = "00";
         }
 
-        private void comboBox3_Leave(object sender, EventArgs e)
+        private void ComboBox3_Leave(object sender, EventArgs e)
         {
             if (comboBox3.Text == "")
                 comboBox3.Text = "00";
         }
 
-        private void comboBox4_Leave(object sender, EventArgs e)
+        private void ComboBox4_Leave(object sender, EventArgs e)
         {
             if (comboBox4.Text == "")
                 comboBox4.Text = "00";
         }
 
-        private void comboBox6_Leave(object sender, EventArgs e)
+        private void ComboBox6_Leave(object sender, EventArgs e)
         {
             if (comboBox6.Text == "")
                 comboBox6.Text = "00";
         }
 
-        private void comboBox5_Leave(object sender, EventArgs e)
+        private void ComboBox5_Leave(object sender, EventArgs e)
         {
             if (comboBox5.Text == "")
                 comboBox5.Text = "00";
         }
+        #endregion
     }
 }
