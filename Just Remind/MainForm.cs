@@ -20,7 +20,6 @@ namespace Just_Remind
         public Form1()
         {
             InitializeComponent();
-            // СЕРЕГА, ТЕБЕ НУЖНО ДОПИСАТЬ ЗДЕСЬ
             comboBox1.SelectedIndex = 0;
             tabControl1.SelectedIndex = 1;
             label2.Visible = false;
@@ -113,6 +112,7 @@ namespace Just_Remind
                 }
                 i--;
                 simpleNotifications.Insert(i, notification);
+
                 UpdateTable();
             }
         }

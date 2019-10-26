@@ -136,7 +136,7 @@ namespace Just_Remind
             }
             //else
             //{
-            //    ДАНИЛ, ТЕБЕ НУЖНО ДОПИСАТЬ ЗДЕСЬ
+            //    нужно дописать
             //}        
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -198,6 +198,20 @@ namespace Just_Remind
         {
             char c = e.KeyChar;
             if (!char.IsControl(c) && (comboBox2.Text.Length == 2 || !char.IsDigit(c)))
+                e.Handled = true;
+        }
+
+        private void comboBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char c = e.KeyChar;
+            if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
+                e.Handled = true;
+        }
+
+        private void comboBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char c = e.KeyChar;
+            if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
                 e.Handled = true;
         }
 

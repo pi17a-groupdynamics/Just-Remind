@@ -11,7 +11,7 @@ namespace Just_Remind
     public class Notification
     {
         // Флаг, указывающий, нужно ли повторять напоминание в течении дня
-        public bool Repeat { get; private set; }
+        public bool Repeat { get; private set; } = false;
         // Текст напоминания
         public string Text { get; private set; }
         // Время напоминания
