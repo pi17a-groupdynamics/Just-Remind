@@ -892,6 +892,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "AddNotificationForm";
             this.Text = "Новое напоминание";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddNotificationForm_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

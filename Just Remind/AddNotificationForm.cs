@@ -26,6 +26,7 @@ namespace Just_Remind
 
         Notification notification;
         bool simpleNotification;
+        bool formClosedOk = false;
 
         public AddNotificationForm(Notification notification)
         {
@@ -34,9 +35,7 @@ namespace Just_Remind
             this.notification = notification;
         }
 
-        /// <summary>
-        /// Нажатие кнопки "Далее" на 1й панели
-        /// </summary>
+        // Нажатие кнопки "Далее" на 1й панели
         private void Button4_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
@@ -52,45 +51,35 @@ namespace Just_Remind
             }
         }
 
-        /// <summary>
-        /// Нажатие кнопки "Далее" на 2й панели
-        /// </summary>
+        // Нажатие кнопки "Далее" на 2й панели
         private void Button5_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
             panel4.Visible = true;
         }
 
-        /// <summary>
-        /// Нажатие кнопки "Далее" на 3й панели
-        /// </summary>
+        // Нажатие кнопки "Далее" на 3й панели
         private void Button26_Click(object sender, EventArgs e)
         {
             panel3.Visible = false;
             panel4.Visible = true;
         }
 
-        /// <summary>
-        /// Нажатие кнопки "Назад" на 2й панели
-        /// </summary>
+        // Нажатие кнопки "Назад" на 2й панели
         private void Button14_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
             panel1.Visible = true;
         }
 
-        /// <summary>
-        /// Нажатие кнопки "Назад" на 3й панели
-        /// </summary>
+        // Нажатие кнопки "Назад" на 3й панели
         private void Button15_Click(object sender, EventArgs e)
         {
             panel3.Visible = false;
             panel1.Visible = true;
         }
 
-        /// <summary>
-        /// Нажатие кнопки "Назад" на 4й панели
-        /// </summary>
+        // Нажатие кнопки "Назад" на 4й панели
         private void Button16_Click(object sender, EventArgs e)
         {
             panel4.Visible = false;
@@ -100,70 +89,75 @@ namespace Just_Remind
                 panel2.Visible = true;
         }
 
-        /// <summary>
-        /// Нажатие кнопки "Сохранить" на 4й панели
-        /// </summary>
+        // Выбраны варианты "Напоминать один день" и "Не повторять в течении дня"
+        private void SimpleNotifNoRepeat(DateTime dateTime)
+        {
+            int hours = int.Parse(comboBox8.Text);
+            int minutes = int.Parse(comboBox7.Text);
+            if (hours > 23 || minutes > 59)
+            {
+                MessageBox.Show("Проверьте корректность введённых данных", "Ошибка");
+                return;
+            }
+            // Добавим часы и минуты к dateTime, взятому из календаря на 3й панели
+            dateTime.AddHours(hours);
+            dateTime.AddMinutes(minutes);
+            // Инициализируем notification, который мы передавали сюда из 
+            // главной формы в конструкторе. Таким образом, метод сейчас
+            // завершится и эта форма закроется, но необходимые данные
+            // будут переданы в главную форму при помощи именно этого
+            // объекта (notification). Дальше мы будем с ним работать уже
+            // в главной форме.
+            notification.Initialize(richTextBox1.Text, dateTime);
+        }
+
+        // Выбраны варианты "Напоминать один день" и "Повторять в течении дня"
+        private void SimpleNotifRepeat(DateTime dateTime)
+        {
+            // Здесь всё аналогично как в SimpleNotifNoRepeat, только инициализация
+            // notification требует больше параметров. Основная логика та же
+            int hoursInterval = int.Parse(comboBox1.Text);
+            int minutesInterval = int.Parse(comboBox2.Text);
+            int beginHours = int.Parse(comboBox3.Text);
+            int beginMinutes = int.Parse(comboBox4.Text);
+            int endHours = int.Parse(comboBox6.Text);
+            int endMinutes = int.Parse(comboBox5.Text);
+            if (hoursInterval > 23 || minutesInterval > 59 || beginHours > 23 ||
+                beginMinutes > 59 || endHours > 23 || endMinutes > 59)
+            {
+                MessageBox.Show("Проверьте корректность введённых данных", "Ошибка");
+                return;
+            }
+            DateTime begin = new DateTime(0);
+            begin.AddHours(beginHours);
+            begin.AddMinutes(beginMinutes);
+            DateTime end = new DateTime(0);
+            end.AddHours(endHours);
+            end.AddMinutes(endMinutes);
+            notification.Initialize(richTextBox1.Text, dateTime, hoursInterval,
+                minutesInterval, begin, end);
+        }
+
+        // Нажатие кнопки "Сохранить" на 4й панели
         private void Button17_Click(object sender, EventArgs e)
         {
             if (simpleNotification)
             {
+                // В объект dateTime вносим даннные о дате из календаря.
+                // Свойства dateTime.Hours, dateTime.Minutes и т. д.
+                // равны нулю
+                DateTime dateTime = monthCalendar2.SelectionStart;
+
                 if (radioButton5.Checked)
-                {
-                    int hours = int.Parse(comboBox8.Text);
-                    int minutes = int.Parse(comboBox7.Text);
-                    if (hours > 23 || minutes > 59)
-                    {
-                        MessageBox.Show("Проверьте корректность введённых данных", "Ошибка");
-                        return;
-                    }
-                    // В объект dateTime вносим даннные о дате из календаря.
-                    // Свойства dateTime.Hours, dateTime.Minutes и т. д.
-                    // равны нулю
-                    DateTime dateTime = monthCalendar2.SelectionStart;
-                    // Теперь добавим hours и minutes
-                    dateTime.AddHours(hours);
-                    dateTime.AddMinutes(minutes);
-                    // Инициализируем notification, который мы передавали сюда из 
-                    // главной формы в конструкторе. Таким образом, метод сейчас
-                    // завершится и эта форма закроется, но необходимые данные
-                    // будут переданы в главную форму при помощи именно этого
-                    // объекта (notification). Дальше мы будем с ним работать уже
-                    // в главной форме.
-                    notification.Initialize(richTextBox1.Text, dateTime);
-                }
+                    SimpleNotifNoRepeat(dateTime);
                 else
-                {
-                    // Здесь всё аналогично как в коде выше, только инициализация
-                    // notification требует больше параметров. Основная логика 
-                    // та же
-                    int hoursInterval = int.Parse(comboBox1.Text);
-                    int minutesInterval = int.Parse(comboBox2.Text);
-                    int beginHours = int.Parse(comboBox3.Text);
-                    int beginMinutes = int.Parse(comboBox4.Text);
-                    int endHours = int.Parse(comboBox6.Text);
-                    int endMinutes = int.Parse(comboBox5.Text);
-                    if (hoursInterval > 23 || minutesInterval > 59 || beginHours > 23 ||
-                        beginMinutes > 59 || endHours > 23 || endMinutes > 59)
-                    {
-                        MessageBox.Show("Проверьте корректность введённых данных", "Ошибка");
-                        return;
-                    }
-                    DateTime dateTime = monthCalendar2.SelectionStart;
-                    DateTime begin = new DateTime(0);
-                    begin.AddHours(beginHours);
-                    begin.AddMinutes(beginMinutes);
-                    DateTime end = new DateTime(0);
-                    end.AddHours(endHours);
-                    end.AddMinutes(endMinutes);
-                    notification.Initialize(richTextBox1.Text, dateTime, hoursInterval,
-                        minutesInterval, begin, end);
-                }
+                    SimpleNotifRepeat(dateTime);
             }
             //else
             //{
             //    нужно дописать
             //}        
-            this.DialogResult = DialogResult.OK;
+            formClosedOk = true;
             this.Close();
         }
 
@@ -289,6 +283,51 @@ namespace Just_Remind
             if (comboBox5.Text == "")
                 comboBox5.Text = "00";
         }
+
         #endregion
+
+        // Возвращение формы в первозданный вид
+        private void ClearForm()
+        {
+            panel2.Visible = false;
+            panel3.Visible = false;
+            panel4.Visible = false;
+            panel1.Visible = true;
+
+            panel5.Visible = false;
+            panel6.Visible = true;
+
+            richTextBox1.Text = string.Empty;
+            radioButton1.Checked = true;
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            monthCalendar1.SelectionStart = DateTime.Now;
+            monthCalendar1.SelectionEnd = DateTime.Now;
+            monthCalendar2.SelectionStart = DateTime.Now;
+            monthCalendar2.SelectionEnd = DateTime.Now;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 0;
+            comboBox4.SelectedIndex = 0;
+            comboBox5.SelectedIndex = 0;
+            comboBox6.SelectedIndex = 0;
+            comboBox7.SelectedIndex = 0;
+            comboBox8.SelectedIndex = 0;
+            radioButton5.Checked = true;
+        }
+
+        // Вызывается при закрытии формы. Возвращаем всё, как было при открытии
+        // и создаём DialogResult
+        private void AddNotificationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ClearForm();
+            if (formClosedOk)
+            {
+                formClosedOk = false;
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+                this.DialogResult = DialogResult.Cancel;
+        }
     }
 }

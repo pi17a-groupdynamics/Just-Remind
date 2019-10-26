@@ -100,11 +100,11 @@ namespace Just_Remind
             {
                 int i;
                 bool indexFound = false;
-                double totalSeconds = notification.DateTime.Subtract(
+                double totalSeconds = notification.NearestDateTime.Subtract(
                     new DateTime(1970, 1, 1)).TotalSeconds;
                 for (i = 0; i < simpleNotifications.Count && !indexFound; i++)
                 {
-                    if (totalSeconds < simpleNotifications[i].DateTime.Subtract(
+                    if (totalSeconds < simpleNotifications[i].NearestDateTime.Subtract(
                         new DateTime(1970, 1, 1)).TotalSeconds)
                     {
                         indexFound = true;
