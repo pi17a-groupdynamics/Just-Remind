@@ -6,67 +6,150 @@ using System.Threading.Tasks;
 
 namespace Just_Remind
 {
-    public enum NotifCategories { Important, Personal, Birthdays, Holidays}
+    public enum NotifCategories { Personal, Birthdays, Holidays}
 
     public class Notification
     {
-        // Флаг, указывающий, нужно ли повторять напоминание в течении дня
-        public bool Repeat { get; private set; } = false;
-        // Текст напоминания
-        public string Text { get; private set; }
-        // Время напоминания
-        public DateTime DateTime { get; set; }
-        // Интервал, через который должно повторяться напоминание в часах
-        // (в течении дня), если это необходимо
-        private int hoursInterval;
-        // Интервал, через который должно повторяться напоминание в минутах
-        // (в течении дня), если это необходимо
-        private int minutesInterval;
-        // Начало повторения напоминания в течении дня
-        private DateTime startTime;
-        // Конец повторения напоминания в течении дня
-        private DateTime endTime;
-        // Категория напоминания (важные, личные, дни рождения, праздники)
-        public NotifCategories Category { get; set; } 
+        /// <summary>
+        /// Текст напоминания
+        /// </summary>
+        public string Text { get; set; }
+
+        /// <summary>
+        /// Ближайшее время напоминания
+        /// </summary>
+        public DateTime NearestDateTime { get; set; }
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли повторять напоминание в течении дня
+        /// </summary>
+        public bool IsRepeatByDay { get; set; } = false;
+
+        /// <summary>
+        /// Интервал, через который должно повторяться напоминание в часах
+        /// (в течении дня), если это необходимо
+        /// </summary>
+        private int HoursInterval { get; set; }
+
+        /// <summary>
+        /// Интервал, через который должно повторяться напоминание в минутах
+        /// (в течении дня), если это необходимо
+        /// </summary>
+        private int MinutesInterval { get; set; }
+
+        /// <summary>
+        /// Начало повторения напоминания в течении дня
+        /// </summary>
+        private DateTime StartTime { get; set; }
+
+        /// <summary>
+        /// Конец повторения напоминания в течении дня
+        /// </summary>
+        private DateTime EndTime { get; set; }
+
+        /// <summary>
+        /// Является ли напоминание важным
+        /// </summary>
+        public bool IsImportant { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли повторять напоминание по дням недели
+        /// </summary>
+        public bool IsRepeatByDaysOfWeek { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли отображать напоминание в понедельник
+        /// </summary>
+        public bool IsRepeatOnMonday { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли отображать напоминание во вторник
+        /// </summary>
+        public bool IsRepeatOnTuesday { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли отображать напоминание в среду
+        /// </summary>
+        public bool IsRepeatOnWednesday { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли отображать напоминание в четверг
+        /// </summary>
+        public bool IsRepeatOnThursday { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли отображать напоминание в пятницу
+        /// </summary>
+        public bool IsRepeatOnFriday { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли отображать напоминание в субботу
+        /// </summary>
+        public bool IsRepeatOnSaturday { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли отображать напоминание в воскресенье
+        /// </summary>
+        public bool IsRepeatOnSunday { get; set; } = false;
+
+        /// <summary>
+        /// Флаг, указывающий, нужно ли повторять напоминание в определённую дату
+        /// </summary>
+        public bool IsRepeatByDate { get; set; } = false;
+
+        /// <summary>
+        /// Дата, когда напоминание должно быть показано
+        /// </summary>
+        public DateTime RepeatDate { get; set; }
+
+        /// <summary>
+        /// Категория напоминания (важные, личные, дни рождения, праздники)
+        /// </summary>
+        public NotifCategories Category { get; set; }
+
 
         public Notification()
         {
 
         }
 
-        // Конструктор для напоминания, которое не нужно повторять в течении дня
-        public Notification(string text, DateTime dateTime)
+        /// <summary>
+        /// Конструктор для напоминания, которое не нужно повторять в течении дня
+        /// </summary>
+        public Notification(string text, DateTime nearestDateTime)
         {
-            Initialize(text, dateTime);
+            Initialize(text, nearestDateTime);
         }
 
-        // Конструктор для напоминания, которое нужно повторять в течении дня
-        public Notification(string text, DateTime dateTime, int hoursInterval,
+        /// <summary>
+        /// Конструктор для напоминания, которое нужно повторять в течении дня
+        /// </summary>
+        public Notification(string text, DateTime nearestDateTime, int hoursInterval,
             int minutesInterval, DateTime startTime, DateTime endTime)
         {
-            Initialize(text, dateTime, hoursInterval, minutesInterval,
+            Initialize(text, nearestDateTime, hoursInterval, minutesInterval,
                 startTime, endTime);
         }
 
-        public void Initialize(string text, DateTime dateTime)
+        public void Initialize(string text, DateTime nearestDateTime)
         {
             Text = text;
-            DateTime = dateTime;
-            Repeat = false;
+            NearestDateTime = nearestDateTime;
+            IsRepeatByDay = false;
         }
 
-        public void Initialize(string text, DateTime dateTime, int hoursInterval,
+        public void Initialize(string text, DateTime nearestDateTime, int hoursInterval,
             int minutesInterval, DateTime startTime, DateTime endTime)
         {
             Text = text;
-            DateTime = dateTime;
-            Repeat = true;
-            this.hoursInterval = hoursInterval;
-            this.minutesInterval = minutesInterval;
-            this.startTime = startTime;
-            this.endTime = endTime;
-            DateTime.AddHours(startTime.Hour);
-            DateTime.AddMinutes(startTime.Minute);
+            NearestDateTime = nearestDateTime;
+            IsRepeatByDay = true;
+            HoursInterval = hoursInterval;
+            MinutesInterval = minutesInterval;
+            StartTime = startTime;
+            EndTime = endTime;
+            NearestDateTime.AddHours(startTime.Hour);
+            NearestDateTime.AddMinutes(startTime.Minute);
         }
     }
 }
