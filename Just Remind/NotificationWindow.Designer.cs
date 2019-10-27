@@ -1,6 +1,6 @@
 ﻿namespace Just_Remind
 {
-    partial class Notification_window
+    partial class NotificationWindow
     {
         /// <summary>
         /// Required designer variable.

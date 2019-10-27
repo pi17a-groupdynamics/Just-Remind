@@ -184,14 +184,14 @@
             this.показатьВсплывающееОкноToolStripMenuItem.Name = "показатьВсплывающееОкноToolStripMenuItem";
             this.показатьВсплывающееОкноToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.показатьВсплывающееОкноToolStripMenuItem.Text = "Показать всплывающее окно";
-            this.показатьВсплывающееОкноToolStripMenuItem.Click += new System.EventHandler(this.показатьВсплывающееОкноToolStripMenuItem_Click);
+            this.показатьВсплывающееОкноToolStripMenuItem.Click += new System.EventHandler(this.ShowPopupWindowToolStripMenuItem_Click);
             // 
             // показатьПростоеУведомлениеToolStripMenuItem
             // 
             this.показатьПростоеУведомлениеToolStripMenuItem.Name = "показатьПростоеУведомлениеToolStripMenuItem";
             this.показатьПростоеУведомлениеToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.показатьПростоеУведомлениеToolStripMenuItem.Text = "Показать простое уведомление";
-            this.показатьПростоеУведомлениеToolStripMenuItem.Click += new System.EventHandler(this.показатьПростоеУведомлениеToolStripMenuItem_Click);
+            this.показатьПростоеУведомлениеToolStripMenuItem.Click += new System.EventHandler(this.ShowSimpleNotifToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -230,7 +230,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(518, 275);
             this.tabControl1.TabIndex = 3;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -446,7 +446,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "+";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label2
             // 

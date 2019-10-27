@@ -24,15 +24,14 @@ namespace Just_Remind
         // Пока что так нужно для удобства.
         // Если что, изначальный размер окна был 553 x 396.
 
-        Notification notification;
-        bool simpleNotification;
-        bool formClosedOk = false;
+        public Notification Notification { get; set; }
+        private bool simpleNotification;
+        private bool formClosedOk = false;
 
-        public AddNotificationForm(Notification notification)
+        public AddNotificationForm()
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
-            this.notification = notification;
         }
 
         // Нажатие кнопки "Далее" на 1й панели
@@ -108,7 +107,7 @@ namespace Just_Remind
             // будут переданы в главную форму при помощи именно этого
             // объекта (notification). Дальше мы будем с ним работать уже
             // в главной форме.
-            notification.Initialize(richTextBox1.Text, dateTime);
+            Notification.Initialize(richTextBox1.Text, dateTime);
         }
 
         // Выбраны варианты "Напоминать один день" и "Повторять в течении дня"
@@ -134,7 +133,7 @@ namespace Just_Remind
             DateTime end = new DateTime(0);
             end.AddHours(endHours);
             end.AddMinutes(endMinutes);
-            notification.Initialize(richTextBox1.Text, dateTime, hoursInterval,
+            Notification.Initialize(richTextBox1.Text, dateTime, hoursInterval,
                 minutesInterval, begin, end);
         }
 
@@ -161,9 +160,7 @@ namespace Just_Remind
             this.Close();
         }
 
-        /// <summary>
-        /// Обработка радиобаттона на последней (4й) панели
-        /// </summary>
+        // Обработка радиобаттона на последней (4й) панели
         private void RadioButton6_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton6.Checked)

@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Just_Remind
 {
-    public partial class Notification_window : Form
+    public partial class NotificationWindow : Form
     {
         //поля статические, чтобы не пересчитывать их каждый раз
         public static int xStartCoord;
         public static int yStartCoord;
 
         //в конструктор обязательно передавать текст по понятным причинам
-        public Notification_window(string text)
+        public NotificationWindow(string text)
         {
             InitializeComponent();
             Location = new Point(xStartCoord, yStartCoord);
