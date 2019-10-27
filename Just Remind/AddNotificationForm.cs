@@ -28,10 +28,21 @@ namespace Just_Remind
         private bool simpleNotification;
         private bool formClosedOk = false;
 
+        // Цвет кнопки по умолчанию
+        private Color defButtonColor = Color.FromKnownColor(KnownColor.ButtonFace);
+        // Цвет кнопки при нажатии
+        private Color altButtonColor = Color.FromKnownColor(KnownColor.ControlDark);
+
         public AddNotificationForm()
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
+        }
+
+        // Вызывается при загрузке формы, после конструктора
+        private void AddNotificationForm_Load(object sender, EventArgs e)
+        {
+            Button1_Click(sender, e);
         }
 
         // Нажатие кнопки "Далее" на 1й панели
@@ -86,6 +97,39 @@ namespace Just_Remind
                 panel3.Visible = true;
             else
                 panel2.Visible = true;
+        }
+
+        // Нажатие кнопки "Личные" на панели 1
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = altButtonColor;
+            button2.BackColor = defButtonColor;
+            button3.BackColor = defButtonColor;
+            button2.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = true;
+            Notification.Category = NotifCategories.Personal;
+        }
+
+        // Нажатие кнопки "Дни рождения" на панели 1
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = defButtonColor;
+            button2.BackColor = altButtonColor;
+            button3.BackColor = defButtonColor;
+            button1.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = true;
+            Notification.Category = NotifCategories.Birthdays;
+        }
+
+        // Нажатие кнопки "Праздники" на панели 1
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = defButtonColor;
+            button2.BackColor = defButtonColor;
+            button3.BackColor = altButtonColor;
+            button1.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = true;
+            Notification.Category = NotifCategories.Holidays;
         }
 
         // Выбраны варианты "Напоминать один день" и "Не повторять в течении дня"

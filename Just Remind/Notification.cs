@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Just_Remind
 {
-    public enum NotifCategories { Personal, Birthdays, Holidays}
+    public enum NotifCategories { Personal, Birthdays, Holidays }
 
     public class Notification
     {
@@ -103,7 +103,7 @@ namespace Just_Remind
         public DateTime RepeatDate { get; set; }
 
         /// <summary>
-        /// Категория напоминания (важные, личные, дни рождения, праздники)
+        /// Категория напоминания (личные, дни рождения, праздники)
         /// </summary>
         public NotifCategories Category { get; set; }
 

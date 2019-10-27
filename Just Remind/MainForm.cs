@@ -111,6 +111,7 @@ namespace Just_Remind
             {
                 personalNotifications.Insert(notification);
                 UpdatePersonalNotifTable();
+                //! дописать сохранение в файл !
             }
         }
 

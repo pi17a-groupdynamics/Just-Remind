@@ -184,6 +184,7 @@
             this.button3.TabIndex = 7;
             this.button3.Text = "Праздники";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // button2
             // 
@@ -194,6 +195,7 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "Дни рождения";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button1
             // 
@@ -204,6 +206,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Личные";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // panel2
             // 
@@ -893,6 +896,7 @@
             this.Name = "AddNotificationForm";
             this.Text = "Новое напоминание";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddNotificationForm_FormClosing);
+            this.Load += new System.EventHandler(this.AddNotificationForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
