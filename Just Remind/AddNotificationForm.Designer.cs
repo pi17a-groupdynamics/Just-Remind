@@ -226,7 +226,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(565, 12);
+            this.panel2.Location = new System.Drawing.Point(534, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(513, 336);
             this.panel2.TabIndex = 9;
@@ -274,6 +274,7 @@
             this.button12.TabIndex = 19;
             this.button12.Text = "ЧТ";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Button12_Click);
             // 
             // button11
             // 
@@ -284,6 +285,7 @@
             this.button11.TabIndex = 18;
             this.button11.Text = "ВС";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.Button11_Click);
             // 
             // button10
             // 
@@ -294,6 +296,7 @@
             this.button10.TabIndex = 17;
             this.button10.Text = "СР";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.Button10_Click);
             // 
             // button9
             // 
@@ -304,6 +307,7 @@
             this.button9.TabIndex = 16;
             this.button9.Text = "СБ";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
             // button8
             // 
@@ -314,6 +318,7 @@
             this.button8.TabIndex = 15;
             this.button8.Text = "ВТ";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Button8_Click);
             // 
             // button7
             // 
@@ -324,6 +329,7 @@
             this.button7.TabIndex = 14;
             this.button7.Text = "ПТ";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
             // 
             // button6
             // 
@@ -334,6 +340,7 @@
             this.button6.TabIndex = 13;
             this.button6.Text = "ПН";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // label6
             // 
@@ -361,6 +368,7 @@
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 10;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar1_DateChanged);
             // 
             // label4
             // 
@@ -400,7 +408,7 @@
             this.panel3.Controls.Add(this.label9);
             this.panel3.Controls.Add(this.button26);
             this.panel3.Controls.Add(this.label10);
-            this.panel3.Location = new System.Drawing.Point(12, 396);
+            this.panel3.Location = new System.Drawing.Point(12, 354);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(513, 336);
             this.panel3.TabIndex = 24;
@@ -464,7 +472,7 @@
             this.panel4.Controls.Add(this.button16);
             this.panel4.Controls.Add(this.button17);
             this.panel4.Controls.Add(this.label18);
-            this.panel4.Location = new System.Drawing.Point(565, 396);
+            this.panel4.Location = new System.Drawing.Point(534, 354);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(513, 336);
             this.panel4.TabIndex = 40;
@@ -888,7 +896,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 744);
+            this.ClientSize = new System.Drawing.Size(1058, 701);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
