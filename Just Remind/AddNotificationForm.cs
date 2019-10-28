@@ -42,6 +42,7 @@ namespace Just_Remind
         private void AddNotificationForm_Load(object sender, EventArgs e)
         {
             Button1_Click(sender, e);
+            Notification.IsRepeatByDay = false;
         }
 
         #region Panel1
@@ -319,6 +320,24 @@ namespace Just_Remind
 
         #endregion
 
+        #region Panel3
+
+        // Выбрана новая дата на календаре 3й панели
+        private void MonthCalendar2_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            Notification.IsRepeatByDate = true;
+            Notification.RepeatDate = monthCalendar2.SelectionStart;
+        }
+
+        // Нажатие кнопки "Назад" на 3й панели
+        private void Button15_Click(object sender, EventArgs e)
+        {
+            Notification.IsRepeatByDate = false;
+            monthCalendar2.SelectionStart = DateTime.Now;
+            panel3.Visible = false;
+            panel1.Visible = true;
+        }
+
         // Нажатие кнопки "Далее" на 3й панели
         private void Button26_Click(object sender, EventArgs e)
         {
@@ -326,12 +345,9 @@ namespace Just_Remind
             panel4.Visible = true;
         }
 
-        // Нажатие кнопки "Назад" на 3й панели
-        private void Button15_Click(object sender, EventArgs e)
-        {
-            panel3.Visible = false;
-            panel1.Visible = true;
-        }
+        #endregion
+
+        #region Panel4
 
         // Нажатие кнопки "Назад" на 4й панели
         private void Button16_Click(object sender, EventArgs e)
@@ -343,91 +359,103 @@ namespace Just_Remind
                 panel2.Visible = true;
         }
 
-        // Выбраны варианты "Напоминать один день" и "Не повторять в течении дня"
-        private void SimpleNotifNoRepeat(DateTime dateTime)
+        // Проверяет, введены ли в комбобоксах корректные цифры
+        private bool CheckRepeatComboboxesCorrect()
         {
-            int hours = int.Parse(comboBox8.Text);
-            int minutes = int.Parse(comboBox7.Text);
-            if (hours > 23 || minutes > 59)
-            {
-                MessageBox.Show("Проверьте корректность введённых данных", "Ошибка");
-                return;
-            }
-            // Добавим часы и минуты к dateTime, взятому из календаря на 3й панели
-            dateTime.AddHours(hours);
-            dateTime.AddMinutes(minutes);
-            // Инициализируем notification, который мы передавали сюда из 
-            // главной формы в конструкторе. Таким образом, метод сейчас
-            // завершится и эта форма закроется, но необходимые данные
-            // будут переданы в главную форму при помощи именно этого
-            // объекта (notification). Дальше мы будем с ним работать уже
-            // в главной форме.
-            Notification.Initialize(richTextBox1.Text, dateTime);
-        }
-
-        // Выбраны варианты "Напоминать один день" и "Повторять в течении дня"
-        private void SimpleNotifRepeat(DateTime dateTime)
-        {
-            // Здесь всё аналогично как в SimpleNotifNoRepeat, только инициализация
-            // notification требует больше параметров. Основная логика та же
-            int hoursInterval = int.Parse(comboBox1.Text);
-            int minutesInterval = int.Parse(comboBox2.Text);
-            int beginHours = int.Parse(comboBox3.Text);
-            int beginMinutes = int.Parse(comboBox4.Text);
+            int startHours = int.Parse(comboBox3.Text);
+            int startMinutes = int.Parse(comboBox4.Text);
             int endHours = int.Parse(comboBox6.Text);
             int endMinutes = int.Parse(comboBox5.Text);
-            if (hoursInterval > 23 || minutesInterval > 59 || beginHours > 23 ||
-                beginMinutes > 59 || endHours > 23 || endMinutes > 59)
+            int intervalHours = int.Parse(comboBox1.Text);
+            int intervalMinutes = int.Parse(comboBox2.Text);
+            if (startHours > endHours)
             {
-                MessageBox.Show("Проверьте корректность введённых данных", "Ошибка");
-                return;
+                MessageBox.Show("Начало повторения не может быть позже конца повторения",
+                    "Ошибка");
+                return false;
             }
-            DateTime begin = new DateTime(0);
-            begin.AddHours(beginHours);
-            begin.AddMinutes(beginMinutes);
-            DateTime end = new DateTime(0);
-            end.AddHours(endHours);
-            end.AddMinutes(endMinutes);
-            Notification.Initialize(richTextBox1.Text, dateTime, hoursInterval,
-                minutesInterval, begin, end);
+            else if (startHours == endHours)
+            {
+                if (startMinutes > endMinutes)
+                {
+                    MessageBox.Show("Начало повторения не может быть позже конца повторения",
+                    "Ошибка");
+                    return false;
+                }
+            }
+            if (intervalHours + intervalMinutes == 0)
+            {
+                MessageBox.Show("Интервал между повторениями не может быть равен 0 часов 00 минут",
+                    "Ошибка");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Выбраны варианты "Напоминать один день" и "Не повторять в течении дня"
+        private bool CreateNotification(DateTime dateTimeNow)
+        {
+            Notification.Text = richTextBox1.Text;
+            if (Notification.IsRepeatByDate || Notification.IsRepeatByDaysOfWeek)
+                Notification.NearestDateTime = NearestDateTimeCounter.CountNearestDateTime(Notification);
+            else
+            {
+                Notification.NearestDateTime = monthCalendar2.SelectionStart;
+                if (radioButton5.Checked)
+                {
+                    int hour = int.Parse(comboBox8.Text);
+                    int minute = int.Parse(comboBox7.Text);
+                    Notification.Hour = hour;
+                    Notification.Minute = minute;
+                    Notification.NearestDateTime.AddHours(hour);
+                    Notification.NearestDateTime.AddMinutes(minute);
+                    if (Notification.NearestDateTime.CompareTo(dateTimeNow) <= 0)
+                    {
+                        MessageBox.Show("Нельзя создать уведомление, которое будет показано в прошлом",
+                            "Ошибка");
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!CheckRepeatComboboxesCorrect())
+                        return false;
+                    int hoursInterval = int.Parse(comboBox1.Text);
+                    int minutesInterval = int.Parse(comboBox2.Text);
+                    int beginHours = int.Parse(comboBox3.Text);
+                    int beginMinutes = int.Parse(comboBox4.Text);
+                    int endHours = int.Parse(comboBox6.Text);
+                    int endMinutes = int.Parse(comboBox5.Text);
+                    DateTime startTime = new DateTime(0);
+                    startTime.AddHours(beginHours);
+                    startTime.AddMinutes(beginMinutes);
+                    DateTime endTime = new DateTime(0);
+                    endTime.AddHours(endHours);
+                    endTime.AddMinutes(endMinutes);
+                    Notification.HoursInterval = hoursInterval;
+                    Notification.MinutesInterval = minutesInterval;
+                    Notification.StartTime = startTime;
+                    Notification.EndTime = endTime;
+                    if (Notification.StartTime.CompareTo(dateTimeNow) <= 0)
+                    {
+                        MessageBox.Show("Начало показа уведомления должно быть позже текущего времени",
+                            "Ошибка");
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         // Нажатие кнопки "Сохранить" на 4й панели
         private void Button17_Click(object sender, EventArgs e)
         {
-            if (!Notification.IsRepeatByDate && !Notification.IsRepeatByDaysOfWeek)
-            {
-                // В объект dateTime вносим даннные о дате из календаря.
-                // Свойства dateTime.Hours, dateTime.Minutes и т. д.
-                // равны нулю
-                DateTime dateTime = monthCalendar2.SelectionStart;
+            if (!CreateNotification(DateTime.Now))
+                return;
 
-                if (radioButton5.Checked)
-                    SimpleNotifNoRepeat(dateTime);
-                else
-                    SimpleNotifRepeat(dateTime);
-            }
-            //else
-            //{
-            //    нужно дописать
-            //}        
             formClosedOk = true;
             this.Close();
-        }
-
-        // Обработка радиобаттона на последней (4й) панели
-        private void RadioButton6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton6.Checked)
-            {
-                panel5.Visible = true;
-                panel6.Visible = false;
-            }
-            else
-            {
-                panel5.Visible = false;
-                panel6.Visible = true;
-            }
         }
 
         // Запрет на ввод в комбобоксы 4й панели некорректных данных
@@ -534,6 +562,25 @@ namespace Just_Remind
         {
             if (comboBox5.Text == "")
                 comboBox5.Text = "00";
+        }
+
+        #endregion
+
+        // Обработка радиобаттона на 4й панели
+        private void RadioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton6.Checked)
+            {
+                panel5.Visible = true;
+                panel6.Visible = false;
+                Notification.IsRepeatByDay = true;
+            }
+            else
+            {
+                panel5.Visible = false;
+                panel6.Visible = true;
+                Notification.IsRepeatByDay = false;
+            }
         }
 
         #endregion

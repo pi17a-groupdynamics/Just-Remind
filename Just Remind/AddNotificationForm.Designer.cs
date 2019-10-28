@@ -431,6 +431,7 @@
             this.monthCalendar2.MaxSelectionCount = 1;
             this.monthCalendar2.Name = "monthCalendar2";
             this.monthCalendar2.TabIndex = 26;
+            this.monthCalendar2.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar2_DateChanged);
             // 
             // label9
             // 
