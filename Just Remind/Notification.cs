@@ -21,6 +21,16 @@ namespace Just_Remind
         public DateTime NearestDateTime { get; set; }
 
         /// <summary>
+        /// Час, в который должно быть показано напоминание
+        /// </summary>
+        public int Hour { get; set; }
+
+        /// <summary>
+        /// Минута, вкоторую должно быть показано напоминание
+        /// </summary>
+        public int Minute { get; set; }
+
+        /// <summary>
         /// Флаг, указывающий, нужно ли повторять напоминание в течении дня
         /// </summary>
         public bool IsRepeatByDay { get; set; } = false;
@@ -29,23 +39,23 @@ namespace Just_Remind
         /// Интервал, через который должно повторяться напоминание в часах
         /// (в течении дня), если это необходимо
         /// </summary>
-        private int HoursInterval { get; set; }
+        public int HoursInterval { get; set; }
 
         /// <summary>
         /// Интервал, через который должно повторяться напоминание в минутах
         /// (в течении дня), если это необходимо
         /// </summary>
-        private int MinutesInterval { get; set; }
+        public int MinutesInterval { get; set; }
 
         /// <summary>
         /// Начало повторения напоминания в течении дня
         /// </summary>
-        private DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         /// <summary>
         /// Конец повторения напоминания в течении дня
         /// </summary>
-        private DateTime EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         /// <summary>
         /// Является ли напоминание важным
