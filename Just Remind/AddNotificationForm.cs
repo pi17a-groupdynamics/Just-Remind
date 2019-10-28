@@ -25,8 +25,12 @@ namespace Just_Remind
         // Если что, изначальный размер окна был 553 x 396.
 
         public Notification Notification { get; set; }
-        private bool simpleNotification;
         private bool formClosedOk = false;
+
+        // Цвет кнопки по умолчанию
+        private Color defButtonColor = Color.FromKnownColor(KnownColor.ButtonFace);
+        // Цвет кнопки при нажатии
+        private Color altButtonColor = Color.FromKnownColor(KnownColor.ControlDark);
 
         public AddNotificationForm()
         {
@@ -34,34 +38,260 @@ namespace Just_Remind
             comboBox1.SelectedIndex = 0;
         }
 
+        // Вызывается при загрузке формы, после конструктора
+        private void AddNotificationForm_Load(object sender, EventArgs e)
+        {
+            Button1_Click(sender, e);
+        }
+
+        #region Panel1
+
+        // Нажатие кнопки "Личные" на панели 1
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = altButtonColor;
+            button2.BackColor = defButtonColor;
+            button3.BackColor = defButtonColor;
+            button2.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = true;
+            Notification.Category = NotifCategories.Personal;
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
+        }
+
+        // Нажатие кнопки "Дни рождения" на панели 1
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = defButtonColor;
+            button2.BackColor = altButtonColor;
+            button3.BackColor = defButtonColor;
+            button1.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = true;
+            Notification.Category = NotifCategories.Birthdays;
+            radioButton2.Checked = true;
+            radioButton1.Enabled = false;
+            radioButton2.Enabled = false;
+        }
+
+        // Нажатие кнопки "Праздники" на панели 1
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = defButtonColor;
+            button2.BackColor = defButtonColor;
+            button3.BackColor = altButtonColor;
+            button1.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = true;
+            Notification.Category = NotifCategories.Holidays;
+            radioButton2.Checked = true;
+            radioButton1.Enabled = false;
+            radioButton2.Enabled = false;
+        }
+
         // Нажатие кнопки "Далее" на 1й панели
         private void Button4_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
-            if (radioButton1.Checked)
-            {
+            if (radioButton2.Checked && Notification.Category == NotifCategories.Personal)
+                panel2.Visible = true;
+            else
                 panel3.Visible = true;
-                simpleNotification = true;
+        }
+
+        #endregion
+
+        #region Panel2
+
+        // Проверяет, нужно ли ставить в Notification флаг IsRepeatByDaysOfWeek.
+        // Если напоминание должно повторяться хотя бы в один из дней недели, то
+        // флаг будет true.
+        private void CheckRepeatByDayOfWeek()
+        {
+            if (Notification.IsRepeatOnMonday || Notification.IsRepeatOnTuesday ||
+                Notification.IsRepeatOnWednesday || Notification.IsRepeatOnThursday ||
+                Notification.IsRepeatOnFriday || Notification.IsRepeatOnSaturday ||
+                Notification.IsRepeatOnSunday)
+            {
+                Notification.IsRepeatByDaysOfWeek = true;
+            }
+            else
+                Notification.IsRepeatByDaysOfWeek = false;
+        }
+
+        // Сбрасывает все изменения в повторении по дате
+        private void DischargeRepeatByDate()
+        {
+            Notification.IsRepeatByDate = false;
+            monthCalendar1.SelectionStart = DateTime.Now;
+        }
+
+        // Нажатие кнопки "ПН" на 2й панели
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            DischargeRepeatByDate();
+            if (!Notification.IsRepeatOnMonday)
+            {
+                button6.BackColor = altButtonColor;
+                Notification.IsRepeatOnMonday = true;
             }
             else
             {
-                panel2.Visible = true;
-                simpleNotification = false;
+                button6.BackColor = defButtonColor;
+                button6.UseVisualStyleBackColor = true;
+                Notification.IsRepeatOnMonday = false;
+                checkBox1.Checked = false;
             }
+            CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "Далее" на 2й панели
-        private void Button5_Click(object sender, EventArgs e)
+        // Нажатие кнопки "ВТ" на 2й панели
+        private void Button8_Click(object sender, EventArgs e)
         {
-            panel2.Visible = false;
-            panel4.Visible = true;
+            DischargeRepeatByDate();
+            if (!Notification.IsRepeatOnTuesday)
+            {
+                button8.BackColor = altButtonColor;
+                Notification.IsRepeatOnTuesday = true;
+            }
+            else
+            {
+                button8.BackColor = defButtonColor;
+                button8.UseVisualStyleBackColor = true;
+                Notification.IsRepeatOnTuesday = false;
+                checkBox1.Checked = false;
+            }
+            CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "Далее" на 3й панели
-        private void Button26_Click(object sender, EventArgs e)
+        // Нажатие кнопки "СР" на 2й панели
+        private void Button10_Click(object sender, EventArgs e)
         {
-            panel3.Visible = false;
-            panel4.Visible = true;
+            DischargeRepeatByDate();
+            if (!Notification.IsRepeatOnWednesday)
+            {
+                button10.BackColor = altButtonColor;
+                Notification.IsRepeatOnWednesday = true;
+            }
+            else
+            {
+                button10.BackColor = defButtonColor;
+                button10.UseVisualStyleBackColor = true;
+                Notification.IsRepeatOnWednesday = false;
+                checkBox1.Checked = false;
+            }
+            CheckRepeatByDayOfWeek();
+        }
+
+        // Нажатие кнопки "ЧТ" на 2й панели
+        private void Button12_Click(object sender, EventArgs e)
+        {
+            DischargeRepeatByDate();
+            if (!Notification.IsRepeatOnThursday)
+            {
+                button12.BackColor = altButtonColor;
+                Notification.IsRepeatOnThursday = true;
+            }
+            else
+            {
+                button12.BackColor = defButtonColor;
+                button12.UseVisualStyleBackColor = true;
+                Notification.IsRepeatOnThursday = false;
+                checkBox1.Checked = false;
+            }
+            CheckRepeatByDayOfWeek();
+        }
+
+        // Нажатие кнопки "ПТ" на 2й панели
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            DischargeRepeatByDate();
+            if (!Notification.IsRepeatOnFriday)
+            {
+                button7.BackColor = altButtonColor;
+                Notification.IsRepeatOnFriday = true;
+            }
+            else
+            {
+                button7.BackColor = defButtonColor;
+                button7.UseVisualStyleBackColor = true;
+                Notification.IsRepeatOnFriday = false;
+                checkBox1.Checked = false;
+            }
+            CheckRepeatByDayOfWeek();
+        }
+
+        // Нажатие кнопки "СБ" на 2й панели
+        private void Button9_Click(object sender, EventArgs e)
+        {
+            DischargeRepeatByDate();
+            if (!Notification.IsRepeatOnSaturday)
+            {
+                button9.BackColor = altButtonColor;
+                Notification.IsRepeatOnSaturday = true;
+            }
+            else
+            {
+                button9.BackColor = defButtonColor;
+                button9.UseVisualStyleBackColor = true;
+                Notification.IsRepeatOnSaturday = false;
+                checkBox2.Checked = false;
+            }
+            CheckRepeatByDayOfWeek();
+        }
+
+        // Нажатие кнопки "ВС" на 2й панели
+        private void Button11_Click(object sender, EventArgs e)
+        {
+            DischargeRepeatByDate();
+            if (!Notification.IsRepeatOnSunday)
+            {
+                button11.BackColor = altButtonColor;
+                Notification.IsRepeatOnSunday = true;
+            }
+            else
+            {
+                button11.BackColor = defButtonColor;
+                button11.UseVisualStyleBackColor = true;
+                Notification.IsRepeatOnSunday = false;
+                checkBox2.Checked = false;
+            }
+            CheckRepeatByDayOfWeek();
+        }
+
+        // Сбрасывает все изменения в днях недели
+        private void DischargeDaysOfWeek()
+        {
+            Notification.IsRepeatByDaysOfWeek = false;
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            button6.BackColor = defButtonColor;
+            button6.UseVisualStyleBackColor = true;
+            Notification.IsRepeatOnMonday = false;
+            button7.BackColor = defButtonColor;
+            button7.UseVisualStyleBackColor = true;
+            Notification.IsRepeatOnTuesday = false;
+            button8.BackColor = defButtonColor;
+            button8.UseVisualStyleBackColor = true;
+            Notification.IsRepeatOnWednesday = false;
+            button9.BackColor = defButtonColor;
+            button9.UseVisualStyleBackColor = true;
+            Notification.IsRepeatOnThursday = false;
+            button10.BackColor = defButtonColor;
+            button10.UseVisualStyleBackColor = true;
+            Notification.IsRepeatOnFriday = false;
+            button11.BackColor = defButtonColor;
+            button11.UseVisualStyleBackColor = true;
+            Notification.IsRepeatOnSaturday = false;
+            button12.BackColor = defButtonColor;
+            button12.UseVisualStyleBackColor = true;
+            Notification.IsRepeatOnSunday = false;
+        }
+
+        // Выбрана новая дата на календаре 2й панели
+        private void MonthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            DischargeDaysOfWeek();
+            Notification.IsRepeatByDate = true;
+            Notification.RepeatDate = monthCalendar1.SelectionStart;
         }
 
         // Нажатие кнопки "Назад" на 2й панели
@@ -69,6 +299,31 @@ namespace Just_Remind
         {
             panel2.Visible = false;
             panel1.Visible = true;
+            DischargeRepeatByDate();
+            DischargeDaysOfWeek();
+        }
+
+        // Нажатие кнопки "Далее" на 2й панели
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            if (!Notification.IsRepeatByDate && !Notification.IsRepeatByDaysOfWeek)
+            {
+                MessageBox.Show("Вы не выбрали повторение ни по дате, ни по дням недели. " +
+                    "Пожалуйста, выберите, когда напоминание должно повторяться, чтобы продолжить.",
+                    "Ошибка");
+                return;
+            }
+            panel2.Visible = false;
+            panel4.Visible = true;
+        }
+
+        #endregion
+
+        // Нажатие кнопки "Далее" на 3й панели
+        private void Button26_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panel4.Visible = true;
         }
 
         // Нажатие кнопки "Назад" на 3й панели
@@ -140,7 +395,7 @@ namespace Just_Remind
         // Нажатие кнопки "Сохранить" на 4й панели
         private void Button17_Click(object sender, EventArgs e)
         {
-            if (simpleNotification)
+            if (!Notification.IsRepeatByDate && !Notification.IsRepeatByDaysOfWeek)
             {
                 // В объект dateTime вносим даннные о дате из календаря.
                 // Свойства dateTime.Hours, dateTime.Minutes и т. д.
@@ -295,6 +550,8 @@ namespace Just_Remind
             panel6.Visible = true;
 
             richTextBox1.Text = string.Empty;
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
             radioButton1.Checked = true;
             checkBox1.Checked = false;
             checkBox2.Checked = false;
