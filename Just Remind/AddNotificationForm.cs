@@ -319,6 +319,24 @@ namespace Just_Remind
 
         #endregion
 
+        #region Panel3
+
+        // Выбрана новая дата на календаре 3й панели
+        private void MonthCalendar2_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            Notification.IsRepeatByDate = true;
+            Notification.RepeatDate = monthCalendar2.SelectionStart;
+        }
+
+        // Нажатие кнопки "Назад" на 3й панели
+        private void Button15_Click(object sender, EventArgs e)
+        {
+            Notification.IsRepeatByDate = false;
+            monthCalendar2.SelectionStart = DateTime.Now;
+            panel3.Visible = false;
+            panel1.Visible = true;
+        }
+
         // Нажатие кнопки "Далее" на 3й панели
         private void Button26_Click(object sender, EventArgs e)
         {
@@ -326,12 +344,7 @@ namespace Just_Remind
             panel4.Visible = true;
         }
 
-        // Нажатие кнопки "Назад" на 3й панели
-        private void Button15_Click(object sender, EventArgs e)
-        {
-            panel3.Visible = false;
-            panel1.Visible = true;
-        }
+        #endregion
 
         // Нажатие кнопки "Назад" на 4й панели
         private void Button16_Click(object sender, EventArgs e)
