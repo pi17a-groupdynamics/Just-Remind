@@ -138,6 +138,48 @@ namespace Just_Remind
             notifyIcon.ShowBalloonTip(5000);
         }
 
+        // Обновить таблицу на вкладке "Личные"
+        private void UpdatePersonalNotifTable()
+        {
+            dataGridView2.Rows.Clear();
+            foreach (Notification notification in personalNotifications)
+                dataGridView2.Rows.Add(notification.Text);
+        }
+
+        // Перезаписывает файл "Personal.dat"
+        private void RewritePersonalFile()
+        {
+
+        }
+
+        // Обновить таблицу на вкладке "Дни рождения"
+        private void UpdateBirthdayNotifTable()
+        {
+            dataGridView3.Rows.Clear();
+            foreach (Notification notification in birthdayNotifications)
+                dataGridView3.Rows.Add(notification.Text);
+        }
+
+        // Перезаписывает файл "Birthdays.dat"
+        private void RewriteBirthdaysFile()
+        {
+
+        }
+
+        // Обновить таблицу на вкладке "Праздники"
+        private void UpdateHolidaysNotifTable()
+        {
+            dataGridView4.Rows.Clear();
+            foreach (Notification notification in holidayNotifications)
+                dataGridView4.Rows.Add(notification.Text);
+        }
+
+        // Перезаписывает файл "Holidays.dat"
+        private void RewriteHolidaysFile()
+        {
+
+        }
+
         // Нажатие кнопки "+"
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -146,18 +188,25 @@ namespace Just_Remind
             addNotificationForm.ShowDialog();
             if (addNotificationForm.DialogResult == DialogResult.OK)
             {
-                personalNotifications.Insert(notification);
-                UpdatePersonalNotifTable();
-                //! дописать сохранение в файл !
+                switch (notification.Category)
+                {
+                    case NotifCategories.Personal:
+                        personalNotifications.Insert(notification);
+                        RewritePersonalFile();
+                        UpdatePersonalNotifTable();
+                        break;
+                    case NotifCategories.Birthdays:
+                        birthdayNotifications.Insert(notification);
+                        RewriteBirthdaysFile();
+                        UpdateBirthdayNotifTable();
+                        break;
+                    case NotifCategories.Holidays:
+                        holidayNotifications.Insert(notification);
+                        RewriteHolidaysFile();
+                        UpdateHolidaysNotifTable();
+                        break;
+                }
             }
-        }
-
-        // Обновить таблицу на вкладке "Личные"
-        private void UpdatePersonalNotifTable()
-        {
-            dataGridView2.Rows.Clear();
-            foreach (Notification notification in personalNotifications)
-                dataGridView2.Rows.Add(notification.Text);
         }
     }
 }
