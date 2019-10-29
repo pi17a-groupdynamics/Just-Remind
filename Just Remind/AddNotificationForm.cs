@@ -92,6 +92,11 @@ namespace Just_Remind
         // Нажатие кнопки "Далее" на 1й панели
         private void Button4_Click(object sender, EventArgs e)
         {
+            if (richTextBox1.Text == string.Empty)
+            {
+                MessageBox.Show("Пожалуйста, введите текст напоминания");
+                return;
+            }
             panel1.Visible = false;
             if (radioButton2.Checked && Notification.Category == NotifCategories.Personal)
                 panel2.Visible = true;
@@ -437,10 +442,24 @@ namespace Just_Remind
             return true;
         }
 
+        //Считает количество строк в тексте
+        private short CountRowsNum(string text)
+        {
+            short rowsNum = 1;
+            int textLength = text.Length;
+            for (int i = 0; i < textLength; i++)
+            {
+                if (text[i] == '\n')
+                    rowsNum++;
+            }
+            return rowsNum;
+        }
+
         // Выбраны варианты "Напоминать один день" и "Не повторять в течении дня"
         private bool CreateNotification(DateTime dateTimeNow)
         {
             Notification.Text = richTextBox1.Text;
+            Notification.RowsNum = CountRowsNum(Notification.Text);
             if (Notification.IsRepeatByDate || Notification.IsRepeatByDaysOfWeek)
                 Notification.NearestDateTime = NearestDateTimeCounter.CountNearestDateTime(Notification);
             else

@@ -16,6 +16,11 @@ namespace Just_Remind
         public string Text { get; set; }
 
         /// <summary>
+        /// Количество строк в поле Text
+        /// </summary>
+        public short RowsNum { get; set; }
+
+        /// <summary>
         /// Ближайшее время напоминания
         /// </summary>
         public DateTime NearestDateTime { get; set; }

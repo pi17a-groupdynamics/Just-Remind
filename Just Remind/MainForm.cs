@@ -138,6 +138,218 @@ namespace Just_Remind
             notifyIcon.ShowBalloonTip(5000);
         }
 
+        // Создаёт директорию Just Remind в AppData, если она была удалена
+        // и файл в этой директории, имя которого передаётся в fileName.
+        // Возвращает путь к файлу
+        private string CreateDirAndFile(string fileName)
+        {
+            string appDataPath =
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string applicationPath = appDataPath + "\\Just Remind";
+            string filePath = applicationPath + "\\" + fileName;
+            if (!Directory.Exists(applicationPath))
+            {
+                Directory.CreateDirectory(applicationPath);
+                File.Create(filePath);
+            }
+            return filePath;
+        }
+
+        // Обновляет таблицу dataGridView, используя данные из notificationList
+        private void UpdateNotifTable(DataGridView dataGridView, 
+            NotificationList notificationList)
+        {
+            dataGridView.Rows.Clear();
+            foreach (Notification notification in notificationList)
+            {
+                string notificationText = notification.Text;
+                int indexOfNewLine = notificationText.IndexOf('\n');
+                if (indexOfNewLine != -1)
+                {
+                    string firstRow = notificationText.Substring(0, indexOfNewLine) + "...";
+                    dataGridView.Rows.Add(firstRow);
+                }
+                else
+                    dataGridView.Rows.Add(notificationText);
+            }
+        }
+
+        // Обновляет таблицу с важными уведомлениями
+        private void UpdateImportantNotifTable()
+        {
+            //дописать
+        }
+
+        // Перезаписывает файл "Personal.dat"
+        private void RewritePersonalFile()
+        {
+            try
+            {
+                string filePath = CreateDirAndFile("Personal.dat");
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    foreach (Notification notification in personalNotifications)
+                    {
+                        writer.WriteLine();
+                        writer.WriteLine(notification.RowsNum);
+                        DateTime nearestDateTime = notification.NearestDateTime;
+                        writer.WriteLine(nearestDateTime.Day);
+                        writer.WriteLine(nearestDateTime.Month);
+                        writer.WriteLine(nearestDateTime.Year);
+                        writer.WriteLine(nearestDateTime.Hour);
+                        writer.WriteLine(nearestDateTime.Minute);
+                        if (notification.IsRepeatByDate)
+                        {
+                            writer.WriteLine(1);
+                            DateTime repeatDate = notification.RepeatDate;
+                            writer.WriteLine(repeatDate.Day);
+                            writer.WriteLine(repeatDate.Month);
+                            writer.WriteLine(repeatDate.Year);
+                            writer.WriteLine(repeatDate.Hour);
+                            writer.WriteLine(repeatDate.Minute);
+                        }
+                        else
+                        {
+                            writer.WriteLine(0);
+                            for (int i = 0; i < 5; i++)
+                                writer.WriteLine(0);
+                        }
+                        if (notification.IsRepeatByDaysOfWeek)
+                        {
+                            writer.WriteLine(1);
+                            if (notification.IsRepeatOnMonday)
+                                writer.WriteLine(1);
+                            else
+                                writer.WriteLine(0);
+                            if (notification.IsRepeatOnTuesday)
+                                writer.WriteLine(1);
+                            else
+                                writer.WriteLine(0);
+                            if (notification.IsRepeatOnWednesday)
+                                writer.WriteLine(1);
+                            else
+                                writer.WriteLine(0);
+                            if (notification.IsRepeatOnThursday)
+                                writer.WriteLine(1);
+                            else
+                                writer.WriteLine(0);
+                            if (notification.IsRepeatOnFriday)
+                                writer.WriteLine(1);
+                            else
+                                writer.WriteLine(0);
+                            if (notification.IsRepeatOnSaturday)
+                                writer.WriteLine(1);
+                            else
+                                writer.WriteLine(0);
+                            if (notification.IsRepeatOnSunday)
+                                writer.WriteLine(1);
+                            else
+                                writer.WriteLine(0);
+                        }
+                        else
+                        {
+                            writer.WriteLine(0);
+                            for (int i = 0; i < 7; i++)
+                                writer.WriteLine(0);
+                        }
+                        if (notification.IsRepeatByDay)
+                        {
+                            writer.WriteLine(1);
+                            writer.WriteLine(0);
+                            writer.WriteLine(0);
+                            DateTime startTime = notification.StartTime;
+                            writer.WriteLine(startTime.Hour);
+                            writer.WriteLine(startTime.Minute);
+                            DateTime endTime = notification.EndTime;
+                            writer.WriteLine(endTime.Hour);
+                            writer.WriteLine(endTime.Minute);
+                            writer.WriteLine(notification.HoursInterval);
+                            writer.WriteLine(notification.MinutesInterval);
+                        }
+                        else
+                        {
+                            writer.WriteLine(0);
+                            writer.WriteLine(notification.Hour);
+                            writer.WriteLine(notification.Minute);
+                            for (int i = 0; i < 6; i++)
+                                writer.WriteLine(0);
+                        }
+                        if (notification.IsImportant)
+                            writer.WriteLine(1);
+                        else
+                            writer.WriteLine(0);
+                        writer.Write(notification.Text);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка при записи файла Personal.dat");
+            }
+        }
+
+        // Перезаписывает файл "Birthdays.dat" или "Holidays.dat" в зависимости
+        // от того, какие notificationList и fileName были переданы в качестве аргументов
+        private void RewriteBirthdaysOrHolidaysFile(NotificationList notificationList,
+            string fileName)
+        {
+            try
+            {
+                string filePath = CreateDirAndFile(fileName);
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    foreach (Notification notification in notificationList)
+                    {
+                        writer.WriteLine();
+                        writer.WriteLine(notification.RowsNum);
+                        DateTime nearestDateTime = notification.NearestDateTime;
+                        writer.WriteLine(nearestDateTime.Day);
+                        writer.WriteLine(nearestDateTime.Month);
+                        writer.WriteLine(nearestDateTime.Year);
+                        writer.WriteLine(nearestDateTime.Hour);
+                        writer.WriteLine(nearestDateTime.Minute);
+                        DateTime repeatDate = notification.RepeatDate;
+                        writer.WriteLine(repeatDate.Day);
+                        writer.WriteLine(repeatDate.Month);
+                        writer.WriteLine(repeatDate.Year);
+                        writer.WriteLine(repeatDate.Hour);
+                        writer.WriteLine(repeatDate.Minute);
+                        if (notification.IsRepeatByDay)
+                        {
+                            writer.WriteLine(1);
+                            writer.WriteLine(0);
+                            writer.WriteLine(0);
+                            DateTime startTime = notification.StartTime;
+                            writer.WriteLine(startTime.Hour);
+                            writer.WriteLine(startTime.Minute);
+                            DateTime endTime = notification.EndTime;
+                            writer.WriteLine(endTime.Hour);
+                            writer.WriteLine(endTime.Minute);
+                            writer.WriteLine(notification.HoursInterval);
+                            writer.WriteLine(notification.MinutesInterval);
+                        }
+                        else
+                        {
+                            writer.WriteLine(0);
+                            writer.WriteLine(notification.Hour);
+                            writer.WriteLine(notification.Minute);
+                            for (int i = 0; i < 6; i++)
+                                writer.WriteLine(0);
+                        }
+                        if (notification.IsImportant)
+                            writer.WriteLine(1);
+                        else
+                            writer.WriteLine(0);
+                        writer.Write(notification.Text);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка при записи файла " + fileName);
+            }
+        }
+
         // Нажатие кнопки "+"
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -146,18 +358,26 @@ namespace Just_Remind
             addNotificationForm.ShowDialog();
             if (addNotificationForm.DialogResult == DialogResult.OK)
             {
-                personalNotifications.Insert(notification);
-                UpdatePersonalNotifTable();
-                //! дописать сохранение в файл !
+                switch (notification.Category)
+                {
+                    case NotifCategories.Personal:
+                        personalNotifications.Insert(notification);
+                        RewritePersonalFile();
+                        UpdateNotifTable(dataGridView2, personalNotifications);
+                        break;
+                    case NotifCategories.Birthdays:
+                        birthdayNotifications.Insert(notification);
+                        RewriteBirthdaysOrHolidaysFile(birthdayNotifications, "Birthdays.dat");
+                        UpdateNotifTable(dataGridView3, birthdayNotifications);
+                        break;
+                    case NotifCategories.Holidays:
+                        holidayNotifications.Insert(notification);
+                        RewriteBirthdaysOrHolidaysFile(holidayNotifications, "Holidays.dat");
+                        UpdateNotifTable(dataGridView4, holidayNotifications);
+                        break;
+                }
+                UpdateImportantNotifTable();
             }
-        }
-
-        // Обновить таблицу на вкладке "Личные"
-        private void UpdatePersonalNotifTable()
-        {
-            dataGridView2.Rows.Clear();
-            foreach (Notification notification in personalNotifications)
-                dataGridView2.Rows.Add(notification.Text);
         }
     }
 }
