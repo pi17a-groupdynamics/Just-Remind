@@ -279,6 +279,7 @@ namespace Just_Remind
                         else
                             writer.WriteLine(0);
                         writer.Write(notification.Text);
+                        writer.Flush();
                     }
                 }
             }
@@ -341,6 +342,7 @@ namespace Just_Remind
                         else
                             writer.WriteLine(0);
                         writer.Write(notification.Text);
+                        writer.Flush();
                     }
                 }
             }
