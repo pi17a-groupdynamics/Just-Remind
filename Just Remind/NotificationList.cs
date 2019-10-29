@@ -30,7 +30,7 @@ namespace Just_Remind
                 if (secondsToDT_1 - secondsToDT_2 <= 0)
                     indexFound = true;
             }
-            if (!indexFound)
+            if (indexFound)
                 i--;
             this.Insert(i, notification);
         }
