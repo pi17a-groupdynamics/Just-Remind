@@ -19,6 +19,9 @@ namespace Just_Remind
         private NotificationList holidayNotifications = new NotificationList();
         private AddNotificationForm addNotificationForm = new AddNotificationForm();
 
+        // Загрузка формы
+        #region Load
+
         // Тестовое уведомление и значения в таблице
         private void SetTestOptions()
         {
@@ -93,6 +96,8 @@ namespace Just_Remind
             CheckUserDirectory();
         }
 
+        #endregion
+
         // Тут программа выбирает, что показывать после "Ваши задачи"
         // в зависимости от того, какая вкладка сейчас открыта
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -137,6 +142,9 @@ namespace Just_Remind
             notifyIcon.Visible = true;
             notifyIcon.ShowBalloonTip(5000);
         }
+
+        // То, что происходит при нажатии кнопки "+"
+        #region ButtonPlus
 
         // Создаёт директорию Just Remind в AppData, если она была удалена
         // и файл в этой директории, имя которого передаётся в fileName.
@@ -381,5 +389,7 @@ namespace Just_Remind
                 UpdateImportantNotifTable();
             }
         }
+
+        #endregion
     }
 }
