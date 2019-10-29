@@ -26,6 +26,7 @@ namespace Just_Remind
 
         public Notification Notification { get; set; }
         private bool formClosedOk = false;
+        private bool catchMonthCalendar1_SelectionChange = false;
 
         // Цвет кнопки по умолчанию
         private Color defButtonColor = Color.FromKnownColor(KnownColor.ButtonFace);
@@ -122,7 +123,11 @@ namespace Just_Remind
         private void DischargeRepeatByDate()
         {
             Notification.IsRepeatByDate = false;
+            // Изменение этого флага нужно из-за того, что 
+            // при изменении monthCalendar1 сбрасываются дни недели
+            catchMonthCalendar1_SelectionChange = true;
             monthCalendar1.SelectionStart = DateTime.Now;
+            catchMonthCalendar1_SelectionChange = false;
         }
 
         // Нажатие кнопки "ПН" на 2й панели
@@ -258,6 +263,40 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
+        // Нажатие чекбокса "Будние дни"
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                DischargeRepeatByDate();
+                button6.BackColor = altButtonColor;
+                button8.BackColor = altButtonColor;
+                button10.BackColor = altButtonColor;
+                button12.BackColor = altButtonColor;
+                button7.BackColor = altButtonColor;
+                Notification.IsRepeatOnMonday = true;
+                Notification.IsRepeatOnTuesday = true;
+                Notification.IsRepeatOnWednesday = true;
+                Notification.IsRepeatOnThursday = true;
+                Notification.IsRepeatOnFriday = true;
+                Notification.IsRepeatByDaysOfWeek = true;
+            }
+        }
+
+        // Нажатие чекбокса "Выходные дни"
+        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                DischargeRepeatByDate();
+                button9.BackColor = altButtonColor;
+                button11.BackColor = altButtonColor;
+                Notification.IsRepeatOnSaturday = true;
+                Notification.IsRepeatOnSunday = true;
+                Notification.IsRepeatByDaysOfWeek = true;
+            }
+        }
+
         // Сбрасывает все изменения в днях недели
         private void DischargeDaysOfWeek()
         {
@@ -290,9 +329,14 @@ namespace Just_Remind
         // Выбрана новая дата на календаре 2й панели
         private void MonthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            DischargeDaysOfWeek();
-            Notification.IsRepeatByDate = true;
-            Notification.RepeatDate = monthCalendar1.SelectionStart;
+            // Иногда нужно вернуть дату на место, а дни недели сбрасывать не нужно.
+            // Поэтому нужна эта проверка
+            if (!catchMonthCalendar1_SelectionChange)
+            {
+                DischargeDaysOfWeek();
+                Notification.IsRepeatByDate = true;
+                Notification.RepeatDate = monthCalendar1.SelectionStart;
+            }
         }
 
         // Нажатие кнопки "Назад" на 2й панели

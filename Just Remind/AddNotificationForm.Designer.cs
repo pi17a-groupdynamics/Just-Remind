@@ -242,6 +242,7 @@
             this.checkBox2.TabIndex = 25;
             this.checkBox2.Text = "выходные дни";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -253,6 +254,7 @@
             this.checkBox1.TabIndex = 24;
             this.checkBox1.Text = "будние дни";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // button14
             // 
