@@ -102,30 +102,30 @@
             this.toolStripMenuItem1,
             this.выходToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(54, 21);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(50, 21);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // импортНапоминанийToolStripMenuItem
             // 
             this.импортНапоминанийToolStripMenuItem.Name = "импортНапоминанийToolStripMenuItem";
-            this.импортНапоминанийToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.импортНапоминанийToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.импортНапоминанийToolStripMenuItem.Text = "Импорт напоминаний";
             // 
             // экспортНапоминанийToolStripMenuItem
             // 
             this.экспортНапоминанийToolStripMenuItem.Name = "экспортНапоминанийToolStripMenuItem";
-            this.экспортНапоминанийToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.экспортНапоминанийToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.экспортНапоминанийToolStripMenuItem.Text = "Экспорт напоминаний";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(216, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(205, 6);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // настройкиToolStripMenuItem
@@ -134,13 +134,13 @@
             this.общиеToolStripMenuItem,
             this.типУведомленийToolStripMenuItem});
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(88, 21);
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(83, 21);
             this.настройкиToolStripMenuItem.Text = "Настройки";
             // 
             // общиеToolStripMenuItem
             // 
             this.общиеToolStripMenuItem.Name = "общиеToolStripMenuItem";
-            this.общиеToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.общиеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.общиеToolStripMenuItem.Text = "Общие...";
             // 
             // типУведомленийToolStripMenuItem
@@ -149,25 +149,25 @@
             this.окноToolStripMenuItem,
             this.всплывающаяПодсказкаToolStripMenuItem});
             this.типУведомленийToolStripMenuItem.Name = "типУведомленийToolStripMenuItem";
-            this.типУведомленийToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.типУведомленийToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.типУведомленийToolStripMenuItem.Text = "Тип уведомлений";
             // 
             // окноToolStripMenuItem
             // 
             this.окноToolStripMenuItem.Name = "окноToolStripMenuItem";
-            this.окноToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.окноToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.окноToolStripMenuItem.Text = "Окно";
             // 
             // всплывающаяПодсказкаToolStripMenuItem
             // 
             this.всплывающаяПодсказкаToolStripMenuItem.Name = "всплывающаяПодсказкаToolStripMenuItem";
-            this.всплывающаяПодсказкаToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.всплывающаяПодсказкаToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.всплывающаяПодсказкаToolStripMenuItem.Text = "Всплывающая подсказка";
             // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(73, 21);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(70, 21);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
             // отладкаToolStripMenuItem
@@ -176,20 +176,20 @@
             this.показатьВсплывающееОкноToolStripMenuItem,
             this.показатьПростоеУведомлениеToolStripMenuItem});
             this.отладкаToolStripMenuItem.Name = "отладкаToolStripMenuItem";
-            this.отладкаToolStripMenuItem.Size = new System.Drawing.Size(73, 21);
+            this.отладкаToolStripMenuItem.Size = new System.Drawing.Size(69, 21);
             this.отладкаToolStripMenuItem.Text = "Отладка";
             // 
             // показатьВсплывающееОкноToolStripMenuItem
             // 
             this.показатьВсплывающееОкноToolStripMenuItem.Name = "показатьВсплывающееОкноToolStripMenuItem";
-            this.показатьВсплывающееОкноToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.показатьВсплывающееОкноToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.показатьВсплывающееОкноToolStripMenuItem.Text = "Показать всплывающее окно";
             this.показатьВсплывающееОкноToolStripMenuItem.Click += new System.EventHandler(this.ShowPopupWindowToolStripMenuItem_Click);
             // 
             // показатьПростоеУведомлениеToolStripMenuItem
             // 
             this.показатьПростоеУведомлениеToolStripMenuItem.Name = "показатьПростоеУведомлениеToolStripMenuItem";
-            this.показатьПростоеУведомлениеToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.показатьПростоеУведомлениеToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.показатьПростоеУведомлениеToolStripMenuItem.Text = "Показать простое уведомление";
             this.показатьПростоеУведомлениеToolStripMenuItem.Click += new System.EventHandler(this.ShowSimpleNotifToolStripMenuItem_Click);
             // 
@@ -484,6 +484,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Just Remind";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
