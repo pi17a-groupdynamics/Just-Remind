@@ -39,11 +39,59 @@ namespace Just_Remind
             comboBox1.SelectedIndex = 0;
         }
 
+        // Возвращение формы в первозданный вид
+        private void ClearForm()
+        {
+            panel2.Visible = false;
+            panel3.Visible = false;
+            panel4.Visible = false;
+            panel1.Visible = true;
+
+            panel5.Visible = false;
+            panel6.Visible = true;
+
+            richTextBox1.Text = string.Empty;
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
+            radioButton1.Checked = true;
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            monthCalendar1.SelectionStart = DateTime.Now;
+            monthCalendar1.SelectionEnd = DateTime.Now;
+            monthCalendar2.SelectionStart = DateTime.Now;
+            monthCalendar2.SelectionEnd = DateTime.Now;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 0;
+            comboBox4.SelectedIndex = 0;
+            comboBox5.SelectedIndex = 0;
+            comboBox6.SelectedIndex = 0;
+            comboBox7.SelectedIndex = 0;
+            comboBox8.SelectedIndex = 0;
+            radioButton5.Checked = true;
+        }
+
+        // Очищает все флаги в напоминании
+        private void ClearNotification()
+        {
+            Notification.IsRepeatByDay = false;
+            Notification.IsRepeatByDate = false;
+            Notification.IsRepeatByDaysOfWeek = false;
+            Notification.IsRepeatOnMonday = false;
+            Notification.IsRepeatOnTuesday = false;
+            Notification.IsRepeatOnWednesday = false;
+            Notification.IsRepeatOnThursday = false;
+            Notification.IsRepeatOnFriday = false;
+            Notification.IsRepeatOnSaturday = false;
+            Notification.IsRepeatOnSunday = false;
+        }
+
         // Вызывается при загрузке формы, после конструктора
         private void AddNotificationForm_Load(object sender, EventArgs e)
         {
             Button1_Click(sender, e);
-            Notification.IsRepeatByDay = false;
+            ClearNotification();
+            ClearForm();
         }
 
         #region Panel1
@@ -648,43 +696,10 @@ namespace Just_Remind
 
         #endregion
 
-        // Возвращение формы в первозданный вид
-        private void ClearForm()
-        {
-            panel2.Visible = false;
-            panel3.Visible = false;
-            panel4.Visible = false;
-            panel1.Visible = true;
-
-            panel5.Visible = false;
-            panel6.Visible = true;
-
-            richTextBox1.Text = string.Empty;
-            radioButton1.Enabled = true;
-            radioButton2.Enabled = true;
-            radioButton1.Checked = true;
-            checkBox1.Checked = false;
-            checkBox2.Checked = false;
-            monthCalendar1.SelectionStart = DateTime.Now;
-            monthCalendar1.SelectionEnd = DateTime.Now;
-            monthCalendar2.SelectionStart = DateTime.Now;
-            monthCalendar2.SelectionEnd = DateTime.Now;
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
-            comboBox4.SelectedIndex = 0;
-            comboBox5.SelectedIndex = 0;
-            comboBox6.SelectedIndex = 0;
-            comboBox7.SelectedIndex = 0;
-            comboBox8.SelectedIndex = 0;
-            radioButton5.Checked = true;
-        }
-
         // Вызывается при закрытии формы. Возвращаем всё, как было при открытии
         // и создаём DialogResult
         private void AddNotificationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ClearForm();
             if (formClosedOk)
             {
                 formClosedOk = false;
