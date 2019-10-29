@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,23 +18,6 @@ namespace Just_Remind
         private NotificationList birthdayNotifications = new NotificationList();
         private NotificationList holidayNotifications = new NotificationList();
         private AddNotificationForm addNotificationForm = new AddNotificationForm();
-
-        public Form1()
-        {
-            InitializeComponent();
-            comboBox1.SelectedIndex = 0;
-            tabControl1.SelectedIndex = 1;
-            label2.Visible = false;
-            label3.Visible = false;
-            // Тут мы определяем разрешение экрана и выставляем начальные
-            // координаты окна уведомления, чтобы оно отображалось в
-            // нижнем правом углу экрана
-            Size resolution = Screen.PrimaryScreen.Bounds.Size;
-            NotificationWindow.xStartCoord = resolution.Width - 431;
-            NotificationWindow.yStartCoord = resolution.Height - 207;
-            // Тестовое уведомление и значения в таблице. Потом мы это уберём
-            SetTestOptions();
-        }
 
         // Тестовое уведомление и значения в таблице
         private void SetTestOptions()
@@ -54,6 +38,59 @@ namespace Just_Remind
             dataGridView3.Rows.Add("Катя - 03.03.19");
             dataGridView4.Rows.Add("8 марта - 08.03.19");
             dataGridView4.Rows.Add("Пасха - 28.04.19");
+        }
+
+        // Конструктор формы
+        public Form1()
+        {
+            InitializeComponent();
+            comboBox1.SelectedIndex = 0;
+            tabControl1.SelectedIndex = 1;
+            label2.Visible = false;
+            label3.Visible = false;
+            // Тут мы определяем разрешение экрана и выставляем начальные
+            // координаты окна уведомления, чтобы оно отображалось в
+            // нижнем правом углу экрана
+            Size resolution = Screen.PrimaryScreen.Bounds.Size;
+            NotificationWindow.xStartCoord = resolution.Width - 431;
+            NotificationWindow.yStartCoord = resolution.Height - 207;
+            // Тестовое уведомление и значения в таблице. Потом мы это уберём
+            SetTestOptions();
+        }
+
+        // Проверяет, существует ли директория пользователя и файлы в ней в 
+        // AppData/Local. Если не существует - создаёт её и файлы. Если
+        // нет какого-то файла - создаёт его
+        private void CheckUserDirectory()
+        {
+            string appDataPath = 
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string applicationPath = appDataPath + "\\Just Remind";
+            if (Directory.Exists(applicationPath))
+            {
+                string personalFilePath = applicationPath + "\\Personal.dat";
+                if (!File.Exists(personalFilePath))
+                    File.Create(personalFilePath);
+                string birthdaysFilePath = applicationPath + "\\Birthdays.dat";
+                if (!File.Exists(birthdaysFilePath))
+                    File.Create(birthdaysFilePath);
+                string holidaysFilePath = applicationPath + "\\Holidays.dat";
+                if (!File.Exists(holidaysFilePath))
+                    File.Create(holidaysFilePath);
+            }
+            else
+            {
+                Directory.CreateDirectory(applicationPath);
+                File.Create(applicationPath + "\\Personal.dat");
+                File.Create(applicationPath + "\\Birthdays.dat");
+                File.Create(applicationPath + "\\Holidays.dat");
+            }
+        }
+
+        // Вызывается при загрузке формы, после конструктора
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CheckUserDirectory();
         }
 
         // Тут программа выбирает, что показывать после "Ваши задачи"
