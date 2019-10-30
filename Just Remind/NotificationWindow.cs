@@ -12,6 +12,14 @@ namespace Just_Remind
 {
     public partial class NotificationWindow : Form
     {
+        // Высота формы по умолчанию
+        private static readonly int DEFAULT_HEAIGHT = 167;
+        // Высота формы после нажатия кнопки "Отложить"
+        private static readonly int ALT_HEIGHT = 200;
+
+        // Переходит в true при нажатии кнопки "Отложить"
+        private bool puttoffClicked = false;
+
         // Основная форма
         private Form mainForm;
 
@@ -52,6 +60,25 @@ namespace Just_Remind
         private void NotificationWindow_Load(object sender, EventArgs e)
         {
             this.Location = new Point(xStartCoord, yStartCoord);
+            comboBox1.SelectedIndex = 0;
+            this.Height = DEFAULT_HEAIGHT;
+        }
+
+        // Нажатие на кнопку "Ок"
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (puttoffClicked && comboBox1.SelectedIndex != 8)
+            {
+                // Обработка ситуации, если пользователь захотел отложить уведомление
+            }
+            this.Close();
+        }
+
+        // Нажатие на кнопку "Отлолжить"
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            this.Height = ALT_HEIGHT;
+            puttoffClicked = true;
         }
     }
 }

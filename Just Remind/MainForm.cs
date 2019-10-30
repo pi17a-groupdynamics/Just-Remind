@@ -45,7 +45,7 @@ namespace Just_Remind
             // нижнем правом углу экрана
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
             NotificationWindow.xStartCoord = resolution.Width - 431;
-            NotificationWindow.yStartCoord = resolution.Height - 207;
+            NotificationWindow.yStartCoord = resolution.Height - 247;
             // Тестовое уведомление и значения в таблице. Потом мы это уберём
             SetTestOptions();
         }
@@ -351,7 +351,8 @@ namespace Just_Remind
         private void ShowPopupWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Так вызывается событие показа уведомления ввиде окна
-            NotificationWindow nWindow = new NotificationWindow("Некий текст");
+            NotificationWindow nWindow = new NotificationWindow(this, 
+                new Notification() { Text = "Какой-то текст"});
             nWindow.Show();
         }
 
