@@ -18,6 +18,12 @@ namespace Just_Remind
         private NotificationList birthdayNotifications = new NotificationList();
         private NotificationList holidayNotifications = new NotificationList();
         private AddNotificationForm addNotificationForm = new AddNotificationForm();
+        private ShowNotificationChecker showNotificationChecker;
+
+        /// <summary>
+        /// Напоминание, которое будет показано раньше всех остальных
+        /// </summary>
+        public Notification NearestNotification { get; set; }
 
         // Загрузка формы
         #region Load
@@ -309,11 +315,93 @@ namespace Just_Remind
             this.Cursor = Cursors.Default;
         }
 
+        // Определяет ближайшее напоминание, если хотя бы один из списков 
+        // с напоминаниями является путым
+        private void DetermineNearestNotif_EmptyLists()
+        {
+            int personalNotifCount = personalNotifications.Count;
+            int birthdayNotifCount = birthdayNotifications.Count;
+            int holidayNotifCount = holidayNotifications.Count;
+            if (personalNotifCount == 0 && birthdayNotifCount == 0 &&
+                holidayNotifCount == 0)
+            {
+                NearestNotification = new Notification();
+                NearestNotification.NearestDateTime = new DateTime(2200, 1, 1);
+            }
+            else if (personalNotifCount > 0)
+            {
+                if (birthdayNotifCount > 0)
+                {
+                    Notification nearestPersonalNotif = personalNotifications[0];
+                    Notification nearestBirthdayNotif = birthdayNotifications[0];
+                    if (nearestPersonalNotif.NearestDateTime.CompareTo(nearestBirthdayNotif.NearestDateTime) <= 0)
+                        NearestNotification = nearestPersonalNotif;
+                    else
+                        NearestNotification = nearestBirthdayNotif;
+                }
+                else if (holidayNotifCount > 0)
+                {
+                    Notification nearestPersonalNotif = personalNotifications[0];
+                    Notification nearestHolidayNotif = birthdayNotifications[0];
+                    if (nearestPersonalNotif.NearestDateTime.CompareTo(nearestHolidayNotif.NearestDateTime) <= 0)
+                        NearestNotification = nearestPersonalNotif;
+                    else
+                        NearestNotification = nearestHolidayNotif;
+                }
+                else
+                    NearestNotification = personalNotifications[0];
+            }
+            else if (birthdayNotifCount > 0)
+            {
+                if (holidayNotifCount > 0)
+                {
+                    Notification nearestBirthdayNotif = personalNotifications[0];
+                    Notification nearestHolidayNotif = birthdayNotifications[0];
+                    if (nearestBirthdayNotif.NearestDateTime.CompareTo(nearestHolidayNotif.NearestDateTime) <= 0)
+                        NearestNotification = nearestBirthdayNotif;
+                    else
+                        NearestNotification = nearestHolidayNotif;
+                }
+                else
+                    NearestNotification = birthdayNotifications[0];
+            }
+            else 
+                NearestNotification = holidayNotifications[0];
+        }
+
+        // Сравнивает ближайшие напоминания во всех списках, выбирает из них
+        // то, которое должно быть показано раньше всего, и сохраняет его в
+        // свойство NearestNotification
+        private void DetermineNearestNotif()
+        {
+            Notification nearestNotif;
+            if (personalNotifications.Count > 0 && birthdayNotifications.Count > 0 &&
+                holidayNotifications.Count > 0)
+            {
+                Notification nearestPersonalNotif = personalNotifications[0];
+                Notification nearestBirthdayNotif = birthdayNotifications[0];
+                if (nearestPersonalNotif.NearestDateTime.CompareTo(nearestBirthdayNotif.NearestDateTime) <= 0)
+                    nearestNotif = nearestPersonalNotif;
+                else
+                    nearestNotif = nearestBirthdayNotif;
+                Notification nearestHolidayNotif = holidayNotifications[0];
+                if (nearestNotif.NearestDateTime.CompareTo(nearestBirthdayNotif.NearestDateTime) <= 0)
+                    NearestNotification = nearestNotif;
+                else
+                    NearestNotification = nearestHolidayNotif;
+            }
+            else
+                DetermineNearestNotif_EmptyLists();
+        }
+
         // Вызывается при загрузке формы, после конструктора
         private void Form1_Load(object sender, EventArgs e)
         {
             string appPath = CheckUserDirectory();
             LoadDataFromFiles(appPath);
+            DetermineNearestNotif();
+            showNotificationChecker = new ShowNotificationChecker(this);
+            showNotificationChecker.StartAsync();
         }
 
         #endregion
@@ -600,6 +688,7 @@ namespace Just_Remind
                         UpdateNotifTable(dataGridView4, holidayNotifications);
                         break;
                 }
+                DetermineNearestNotif();
                 UpdateImportantNotifTable();
             }
         }
