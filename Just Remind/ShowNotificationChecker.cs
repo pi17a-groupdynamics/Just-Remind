@@ -9,6 +9,10 @@ namespace Just_Remind
 {
     class ShowNotificationChecker
     {
+        // Делегат, необходимый для вызова метода BeginInvoke()
+        // в методе Work()
+        private delegate void InvokeDelegate();
+
         // Флаг, указывающий, должен ли метод Work
         // остановить работу
         private volatile bool stopped;
@@ -29,6 +33,12 @@ namespace Just_Remind
             while (!stopped)
             {
                 // дописать выполнение работы
+                if (mainForm.NearestNotification.NearestDateTime.CompareTo(DateTime.Now) <= 0)
+                    // BeginInvoke() вызывает метод, передаваемый через делегат, из 
+                    // того потока, к которому принадлежит компонент, при помощи которого 
+                    // был вызван метод BeginInvoke().
+                    // В нашем случае это наш основной поток, в котором работает программа
+                    mainForm.BeginInvoke(new InvokeDelegate(mainForm.ShowNearestNotification));
 
                 Thread.Sleep(500);
             }
