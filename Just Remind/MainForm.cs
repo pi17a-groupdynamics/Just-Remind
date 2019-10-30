@@ -186,19 +186,110 @@ namespace Just_Remind
             catch
             {
                 MessageBox.Show("Ошибка при чтении файла \"Personal.dat\"", "Ошибка");
+                return;
+            }
+        }
+
+        // Загружает данные из "Birthdays.dat" или из "Holidays.dat"
+        // в зависимости от переданных аргументов
+        private void LoadDataFromBirthdaysOrHolidays(string filePath, 
+            NotificationList notificationList)
+        {
+            string fileText;
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                fileText = reader.ReadToEnd();
+            }
+            using (StringReader reader = new StringReader(fileText))
+            {
+                string line;
+                reader.ReadLine();
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Notification notification = new Notification();
+                    short rowsNum = short.Parse(line);
+                    short day = short.Parse(reader.ReadLine());
+                    short month = short.Parse(reader.ReadLine());
+                    short year = short.Parse(reader.ReadLine());
+                    short hour = short.Parse(reader.ReadLine());
+                    short minute = short.Parse(reader.ReadLine());
+                    DateTime dateTime = new DateTime(year, month, day);
+                    dateTime = dateTime.AddHours(hour);
+                    dateTime = dateTime.AddMinutes(minute);
+                    notification.NearestDateTime = dateTime;
+                    day = short.Parse(reader.ReadLine());
+                    month = short.Parse(reader.ReadLine());
+                    notification.RepeatDate = new DateTime(year, month, day);
+                    bool flag = StrToBool(reader.ReadLine());
+                    notification.IsRepeatByDay = flag;
+                    if (flag == true)
+                    {
+                        reader.ReadLine();
+                        reader.ReadLine();
+                        DateTime startTime = new DateTime();
+                        startTime = startTime.AddHours(short.Parse(reader.ReadLine()));
+                        startTime = startTime.AddMinutes(short.Parse(reader.ReadLine()));
+                        notification.StartTime = startTime;
+                        DateTime endTime = new DateTime();
+                        endTime = endTime.AddHours(short.Parse(reader.ReadLine()));
+                        endTime = endTime.AddMinutes(short.Parse(reader.ReadLine()));
+                        notification.EndTime = endTime;
+                        notification.HoursInterval = short.Parse(reader.ReadLine());
+                        notification.MinutesInterval = short.Parse(reader.ReadLine());
+                    }
+                    else
+                    {
+                        notification.Hour = short.Parse(reader.ReadLine());
+                        notification.Minute = short.Parse(reader.ReadLine());
+                        for (int i = 0; i < 6; i++)
+                            reader.ReadLine();
+                    }
+                    notification.IsImportant = StrToBool(reader.ReadLine());
+                    string notificationText = string.Empty;
+                    for (int i = 0; i < rowsNum; i++)
+                        notificationText += reader.ReadLine();
+                    notification.Text = notificationText;
+                    notificationList.Insert(notification);
+                }
             }
         }
 
         // Загружает данные из "Birthdays.dat"
         private void LoadDataFromBirthdays(string appPath)
         {
-
+            try
+            {
+                string filePath = appPath + "\\Birthdays.dat";
+                long fileLength = new FileInfo(filePath).Length;
+                if (fileLength == 0)
+                    return;
+                else
+                    LoadDataFromBirthdaysOrHolidays(filePath, birthdayNotifications);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при чтении файла \"Birthdays.dat\"", "Ошибка");
+                return;
+            }
         }
 
         // Загружает данные из "Holidays.dat"
         private void LoadDataFromHolidays(string appPath)
         {
-
+            try
+            {
+                string filePath = appPath + "\\Holidays.dat";
+                long fileLength = new FileInfo(filePath).Length;
+                if (fileLength == 0)
+                    return;
+                else
+                    LoadDataFromBirthdaysOrHolidays(filePath, holidayNotifications);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при чтении файла \"Holidays.dat\"", "Ошибка");
+                return;
+            }
         }
 
         // Загружает данные из файлов программы в AppData оперативную память
@@ -312,7 +403,7 @@ namespace Just_Remind
         // Обновляет таблицу с важными уведомлениями
         private void UpdateImportantNotifTable()
         {
-            //дописать
+            // !дописать!
         }
 
         // Перезаписывает файл "Personal.dat"
