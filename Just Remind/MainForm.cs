@@ -420,14 +420,17 @@ namespace Just_Remind
                 case NotifCategories.Personal:
                     personalNotifications.RemoveAt(0);
                     RewritePersonalFile();
+                    UpdateNotifTable(dataGridView2, personalNotifications);
                     break;
                 case NotifCategories.Birthdays:
                     birthdayNotifications.RemoveAt(0);
                     RewriteBirthdaysOrHolidaysFile(birthdayNotifications, "Birthdays.dat");
+                    UpdateNotifTable(dataGridView3, birthdayNotifications);
                     break;
                 case NotifCategories.Holidays:
                     holidayNotifications.RemoveAt(0);
                     RewriteBirthdaysOrHolidaysFile(holidayNotifications, "Holidays.dat");
+                    UpdateNotifTable(dataGridView4, holidayNotifications);
                     break;
             }
             DetermineNearestNotif();

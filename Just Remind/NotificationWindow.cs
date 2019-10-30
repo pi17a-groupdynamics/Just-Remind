@@ -62,6 +62,7 @@ namespace Just_Remind
             this.Location = new Point(xStartCoord, yStartCoord);
             comboBox1.SelectedIndex = 0;
             this.Height = DEFAULT_HEAIGHT;
+            label1.Text = Notification.Text;
         }
 
         // Нажатие на кнопку "Ок"
