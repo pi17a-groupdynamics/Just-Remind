@@ -245,8 +245,8 @@ namespace Just_Remind
         {
             //весь метод нужно переписать
             DateTime time = new DateTime(2019, 1, 1);
-            time.AddHours(notification.Hour);
-            time.AddMinutes(notification.Minute);
+            time = time.AddHours(notification.Hour);
+            time = time.AddMinutes(notification.Minute);
             int timeComparison = CompareTimes(time, dateTimeNow);
             DateTime nearestDateTime;
             if (timeComparison > 0)
@@ -257,10 +257,10 @@ namespace Just_Remind
                 nearestDateTime = new DateTime(dateTimeNow.Year,
                     dateTimeNow.Month, dateTimeNow.Day);
                 int daysToCarryOver = CountDaysToCarryover(notification, dateTimeNow);
-                nearestDateTime.AddDays(daysToCarryOver);
+                nearestDateTime = nearestDateTime.AddDays(daysToCarryOver);
             }
-            nearestDateTime.AddHours(notification.Hour);
-            nearestDateTime.AddMinutes(notification.Minute);
+            nearestDateTime = nearestDateTime.AddHours(notification.Hour);
+            nearestDateTime = nearestDateTime.AddMinutes(notification.Minute);
             return nearestDateTime;
         }
 
@@ -271,14 +271,14 @@ namespace Just_Remind
             DateTime dateTimeNow, DateTime endTime)
         {
             DateTime notificationTime = new DateTime(2019, 1, 1);
-            notificationTime.AddHours(notification.StartTime.Hour);
-            notificationTime.AddMinutes(notification.StartTime.Minute);
+            notificationTime = notificationTime.AddHours(notification.StartTime.Hour);
+            notificationTime = notificationTime.AddMinutes(notification.StartTime.Minute);
             bool outOfInterval = false;
             int comparisonResult = CompareTimes(notificationTime, dateTimeNow);
             while (comparisonResult <= 0 && !outOfInterval)
             {
-                notificationTime.AddHours(notification.HoursInterval);
-                notificationTime.AddMinutes(notification.MinutesInterval);
+                notificationTime = notificationTime.AddHours(notification.HoursInterval);
+                notificationTime = notificationTime.AddMinutes(notification.MinutesInterval);
                 comparisonResult = CompareTimes(notificationTime, dateTimeNow);
                 int outOfIntervalComparison = CompareTimes(endTime, notificationTime);
                 if (outOfIntervalComparison < 0)
@@ -289,17 +289,17 @@ namespace Just_Remind
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year,
                     dateTimeNow.Month, dateTimeNow.Day);
                 int daysToCarryover = CountDaysToCarryover(notification, dateTimeNow);
-                nearestDateTime.AddDays(daysToCarryover);
-                nearestDateTime.AddHours(notification.StartTime.Hour);
-                nearestDateTime.AddMinutes(notification.StartTime.Minute);
+                nearestDateTime = nearestDateTime.AddDays(daysToCarryover);
+                nearestDateTime = nearestDateTime.AddHours(notification.StartTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notification.StartTime.Minute);
                 return nearestDateTime;
             }
             else
             {
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year,
                     dateTimeNow.Month, dateTimeNow.Day);
-                nearestDateTime.AddHours(notificationTime.Hour);
-                nearestDateTime.AddMinutes(notificationTime.Minute);
+                nearestDateTime = nearestDateTime.AddHours(notificationTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notificationTime.Minute);
                 return nearestDateTime;
             }
         }
@@ -318,8 +318,8 @@ namespace Just_Remind
             {
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year,
                     dateTimeNow.Month, dateTimeNow.Day);
-                nearestDateTime.AddHours(notification.StartTime.Hour);
-                nearestDateTime.AddMinutes(notification.StartTime.Minute);
+                nearestDateTime = nearestDateTime.AddHours(notification.StartTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notification.StartTime.Minute);
                 return nearestDateTime;
             }
             // Текущее время позже, чем интерал, в который напоминание повторяется, либо
@@ -329,9 +329,9 @@ namespace Just_Remind
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year,
                     dateTimeNow.Month, dateTimeNow.Day);
                 int daysToCarryOver = CountDaysToCarryover(notification, dateTimeNow);
-                nearestDateTime.AddDays(daysToCarryOver);
-                nearestDateTime.AddHours(notification.StartTime.Hour);
-                nearestDateTime.AddMinutes(notification.StartTime.Minute);
+                nearestDateTime = nearestDateTime.AddDays(daysToCarryOver);
+                nearestDateTime = nearestDateTime.AddHours(notification.StartTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notification.StartTime.Minute);
                 return nearestDateTime;
             }
             // Текущее время попадает в интервал
@@ -367,7 +367,7 @@ namespace Just_Remind
             if (!IsSuitableDay(notification, notificationDate))
             {
                 int daysToCarryOver = CountDaysToCarryover(notification, notificationDate);
-                notificationDate.AddDays(daysToCarryOver);
+                notificationDate = notificationDate.AddDays(daysToCarryOver);
             }
 
             int comparison = CompareDates(notificationDate, dateTimeNow);
@@ -390,8 +390,8 @@ namespace Just_Remind
             DateTime dateTimeNow)
         {
             DateTime time = new DateTime(2019, 1, 1);
-            time.AddHours(notification.Hour);
-            time.AddMinutes(notification.Minute);
+            time = time.AddHours(notification.Hour);
+            time = time.AddMinutes(notification.Minute);
             int timeComparison = CompareTimes(time, dateTimeNow);
             DateTime nearestDateTime;
             if (timeComparison > 0)
@@ -400,8 +400,8 @@ namespace Just_Remind
             else
                 nearestDateTime = new DateTime(dateTimeNow.Year + 1,
                     dateTimeNow.Month, dateTimeNow.Day);
-            nearestDateTime.AddHours(notification.Hour);
-            nearestDateTime.AddMinutes(notification.Minute);
+            nearestDateTime = nearestDateTime.AddHours(notification.Hour);
+            nearestDateTime = nearestDateTime.AddMinutes(notification.Minute);
             return nearestDateTime;
         }
 
@@ -412,14 +412,14 @@ namespace Just_Remind
             DateTime dateTimeNow, DateTime endTime)
         {
             DateTime notificationTime = new DateTime(2019, 1, 1);
-            notificationTime.AddHours(notification.StartTime.Hour);
-            notificationTime.AddMinutes(notification.StartTime.Minute);
+            notificationTime = notificationTime.AddHours(notification.StartTime.Hour);
+            notificationTime = notificationTime.AddMinutes(notification.StartTime.Minute);
             bool outOfInterval = false;
             int comparisonResult = CompareTimes(notificationTime, dateTimeNow);
             while (comparisonResult <= 0 && !outOfInterval)
             {
-                notificationTime.AddHours(notification.HoursInterval);
-                notificationTime.AddMinutes(notification.MinutesInterval);
+                notificationTime = notificationTime.AddHours(notification.HoursInterval);
+                notificationTime = notificationTime.AddMinutes(notification.MinutesInterval);
                 comparisonResult = CompareTimes(notificationTime, dateTimeNow);
                 int outOfIntervalComparison = CompareTimes(endTime, notificationTime);
                 if (outOfIntervalComparison < 0)
@@ -429,16 +429,16 @@ namespace Just_Remind
             {
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year + 1,
                     dateTimeNow.Month, dateTimeNow.Day);
-                nearestDateTime.AddHours(notification.StartTime.Hour);
-                nearestDateTime.AddMinutes(notification.StartTime.Minute);
+                nearestDateTime = nearestDateTime.AddHours(notification.StartTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notification.StartTime.Minute);
                 return nearestDateTime;
             }
             else
             {
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year,
                     dateTimeNow.Month, dateTimeNow.Day);
-                nearestDateTime.AddHours(notificationTime.Hour);
-                nearestDateTime.AddMinutes(notificationTime.Minute);
+                nearestDateTime = nearestDateTime.AddHours(notificationTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notificationTime.Minute);
                 return nearestDateTime;
             }
         }
@@ -457,8 +457,8 @@ namespace Just_Remind
             {
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year,
                     dateTimeNow.Month, dateTimeNow.Day);
-                nearestDateTime.AddHours(notification.StartTime.Hour);
-                nearestDateTime.AddMinutes(notification.StartTime.Minute);
+                nearestDateTime = nearestDateTime.AddHours(notification.StartTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notification.StartTime.Minute);
                 return nearestDateTime;
             }
             // Текущее время позже, чем интерал, в который напоминание повторяется, либо
@@ -467,8 +467,8 @@ namespace Just_Remind
             {
                 DateTime nearestDateTime = new DateTime(dateTimeNow.Year + 1,
                     dateTimeNow.Month, dateTimeNow.Day);
-                nearestDateTime.AddHours(notification.StartTime.Hour);
-                nearestDateTime.AddMinutes(notification.StartTime.Minute);
+                nearestDateTime = nearestDateTime.AddHours(notification.StartTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notification.StartTime.Minute);
                 return nearestDateTime;
             }
             // Текущее время попадает в интервал
@@ -514,7 +514,7 @@ namespace Just_Remind
             else
             {
                 // Добавляем годик
-                notificationDate.AddYears(1);
+                notificationDate = notificationDate.AddYears(1);
                 // И считаем время
                 return CountTimeNotToday(notification, notificationDate);
             }

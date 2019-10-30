@@ -19,6 +19,9 @@ namespace Just_Remind
         private NotificationList holidayNotifications = new NotificationList();
         private AddNotificationForm addNotificationForm = new AddNotificationForm();
 
+        // Загрузка формы
+        #region Load
+
         // Тестовое уведомление и значения в таблице
         private void SetTestOptions()
         {
@@ -27,17 +30,6 @@ namespace Just_Remind
             notifyIcon.BalloonTipTitle = "Очень важное";
             notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon.Icon = this.Icon;
-            // Заполняем таблицы 
-            personalNotifications.Add(new Notification("Позвонить Илону Маску",
-                new DateTime(2019, 07, 15, 23, 00, 00)));
-            personalNotifications.Add(new Notification("Купить майонез",
-                new DateTime(2019, 08, 16, 09, 00, 00)));
-            dataGridView2.Rows.Add("Позвонить Илону Маску");
-            dataGridView2.Rows.Add("Купить майонез");
-            dataGridView3.Rows.Add("Надя - 26.02.19");
-            dataGridView3.Rows.Add("Катя - 03.03.19");
-            dataGridView4.Rows.Add("8 марта - 08.03.19");
-            dataGridView4.Rows.Add("Пасха - 28.04.19");
         }
 
         // Конструктор формы
@@ -61,7 +53,7 @@ namespace Just_Remind
         // Проверяет, существует ли директория пользователя и файлы в ней в 
         // AppData/Local. Если не существует - создаёт её и файлы. Если
         // нет какого-то файла - создаёт его
-        private void CheckUserDirectory()
+        private string CheckUserDirectory()
         {
             string appDataPath = 
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -70,28 +62,259 @@ namespace Just_Remind
             {
                 string personalFilePath = applicationPath + "\\Personal.dat";
                 if (!File.Exists(personalFilePath))
-                    File.Create(personalFilePath);
+                    File.Create(personalFilePath).Close();
                 string birthdaysFilePath = applicationPath + "\\Birthdays.dat";
                 if (!File.Exists(birthdaysFilePath))
-                    File.Create(birthdaysFilePath);
+                    File.Create(birthdaysFilePath).Close();
                 string holidaysFilePath = applicationPath + "\\Holidays.dat";
                 if (!File.Exists(holidaysFilePath))
-                    File.Create(holidaysFilePath);
+                    File.Create(holidaysFilePath).Close();
             }
             else
             {
                 Directory.CreateDirectory(applicationPath);
-                File.Create(applicationPath + "\\Personal.dat");
-                File.Create(applicationPath + "\\Birthdays.dat");
-                File.Create(applicationPath + "\\Holidays.dat");
+                File.Create(applicationPath + "\\Personal.dat").Close();
+                File.Create(applicationPath + "\\Birthdays.dat").Close();
+                File.Create(applicationPath + "\\Holidays.dat").Close();
             }
+            return applicationPath;
+        }
+
+        // Тут думаю всё понятно
+        private bool StrToBool(string str)
+        {
+            if (str == "0")
+                return false;
+            else
+                return true;
+        }
+
+        // Загружает данные из "Personal.dat"
+        private void LoadDataFromPersonal(string appPath)
+        {
+            try
+            {
+                string filePath = appPath + "\\Personal.dat";
+                long fileLength = new FileInfo(filePath).Length;
+                if (fileLength == 0)
+                    return;
+                string fileText;
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    fileText = reader.ReadToEnd();
+                }
+                using (StringReader reader = new StringReader(fileText))
+                {
+                    string line;
+                    reader.ReadLine();
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        Notification notification = new Notification();
+                        short rowsNum = short.Parse(line);
+                        short day = short.Parse(reader.ReadLine());
+                        short month = short.Parse(reader.ReadLine());
+                        short year = short.Parse(reader.ReadLine());
+                        short hour = short.Parse(reader.ReadLine());
+                        short minute = short.Parse(reader.ReadLine());
+                        DateTime dateTime = new DateTime(year, month, day);
+                        dateTime = dateTime.AddHours(hour);
+                        dateTime = dateTime.AddMinutes(minute);
+                        notification.NearestDateTime = dateTime;
+                        bool flag = StrToBool(reader.ReadLine());
+                        notification.IsRepeatByDate = flag;
+                        if (flag == true)
+                        {
+                            day = short.Parse(reader.ReadLine());
+                            month = short.Parse(reader.ReadLine());
+                            notification.RepeatDate = new DateTime(year, month, day);
+                        }
+                        else
+                        {
+                            reader.ReadLine();
+                            reader.ReadLine();
+                        }
+                        flag = StrToBool(reader.ReadLine());
+                        notification.IsRepeatByDaysOfWeek = flag;
+                        if (flag == true)
+                        {
+                            notification.IsRepeatOnMonday = StrToBool(reader.ReadLine());
+                            notification.IsRepeatOnTuesday = StrToBool(reader.ReadLine());
+                            notification.IsRepeatOnWednesday = StrToBool(reader.ReadLine());
+                            notification.IsRepeatOnThursday = StrToBool(reader.ReadLine());
+                            notification.IsRepeatOnFriday = StrToBool(reader.ReadLine());
+                            notification.IsRepeatOnSaturday = StrToBool(reader.ReadLine());
+                            notification.IsRepeatOnSunday = StrToBool(reader.ReadLine());
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 7; i++)
+                                reader.ReadLine();
+                        }
+                        flag = StrToBool(reader.ReadLine());
+                        notification.IsRepeatByDay = flag;
+                        if (flag == true)
+                        {
+                            reader.ReadLine();
+                            reader.ReadLine();
+                            DateTime startTime = new DateTime();
+                            startTime = startTime.AddHours(short.Parse(reader.ReadLine()));
+                            startTime = startTime.AddMinutes(short.Parse(reader.ReadLine()));
+                            notification.StartTime = startTime;
+                            DateTime endTime = new DateTime();
+                            endTime = endTime.AddHours(short.Parse(reader.ReadLine()));
+                            endTime = endTime.AddMinutes(short.Parse(reader.ReadLine()));
+                            notification.EndTime = endTime;
+                            notification.HoursInterval = short.Parse(reader.ReadLine());
+                            notification.MinutesInterval = short.Parse(reader.ReadLine());
+                        }
+                        else
+                        {
+                            notification.Hour = short.Parse(reader.ReadLine());
+                            notification.Minute = short.Parse(reader.ReadLine());
+                            for (int i = 0; i < 6; i++)
+                                reader.ReadLine();
+                        }
+                        notification.IsImportant = StrToBool(reader.ReadLine());
+                        string notificationText = string.Empty;
+                        for (int i = 0; i < rowsNum; i++)
+                            notificationText += reader.ReadLine();
+                        notification.Text = notificationText;
+                        personalNotifications.Insert(notification);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при чтении файла \"Personal.dat\"", "Ошибка");
+                return;
+            }
+        }
+
+        // Загружает данные из "Birthdays.dat" или из "Holidays.dat"
+        // в зависимости от переданных аргументов
+        private void LoadDataFromBirthdaysOrHolidays(string filePath, 
+            NotificationList notificationList)
+        {
+            string fileText;
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                fileText = reader.ReadToEnd();
+            }
+            using (StringReader reader = new StringReader(fileText))
+            {
+                string line;
+                reader.ReadLine();
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Notification notification = new Notification();
+                    short rowsNum = short.Parse(line);
+                    short day = short.Parse(reader.ReadLine());
+                    short month = short.Parse(reader.ReadLine());
+                    short year = short.Parse(reader.ReadLine());
+                    short hour = short.Parse(reader.ReadLine());
+                    short minute = short.Parse(reader.ReadLine());
+                    DateTime dateTime = new DateTime(year, month, day);
+                    dateTime = dateTime.AddHours(hour);
+                    dateTime = dateTime.AddMinutes(minute);
+                    notification.NearestDateTime = dateTime;
+                    day = short.Parse(reader.ReadLine());
+                    month = short.Parse(reader.ReadLine());
+                    notification.RepeatDate = new DateTime(year, month, day);
+                    bool flag = StrToBool(reader.ReadLine());
+                    notification.IsRepeatByDay = flag;
+                    if (flag == true)
+                    {
+                        reader.ReadLine();
+                        reader.ReadLine();
+                        DateTime startTime = new DateTime();
+                        startTime = startTime.AddHours(short.Parse(reader.ReadLine()));
+                        startTime = startTime.AddMinutes(short.Parse(reader.ReadLine()));
+                        notification.StartTime = startTime;
+                        DateTime endTime = new DateTime();
+                        endTime = endTime.AddHours(short.Parse(reader.ReadLine()));
+                        endTime = endTime.AddMinutes(short.Parse(reader.ReadLine()));
+                        notification.EndTime = endTime;
+                        notification.HoursInterval = short.Parse(reader.ReadLine());
+                        notification.MinutesInterval = short.Parse(reader.ReadLine());
+                    }
+                    else
+                    {
+                        notification.Hour = short.Parse(reader.ReadLine());
+                        notification.Minute = short.Parse(reader.ReadLine());
+                        for (int i = 0; i < 6; i++)
+                            reader.ReadLine();
+                    }
+                    notification.IsImportant = StrToBool(reader.ReadLine());
+                    string notificationText = string.Empty;
+                    for (int i = 0; i < rowsNum; i++)
+                        notificationText += reader.ReadLine();
+                    notification.Text = notificationText;
+                    notificationList.Insert(notification);
+                }
+            }
+        }
+
+        // Загружает данные из "Birthdays.dat"
+        private void LoadDataFromBirthdays(string appPath)
+        {
+            try
+            {
+                string filePath = appPath + "\\Birthdays.dat";
+                long fileLength = new FileInfo(filePath).Length;
+                if (fileLength == 0)
+                    return;
+                else
+                    LoadDataFromBirthdaysOrHolidays(filePath, birthdayNotifications);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при чтении файла \"Birthdays.dat\"", "Ошибка");
+                return;
+            }
+        }
+
+        // Загружает данные из "Holidays.dat"
+        private void LoadDataFromHolidays(string appPath)
+        {
+            try
+            {
+                string filePath = appPath + "\\Holidays.dat";
+                long fileLength = new FileInfo(filePath).Length;
+                if (fileLength == 0)
+                    return;
+                else
+                    LoadDataFromBirthdaysOrHolidays(filePath, holidayNotifications);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при чтении файла \"Holidays.dat\"", "Ошибка");
+                return;
+            }
+        }
+
+        // Загружает данные из файлов программы в AppData оперативную память
+        // (списки NotificationList)
+        private void LoadDataFromFiles(string appPath)
+        {
+            // Проверять наличие папки Just Remind и файлов не обязательно, так как
+            // этот метод вызывается при загрузке программы после этой самой проверки
+            LoadDataFromPersonal(appPath);
+            LoadDataFromBirthdays(appPath);
+            LoadDataFromHolidays(appPath);
+            UpdateNotifTable(dataGridView2, personalNotifications);
+            UpdateNotifTable(dataGridView3, birthdayNotifications);
+            UpdateNotifTable(dataGridView4, holidayNotifications);
+            UpdateImportantNotifTable();
         }
 
         // Вызывается при загрузке формы, после конструктора
         private void Form1_Load(object sender, EventArgs e)
         {
-            CheckUserDirectory();
+            string appPath = CheckUserDirectory();
+            LoadDataFromFiles(appPath);
         }
+
+        #endregion
 
         // Тут программа выбирает, что показывать после "Ваши задачи"
         // в зависимости от того, какая вкладка сейчас открыта
@@ -138,6 +361,9 @@ namespace Just_Remind
             notifyIcon.ShowBalloonTip(5000);
         }
 
+        // То, что происходит при нажатии кнопки "+"
+        #region ButtonPlus
+
         // Создаёт директорию Just Remind в AppData, если она была удалена
         // и файл в этой директории, имя которого передаётся в fileName.
         // Возвращает путь к файлу
@@ -150,7 +376,7 @@ namespace Just_Remind
             if (!Directory.Exists(applicationPath))
             {
                 Directory.CreateDirectory(applicationPath);
-                File.Create(filePath);
+                File.Create(filePath).Close();
             }
             return filePath;
         }
@@ -177,7 +403,7 @@ namespace Just_Remind
         // Обновляет таблицу с важными уведомлениями
         private void UpdateImportantNotifTable()
         {
-            //дописать
+            // !дописать!
         }
 
         // Перезаписывает файл "Personal.dat"
@@ -204,14 +430,10 @@ namespace Just_Remind
                             DateTime repeatDate = notification.RepeatDate;
                             writer.WriteLine(repeatDate.Day);
                             writer.WriteLine(repeatDate.Month);
-                            writer.WriteLine(repeatDate.Year);
-                            writer.WriteLine(repeatDate.Hour);
-                            writer.WriteLine(repeatDate.Minute);
                         }
                         else
                         {
-                            writer.WriteLine(0);
-                            for (int i = 0; i < 5; i++)
+                            for (int i = 0; i < 3; i++)
                                 writer.WriteLine(0);
                         }
                         if (notification.IsRepeatByDaysOfWeek)
@@ -312,9 +534,6 @@ namespace Just_Remind
                         DateTime repeatDate = notification.RepeatDate;
                         writer.WriteLine(repeatDate.Day);
                         writer.WriteLine(repeatDate.Month);
-                        writer.WriteLine(repeatDate.Year);
-                        writer.WriteLine(repeatDate.Hour);
-                        writer.WriteLine(repeatDate.Minute);
                         if (notification.IsRepeatByDay)
                         {
                             writer.WriteLine(1);
@@ -381,5 +600,7 @@ namespace Just_Remind
                 UpdateImportantNotifTable();
             }
         }
+
+        #endregion
     }
 }
