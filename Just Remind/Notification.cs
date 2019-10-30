@@ -166,5 +166,38 @@ namespace Just_Remind
             NearestDateTime = NearestDateTime.AddHours(startTime.Hour);
             NearestDateTime = NearestDateTime.AddMinutes(startTime.Minute);
         }
+
+        /// <summary>
+        /// Возвращает копию данного объекта Notification
+        /// </summary>
+        public Notification Copy()
+        {
+            Notification notification = new Notification
+            {
+                Category = this.Category,
+                EndTime = this.EndTime,
+                Hour = this.Hour,
+                HoursInterval = this.HoursInterval,
+                IsImportant = this.IsImportant,
+                IsRepeatByDate = this.IsRepeatByDate,
+                IsRepeatByDay = this.IsRepeatByDay,
+                IsRepeatByDaysOfWeek = this.IsRepeatByDaysOfWeek,
+                IsRepeatOnMonday = this.IsRepeatOnMonday,
+                IsRepeatOnTuesday = this.IsRepeatOnTuesday,
+                IsRepeatOnWednesday = this.IsRepeatOnWednesday,
+                IsRepeatOnThursday = this.IsRepeatOnThursday,
+                IsRepeatOnFriday = this.IsRepeatOnFriday,
+                IsRepeatOnSaturday = this.IsRepeatOnSaturday,
+                IsRepeatOnSunday = this.IsRepeatOnSunday,
+                Minute = this.Minute,
+                MinutesInterval = this.MinutesInterval,
+                NearestDateTime = this.NearestDateTime,
+                RepeatDate = this.RepeatDate,
+                RowsNum = this.RowsNum,
+                StartTime = this.StartTime,
+                Text = this.Text
+            };
+            return notification;
+        }
     }
 }
