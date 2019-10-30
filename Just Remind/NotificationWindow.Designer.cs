@@ -61,7 +61,7 @@
             this.button2.Text = "Закрыть";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // Notification_window
+            // NotificationWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -70,9 +70,10 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "Notification_window";
+            this.Name = "NotificationWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Just Remind";
+            this.Load += new System.EventHandler(this.NotificationWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
