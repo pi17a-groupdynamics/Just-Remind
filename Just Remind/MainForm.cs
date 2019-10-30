@@ -298,6 +298,7 @@ namespace Just_Remind
         {
             // Проверять наличие папки Just Remind и файлов не обязательно, так как
             // этот метод вызывается при загрузке программы после этой самой проверки
+            this.Cursor = Cursors.WaitCursor;
             LoadDataFromPersonal(appPath);
             LoadDataFromBirthdays(appPath);
             LoadDataFromHolidays(appPath);
@@ -305,6 +306,7 @@ namespace Just_Remind
             UpdateNotifTable(dataGridView3, birthdayNotifications);
             UpdateNotifTable(dataGridView4, holidayNotifications);
             UpdateImportantNotifTable();
+            this.Cursor = Cursors.Default;
         }
 
         // Вызывается при загрузке формы, после конструктора
