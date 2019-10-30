@@ -163,8 +163,8 @@ namespace Just_Remind
             MinutesInterval = minutesInterval;
             StartTime = startTime;
             EndTime = endTime;
-            NearestDateTime.AddHours(startTime.Hour);
-            NearestDateTime.AddMinutes(startTime.Minute);
+            NearestDateTime = NearestDateTime.AddHours(startTime.Hour);
+            NearestDateTime = NearestDateTime.AddMinutes(startTime.Minute);
         }
     }
 }

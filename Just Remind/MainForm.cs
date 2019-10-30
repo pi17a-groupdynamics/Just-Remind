@@ -117,8 +117,8 @@ namespace Just_Remind
                         short hour = short.Parse(reader.ReadLine());
                         short minute = short.Parse(reader.ReadLine());
                         DateTime dateTime = new DateTime(year, month, day);
-                        dateTime.AddHours(hour);
-                        dateTime.AddMinutes(minute);
+                        dateTime = dateTime.AddHours(hour);
+                        dateTime = dateTime.AddMinutes(minute);
                         notification.NearestDateTime = dateTime;
                         bool flag = StrToBool(reader.ReadLine());
                         notification.IsRepeatByDate = flag;
@@ -157,12 +157,12 @@ namespace Just_Remind
                             reader.ReadLine();
                             reader.ReadLine();
                             DateTime startTime = new DateTime();
-                            startTime.AddHours(short.Parse(reader.ReadLine()));
-                            startTime.AddMinutes(short.Parse(reader.ReadLine()));
+                            startTime = startTime.AddHours(short.Parse(reader.ReadLine()));
+                            startTime = startTime.AddMinutes(short.Parse(reader.ReadLine()));
                             notification.StartTime = startTime;
                             DateTime endTime = new DateTime();
-                            endTime.AddHours(short.Parse(reader.ReadLine()));
-                            endTime.AddMinutes(short.Parse(reader.ReadLine()));
+                            endTime = endTime.AddHours(short.Parse(reader.ReadLine()));
+                            endTime = endTime.AddMinutes(short.Parse(reader.ReadLine()));
                             notification.EndTime = endTime;
                             notification.HoursInterval = short.Parse(reader.ReadLine());
                             notification.MinutesInterval = short.Parse(reader.ReadLine());
