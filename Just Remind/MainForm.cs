@@ -84,6 +84,7 @@ namespace Just_Remind
         // свойство NearestNotification
         private void DetermineNearestNotif()
         {
+            showNotificationChecker.Stop();
             Notification nearestNotif;
             if (personalNotifications.Count > 0 && birthdayNotifications.Count > 0 &&
                 holidayNotifications.Count > 0)
@@ -102,6 +103,7 @@ namespace Just_Remind
             }
             else
                 DetermineNearestNotif_EmptyLists();
+            showNotificationChecker.StartAsync();
         }
 
         // Загрузка формы
@@ -129,8 +131,8 @@ namespace Just_Remind
             // координаты окна уведомления, чтобы оно отображалось в
             // нижнем правом углу экрана
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
-            NotificationWindow.xStartCoord = resolution.Width - 431;
-            NotificationWindow.yStartCoord = resolution.Height - 247;
+            NotificationWindow.XStartCoord = resolution.Width - 431;
+            NotificationWindow.YStartCoord = resolution.Height - 247;
             // Тестовое уведомление и значения в таблице. Потом мы это уберём
             SetTestOptions();
         }
@@ -399,9 +401,8 @@ namespace Just_Remind
         {
             string appPath = CheckUserDirectory();
             LoadDataFromFiles(appPath);
-            DetermineNearestNotif();
             showNotificationChecker = new ShowNotificationChecker(this);
-            showNotificationChecker.StartAsync();
+            DetermineNearestNotif();
         }
 
         #endregion
@@ -414,7 +415,6 @@ namespace Just_Remind
         {
             NotificationWindow notificationWindow = new NotificationWindow(this, NearestNotification);
             notificationWindow.Show();
-            showNotificationChecker.Stop();
             switch (NearestNotification.Category)
             {
                 case NotifCategories.Personal:
@@ -434,7 +434,6 @@ namespace Just_Remind
                     break;
             }
             DetermineNearestNotif();
-            showNotificationChecker.StartAsync();
         }
 
         // Нажатие Отладка -> Показать всплывающее окно
@@ -726,6 +725,29 @@ namespace Just_Remind
                     label3.Visible = true;
                     break;
             }
+        }
+
+        // Вставляет отложенное напоминание в необходимый список, пересчитывает
+        // NearestNotification, обновляет таблицы
+        public void InsertPutedoffNotification(Notification notification)
+        {
+            switch (notification.Category)
+            {
+                case NotifCategories.Personal:
+                    personalNotifications.Insert(notification);
+                    UpdateNotifTable(dataGridView2, personalNotifications);
+                    break;
+                case NotifCategories.Birthdays:
+                    birthdayNotifications.Insert(notification);
+                    UpdateNotifTable(dataGridView3, birthdayNotifications);
+                    break;
+                case NotifCategories.Holidays:
+                    holidayNotifications.Insert(notification);
+                    UpdateNotifTable(dataGridView4, holidayNotifications);
+                    break;
+            }
+            DetermineNearestNotif();
+            UpdateImportantNotifTable();
         }
     }
 }

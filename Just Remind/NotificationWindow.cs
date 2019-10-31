@@ -16,12 +16,14 @@ namespace Just_Remind
         private static readonly int DEFAULT_HEAIGHT = 167;
         // Высота формы после нажатия кнопки "Отложить"
         private static readonly int ALT_HEIGHT = 200;
+        // Номер элемента в комбобоксе с вариантом "не откладывать"
+        private static readonly int NO_PUTOFF = 8;
 
         // Переходит в true при нажатии кнопки "Отложить"
         private bool puttoffClicked = false;
 
         // Основная форма
-        private Form mainForm;
+        private Form1 mainForm;
 
         private Notification notification;
 
@@ -45,11 +47,11 @@ namespace Just_Remind
         }
 
         // Поля статические, чтобы не пересчитывать их каждый раз
-        public static int xStartCoord;
-        public static int yStartCoord;
+        public static int XStartCoord { get; set; }
+        public static int YStartCoord { get; set; }
 
         // Конструктор принимает объект главной формы
-        public NotificationWindow(Form mainForm, Notification notification)
+        public NotificationWindow(Form1 mainForm, Notification notification)
         {
             InitializeComponent();
             this.mainForm = mainForm;
@@ -59,7 +61,7 @@ namespace Just_Remind
         // Вызывается при загрузке формы (когда форма отображается пользователю)
         private void NotificationWindow_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(xStartCoord, yStartCoord);
+            this.Location = new Point(XStartCoord, YStartCoord);
             comboBox1.SelectedIndex = 0;
             this.Height = DEFAULT_HEAIGHT;
             label1.Text = Notification.Text;
@@ -68,9 +70,40 @@ namespace Just_Remind
         // Нажатие на кнопку "Ок"
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (puttoffClicked && comboBox1.SelectedIndex != 8)
+            if (puttoffClicked && comboBox1.SelectedIndex != NO_PUTOFF)
             {
                 // Обработка ситуации, если пользователь захотел отложить уведомление
+                notification.IsRepeatByDate = false;
+                notification.IsRepeatByDay = false;
+                notification.IsRepeatByDaysOfWeek = false;
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        notification.NearestDateTime = DateTime.Now.AddMinutes(5);
+                        break;
+                    case 1:
+                        notification.NearestDateTime = DateTime.Now.AddMinutes(10);
+                        break;
+                    case 2:
+                        notification.NearestDateTime = DateTime.Now.AddMinutes(15);
+                        break;
+                    case 3:
+                        notification.NearestDateTime = DateTime.Now.AddMinutes(20);
+                        break;
+                    case 4:
+                        notification.NearestDateTime = DateTime.Now.AddMinutes(30);
+                        break;
+                    case 5:
+                        notification.NearestDateTime = DateTime.Now.AddMinutes(40);
+                        break;
+                    case 6:
+                        notification.NearestDateTime = DateTime.Now.AddMinutes(50);
+                        break;
+                    case 7:
+                        notification.NearestDateTime = DateTime.Now.AddHours(1);
+                        break;
+                }
+                mainForm.InsertPutedoffNotification(notification);
             }
             this.Close();
         }
