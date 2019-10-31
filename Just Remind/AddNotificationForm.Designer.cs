@@ -904,6 +904,8 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "AddNotificationForm";
             this.Text = "Новое напоминание";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddNotificationForm_FormClosing);
