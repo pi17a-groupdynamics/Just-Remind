@@ -20,6 +20,10 @@ namespace Just_Remind
         private AddNotificationForm addNotificationForm = new AddNotificationForm();
         private ShowNotificationChecker showNotificationChecker;
 
+        // Зарезервированная дата и время, которую возвращает NearestDateTimeCounter
+        // в том случае, если напоминание больше не нужно повторять
+        private readonly DateTime DELETE_NOTIFICATION = new DateTime(2200, 1, 1);
+
         /// <summary>
         /// Напоминание, которое будет показано раньше всех остальных
         /// </summary>
@@ -84,7 +88,6 @@ namespace Just_Remind
         // свойство NearestNotification
         private void DetermineNearestNotif()
         {
-            showNotificationChecker.Stop();
             Notification nearestNotif;
             if (personalNotifications.Count > 0 && birthdayNotifications.Count > 0 &&
                 holidayNotifications.Count > 0)
@@ -103,7 +106,6 @@ namespace Just_Remind
             }
             else
                 DetermineNearestNotif_EmptyLists();
-            showNotificationChecker.StartAsync();
         }
 
         // Загрузка формы
@@ -403,6 +405,7 @@ namespace Just_Remind
             LoadDataFromFiles(appPath);
             showNotificationChecker = new ShowNotificationChecker(this);
             DetermineNearestNotif();
+            showNotificationChecker.StartAsync();
         }
 
         #endregion
@@ -414,26 +417,48 @@ namespace Just_Remind
         public void ShowNearestNotification()
         {
             NotificationWindow notificationWindow = new NotificationWindow(this, NearestNotification);
+            showNotificationChecker.Stop();
             notificationWindow.Show();
+            Notification tempNotification;
             switch (NearestNotification.Category)
             {
                 case NotifCategories.Personal:
+                    // Сохраняем первый (ближайший) элемент списка во временный объект
+                    tempNotification = personalNotifications[0];
+                    // Считаем для него новую ближайшую дату показа
+                    tempNotification.NearestDateTime = NearestDateTimeCounter.CountNearestDateTime(tempNotification);
+                    // Удаляем первый элемент списка, так как он только что был показан и больше не нужен
                     personalNotifications.RemoveAt(0);
+                    // Если это напоминание ещё нужно будет повторять в будущем, то вставляем его 
+                    // (с уже пересчитанной датой/временем показа) в список
+                    if (tempNotification.NearestDateTime.CompareTo(DELETE_NOTIFICATION) != 0)
+                        personalNotifications.Insert(tempNotification);
+                    // Перезаписываем файл и обновляем таблицу, основываясь на уже обновлённом списке
                     RewritePersonalFile();
                     UpdateNotifTable(dataGridView2, personalNotifications);
                     break;
+                    // В остальных кейсах делается то же самое, только с другими списками
                 case NotifCategories.Birthdays:
+                    tempNotification = birthdayNotifications[0];
+                    tempNotification.NearestDateTime = NearestDateTimeCounter.CountNearestDateTime(tempNotification);
                     birthdayNotifications.RemoveAt(0);
+                    if (tempNotification.NearestDateTime.CompareTo(DELETE_NOTIFICATION) != 0)
+                        birthdayNotifications.Insert(tempNotification);
                     RewriteBirthdaysOrHolidaysFile(birthdayNotifications, "Birthdays.dat");
                     UpdateNotifTable(dataGridView3, birthdayNotifications);
                     break;
                 case NotifCategories.Holidays:
+                    tempNotification = holidayNotifications[0];
+                    tempNotification.NearestDateTime = NearestDateTimeCounter.CountNearestDateTime(tempNotification);
                     holidayNotifications.RemoveAt(0);
+                    if (tempNotification.NearestDateTime.CompareTo(DELETE_NOTIFICATION) != 0)
+                        holidayNotifications.Insert(tempNotification);
                     RewriteBirthdaysOrHolidaysFile(holidayNotifications, "Holidays.dat");
                     UpdateNotifTable(dataGridView4, holidayNotifications);
                     break;
             }
             DetermineNearestNotif();
+            showNotificationChecker.StartAsync();
         }
 
         // Нажатие Отладка -> Показать всплывающее окно
@@ -691,7 +716,9 @@ namespace Just_Remind
                         UpdateNotifTable(dataGridView4, holidayNotifications);
                         break;
                 }
+                showNotificationChecker.Stop();
                 DetermineNearestNotif();
+                showNotificationChecker.StartAsync();
                 UpdateImportantNotifTable();
             }
         }
@@ -746,7 +773,9 @@ namespace Just_Remind
                     UpdateNotifTable(dataGridView4, holidayNotifications);
                     break;
             }
+            showNotificationChecker.Stop();
             DetermineNearestNotif();
+            showNotificationChecker.StartAsync();
             UpdateImportantNotifTable();
         }
     }

@@ -522,14 +522,68 @@ namespace Just_Remind
 
         #endregion
 
+        #region RepeatOnlyByDay
+
+        // Считает, в какое время должно быть показано напоминание, если текущее время
+        // попадает в интервал повторения
+        private static DateTime RepeatOnlyByDay_TimeInInterval(Notification notification,
+            DateTime dateTimeNow, DateTime endTime)
+        {
+            DateTime notificationTime = new DateTime(2019, 1, 1);
+            notificationTime = notificationTime.AddHours(notification.StartTime.Hour);
+            notificationTime = notificationTime.AddMinutes(notification.StartTime.Minute);
+            bool outOfInterval = false;
+            int comparisonResult = CompareTimes(notificationTime, dateTimeNow);
+            while (comparisonResult <= 0 && !outOfInterval)
+            {
+                notificationTime = notificationTime.AddHours(notification.HoursInterval);
+                notificationTime = notificationTime.AddMinutes(notification.MinutesInterval);
+                comparisonResult = CompareTimes(notificationTime, dateTimeNow);
+                int outOfIntervalComparison = CompareTimes(endTime, notificationTime);
+                if (outOfIntervalComparison < 0)
+                    outOfInterval = true;
+            }
+            if (outOfInterval)
+                return new DateTime(2200, 1, 1);
+            else
+            {
+                DateTime nearestDateTime = new DateTime(dateTimeNow.Year,
+                    dateTimeNow.Month, dateTimeNow.Day);
+                nearestDateTime = nearestDateTime.AddHours(notificationTime.Hour);
+                nearestDateTime = nearestDateTime.AddMinutes(notificationTime.Minute);
+                return nearestDateTime;
+            }
+        }
+
+        // Если повтор только в течении дня
+        private static DateTime CountIfRepeatOnlyByDay(Notification notification,
+            DateTime dateTimeNow)
+        {
+            if (!notification.IsRepeatByDay)
+                return new DateTime(2200, 1, 1);
+            else
+            {
+                DateTime endTime = notification.EndTime;
+                int comparisonEnd = CompareTimes(endTime, dateTimeNow);
+                // Текущее время позже, чем интервал, в который напоминание повторяется, либо
+                // мы находимся в последней минуте интервала
+                if (comparisonEnd <= 0)
+                    return new DateTime(2200, 1, 1);
+                // Текущее время попадает в интервал
+                else
+                    return RepeatOnlyByDay_TimeInInterval(notification, dateTimeNow, endTime);
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// Позволяет посчитать ближайшую дату и время показа уведомления. 
-        /// Для этого в уведомлении должна быть инициализирована вся информация,
+        /// Для этого в напоминании должна быть инициализирована вся информация,
         /// касающаяся даты и времени его показа (по дням недели, датам, повтор
         /// в течении дня и т. д.). Этот метод считает ближайшую дату только для 
-        /// уведомления, которое повторяется по датам в году либо по дням недели. 
-        /// Для другого уведомления он вернёт дату и время,
-        /// которые УЖЕ находятся у этого уведомления в NearestDateTime.
+        /// повторяющегося напоминания. Если напоминание больше не нужно повторять,
+        /// то метод вернёт 1 января 2200 года 00:00.
         /// </summary>
         public static DateTime CountNearestDateTime(Notification notification)
         {
@@ -539,7 +593,7 @@ namespace Just_Remind
             else if (notification.IsRepeatByDate)
                 return CountIfRepeatByDate(notification, dateTimeNow);
             else
-                return notification.NearestDateTime;
+                return CountIfRepeatOnlyByDay(notification, dateTimeNow);
         }
     }
 }

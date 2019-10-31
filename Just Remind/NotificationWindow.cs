@@ -53,6 +53,7 @@ namespace Just_Remind
         // Конструктор принимает объект главной формы
         public NotificationWindow(Form1 mainForm, Notification notification)
         {
+            this.TopMost = true;
             InitializeComponent();
             this.mainForm = mainForm;
             this.Notification = notification;
@@ -65,6 +66,7 @@ namespace Just_Remind
             comboBox1.SelectedIndex = 0;
             this.Height = DEFAULT_HEAIGHT;
             label1.Text = Notification.Text;
+            this.WindowState = FormWindowState.Normal;
         }
 
         // Нажатие на кнопку "Ок"
