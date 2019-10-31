@@ -17,6 +17,7 @@ namespace Just_Remind
         private NotificationList personalNotifications = new NotificationList();
         private NotificationList birthdayNotifications = new NotificationList();
         private NotificationList holidayNotifications = new NotificationList();
+        private NotificationList importantNotifications = new NotificationList();
         private AddNotificationForm addNotificationForm = new AddNotificationForm();
         private ShowNotificationChecker showNotificationChecker;
 
@@ -285,6 +286,7 @@ namespace Just_Remind
                         for (int i = 0; i < rowsNum; i++)
                             notificationText += reader.ReadLine();
                         notification.Text = notificationText;
+                        notification.Category = NotifCategories.Personal;
                         personalNotifications.Insert(notification);
                     }
                 }
@@ -303,6 +305,11 @@ namespace Just_Remind
         private void LoadDataFromBirthdaysOrHolidays(string filePath, 
             NotificationList notificationList)
         {
+            NotifCategories notifCategory;
+            if (notificationList == birthdayNotifications)
+                notifCategory = NotifCategories.Birthdays;
+            else
+                notifCategory = NotifCategories.Holidays;
             string fileText;
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -359,6 +366,7 @@ namespace Just_Remind
                         notificationText += reader.ReadLine();
                     notification.Text = notificationText;
                     notification.IsRepeatByDate = true;
+                    notification.Category = notifCategory;
                     notificationList.Insert(notification);
                 }
             }
@@ -421,8 +429,31 @@ namespace Just_Remind
             UpdateNotifTable(dataGridView2, personalNotifications);
             UpdateNotifTable(dataGridView3, birthdayNotifications);
             UpdateNotifTable(dataGridView4, holidayNotifications);
+            CreateImportantNotifsList();
             UpdateImportantNotifTable();
             this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// Формирует список важных напоминаний
+        /// </summary>
+        private void CreateImportantNotifsList()
+        {
+            foreach (Notification notification in personalNotifications)
+            {
+                if (notification.IsImportant)
+                    importantNotifications.Insert(notification);
+            }
+            foreach (Notification notification in birthdayNotifications)
+            {
+                if (notification.IsImportant)
+                    importantNotifications.Insert(notification);
+            }
+            foreach (Notification notification in holidayNotifications)
+            {
+                if (notification.IsImportant)
+                    importantNotifications.Insert(notification);
+            }
         }
 
         /// <summary>
@@ -556,6 +587,7 @@ namespace Just_Remind
                 else
                     dataGridView.Rows.Add(notificationText);
             }
+            UpdateImportantNotifTable();
         }
 
         /// <summary>
@@ -563,7 +595,19 @@ namespace Just_Remind
         /// </summary>
         private void UpdateImportantNotifTable()
         {
-            // !дописать!
+            dataGridView1.Rows.Clear();
+            foreach (Notification notification in importantNotifications)
+            {
+                string notificationText = notification.Text;
+                int indexOfNewLine = notificationText.IndexOf('\n');
+                if (indexOfNewLine != -1)
+                {
+                    string firstRow = notificationText.Substring(0, indexOfNewLine) + "...";
+                    dataGridView1.Rows.Add(firstRow);
+                }
+                else
+                    dataGridView1.Rows.Add(notificationText);
+            }
         }
 
         /// <summary>
@@ -766,7 +810,6 @@ namespace Just_Remind
                 showNotificationChecker.Stop();
                 DetermineNearestNotif();
                 showNotificationChecker.StartAsync();
-                UpdateImportantNotifTable();
             }
         }
 
@@ -827,7 +870,101 @@ namespace Just_Remind
             showNotificationChecker.Stop();
             DetermineNearestNotif();
             showNotificationChecker.StartAsync();
-            UpdateImportantNotifTable();
+        }
+
+        /// <summary>
+        /// Нажатие звёздочки в таблице "Важные"
+        /// </summary>
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                int rowNum = e.RowIndex;
+                importantNotifications[rowNum].IsImportant = false;
+                switch (importantNotifications[rowNum].Category)
+                {
+                    case NotifCategories.Personal:
+                        RewritePersonalFile();
+                        break;
+                    case NotifCategories.Birthdays:
+                        RewriteBirthdaysOrHolidaysFile(birthdayNotifications, "Birthdays.dat");
+                        break;
+                    case NotifCategories.Holidays:
+                        RewriteBirthdaysOrHolidaysFile(holidayNotifications, "Holidays.dat");
+                        break;
+                }
+                importantNotifications.RemoveAt(rowNum);
+                UpdateImportantNotifTable();
+            }
+        }
+
+        /// <summary>
+        /// Нажатие звёздочки в таблице "Личные"
+        /// </summary>
+        private void DataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                int rowNum = e.RowIndex;
+                if (!personalNotifications[rowNum].IsImportant)
+                {
+                    personalNotifications[rowNum].IsImportant = true;
+                    importantNotifications.Insert(personalNotifications[rowNum]);
+                }
+                else
+                {
+                    personalNotifications[rowNum].IsImportant = false;
+                    importantNotifications.Remove(personalNotifications[rowNum]);
+                }
+                RewritePersonalFile();
+                UpdateImportantNotifTable();
+            }
+        }
+
+        /// <summary>
+        /// Нажатие звёздочки в таблице "Дни рождения"
+        /// </summary>
+        private void DataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                int rowNum = e.RowIndex;
+                if (!birthdayNotifications[rowNum].IsImportant)
+                {
+                    birthdayNotifications[rowNum].IsImportant = true;
+                    importantNotifications.Insert(birthdayNotifications[rowNum]);
+                }
+                else
+                {
+                    birthdayNotifications[rowNum].IsImportant = false;
+                    importantNotifications.Remove(birthdayNotifications[rowNum]);
+                }
+                RewriteBirthdaysOrHolidaysFile(birthdayNotifications, "Birthdays.dat");
+                UpdateImportantNotifTable();
+            }
+        }
+
+        /// <summary>
+        /// Нажатие звёздочки в таблице "Праздники"
+        /// </summary>
+        private void DataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                int rowNum = e.RowIndex;
+                if (!holidayNotifications[rowNum].IsImportant)
+                {
+                    holidayNotifications[rowNum].IsImportant = true;
+                    importantNotifications.Insert(holidayNotifications[rowNum]);
+                }
+                else
+                {
+                    holidayNotifications[rowNum].IsImportant = false;
+                    importantNotifications.Remove(holidayNotifications[rowNum]);
+                }
+                RewriteBirthdaysOrHolidaysFile(holidayNotifications, "Holidasy.dat");
+                UpdateImportantNotifTable();
+            }
         }
     }
 }
