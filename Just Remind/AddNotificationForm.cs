@@ -28,6 +28,16 @@ namespace Just_Remind
         private bool formClosedOk = false;
         private bool catchMonthCalendar1_SelectionChange = false;
 
+        // Эти переменные нужны для корректного ввода текста в комбобоксы
+        private string comboBox1_Text;
+        private string comboBox2_Text;
+        private string comboBox3_Text;
+        private string comboBox4_Text;
+        private string comboBox5_Text;
+        private string comboBox6_Text;
+        private string comboBox7_Text;
+        private string comboBox8_Text;
+
         /// <summary>
         /// Цвет кнопки по умолчанию
         /// </summary>
@@ -75,6 +85,14 @@ namespace Just_Remind
             comboBox6.SelectedIndex = 0;
             comboBox7.SelectedIndex = 0;
             comboBox8.SelectedIndex = 0;
+            comboBox1_Text = comboBox1.Text;
+            comboBox2_Text = comboBox2.Text;
+            comboBox3_Text = comboBox3.Text;
+            comboBox4_Text = comboBox4.Text;
+            comboBox5_Text = comboBox5.Text;
+            comboBox6_Text = comboBox6.Text;
+            comboBox7_Text = comboBox7.Text;
+            comboBox8_Text = comboBox8.Text;
             radioButton5.Checked = true;
         }
 
@@ -691,60 +709,178 @@ namespace Just_Remind
         // Запрет на ввод в комбобоксы 4й панели некорректных данных
         #region ComboBoxesPanel4_BanIncorrectData
 
-        private void ComboBox3_KeyPress(object sender, KeyPressEventArgs e)
+        /// <summary>
+        /// Возвращает true, если text содержит только цифры, и false в противном случае
+        /// </summary>
+        private bool CheckOnlyDigits(string text)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox3.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            int textLen = text.Length;
+            for (int i = 0; i < textLen; i++)
+            {
+                if (text[i] < '0' || text[i] > '9')
+                    return false;
+            }
+            return true;
         }
 
-        private void ComboBox4_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox1_TextChanged(object sender, EventArgs e)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox4.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            if (!CheckOnlyDigits(comboBox1.Text))
+            {
+                comboBox1.Text = comboBox1_Text;
+                return;
+            }
+            if (comboBox1_Text.Length > 2)
+            {
+                comboBox1.Text = comboBox1_Text;
+                return;
+            }
+            if (short.Parse(comboBox1.Text) > 23)
+            {
+                comboBox1.Text = comboBox1_Text;
+                return;
+            }
+            comboBox1_Text = comboBox1.Text;
         }
 
-        private void ComboBox6_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox2_TextChanged(object sender, EventArgs e)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox6.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            if (!CheckOnlyDigits(comboBox2.Text))
+            {
+                comboBox2.Text = comboBox2_Text;
+                return;
+            }
+            if (comboBox2_Text.Length > 2)
+            {
+                comboBox2.Text = comboBox2_Text;
+                return;
+            }
+            if (short.Parse(comboBox2.Text) > 59)
+            {
+                comboBox2.Text = comboBox2_Text;
+                return;
+            }
+            comboBox2_Text = comboBox2.Text;
         }
 
-        private void ComboBox5_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox3_TextChanged(object sender, EventArgs e)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox5.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            if (!CheckOnlyDigits(comboBox3.Text))
+            {
+                comboBox3.Text = comboBox3_Text;
+                return;
+            }
+            if (comboBox3_Text.Length > 2)
+            {
+                comboBox3.Text = comboBox3_Text;
+                return;
+            }
+            if (short.Parse(comboBox3.Text) > 23)
+            {
+                comboBox3.Text = comboBox3_Text;
+                return;
+            }
+            comboBox3_Text = comboBox3.Text;
         }
 
-        private void ComboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox4_TextChanged(object sender, EventArgs e)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            if (!CheckOnlyDigits(comboBox4.Text))
+            {
+                comboBox4.Text = comboBox4_Text;
+                return;
+            }
+            if (comboBox4_Text.Length > 2)
+            {
+                comboBox4.Text = comboBox4_Text;
+                return;
+            }
+            if (short.Parse(comboBox4.Text) > 59)
+            {
+                comboBox4.Text = comboBox4_Text;
+                return;
+            }
+            comboBox4_Text = comboBox4.Text;
         }
 
-        private void ComboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox5_TextChanged(object sender, EventArgs e)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox2.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            if (!CheckOnlyDigits(comboBox5.Text))
+            {
+                comboBox5.Text = comboBox5_Text;
+                return;
+            }
+            if (comboBox5_Text.Length > 2)
+            {
+                comboBox5.Text = comboBox5_Text;
+                return;
+            }
+            if (short.Parse(comboBox5.Text) > 59)
+            {
+                comboBox5.Text = comboBox5_Text;
+                return;
+            }
+            comboBox5_Text = comboBox5.Text;
         }
 
-        private void ComboBox7_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox6_TextChanged(object sender, EventArgs e)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            if (!CheckOnlyDigits(comboBox6.Text))
+            {
+                comboBox6.Text = comboBox6_Text;
+                return;
+            }
+            if (comboBox6_Text.Length > 2)
+            {
+                comboBox6.Text = comboBox6_Text;
+                return;
+            }
+            if (short.Parse(comboBox6.Text) > 23)
+            {
+                comboBox6.Text = comboBox6_Text;
+                return;
+            }
+            comboBox6_Text = comboBox6.Text;
         }
 
-        private void ComboBox8_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox7_TextChanged(object sender, EventArgs e)
         {
-            char c = e.KeyChar;
-            if (!char.IsControl(c) && (comboBox1.Text.Length == 2 || !char.IsDigit(c)))
-                e.Handled = true;
+            if (!CheckOnlyDigits(comboBox7.Text))
+            {
+                comboBox7.Text = comboBox7_Text;
+                return;
+            }
+            if (comboBox7_Text.Length > 2)
+            {
+                comboBox7.Text = comboBox7_Text;
+                return;
+            }
+            if (short.Parse(comboBox7.Text) > 59)
+            {
+                comboBox7.Text = comboBox7_Text;
+                return;
+            }
+            comboBox7_Text = comboBox7.Text;
+        }
+
+        private void ComboBox8_TextChanged(object sender, EventArgs e)
+        {
+            if (!CheckOnlyDigits(comboBox8.Text))
+            {
+                comboBox8.Text = comboBox8_Text;
+                return;
+            }
+            if (comboBox8_Text.Length > 2)
+            {
+                comboBox8.Text = comboBox8_Text;
+                return;
+            }
+            if (short.Parse(comboBox8.Text) > 23)
+            {
+                comboBox8.Text = comboBox8_Text;
+                return;
+            }
+            comboBox8_Text = comboBox8.Text;
         }
 
         private void ComboBox8_Leave(object sender, EventArgs e)

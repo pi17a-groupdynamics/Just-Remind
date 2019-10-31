@@ -519,7 +519,7 @@
             this.comboBox7.Size = new System.Drawing.Size(45, 28);
             this.comboBox7.TabIndex = 70;
             this.comboBox7.Text = "00";
-            this.comboBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox7_KeyPress);
+            this.comboBox7.TextChanged += new System.EventHandler(this.ComboBox7_TextChanged);
             this.comboBox7.Leave += new System.EventHandler(this.ComboBox7_Leave);
             // 
             // label13
@@ -566,7 +566,7 @@
             this.comboBox8.Size = new System.Drawing.Size(45, 28);
             this.comboBox8.TabIndex = 68;
             this.comboBox8.Text = "0";
-            this.comboBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox8_KeyPress);
+            this.comboBox8.TextChanged += new System.EventHandler(this.ComboBox8_TextChanged);
             this.comboBox8.Leave += new System.EventHandler(this.ComboBox8_Leave);
             // 
             // label19
@@ -616,7 +616,7 @@
             this.comboBox5.Size = new System.Drawing.Size(45, 28);
             this.comboBox5.TabIndex = 71;
             this.comboBox5.Text = "00";
-            this.comboBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox5_KeyPress);
+            this.comboBox5.TextChanged += new System.EventHandler(this.ComboBox5_TextChanged);
             this.comboBox5.Leave += new System.EventHandler(this.ComboBox5_Leave);
             // 
             // comboBox6
@@ -653,7 +653,7 @@
             this.comboBox6.Size = new System.Drawing.Size(45, 28);
             this.comboBox6.TabIndex = 70;
             this.comboBox6.Text = "00";
-            this.comboBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox6_KeyPress);
+            this.comboBox6.TextChanged += new System.EventHandler(this.ComboBox6_TextChanged);
             this.comboBox6.Leave += new System.EventHandler(this.ComboBox6_Leave);
             // 
             // label11
@@ -682,7 +682,7 @@
             this.comboBox4.Size = new System.Drawing.Size(45, 28);
             this.comboBox4.TabIndex = 68;
             this.comboBox4.Text = "00";
-            this.comboBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox4_KeyPress);
+            this.comboBox4.TextChanged += new System.EventHandler(this.ComboBox4_TextChanged);
             this.comboBox4.Leave += new System.EventHandler(this.ComboBox4_Leave);
             // 
             // comboBox3
@@ -719,7 +719,7 @@
             this.comboBox3.Size = new System.Drawing.Size(45, 28);
             this.comboBox3.TabIndex = 67;
             this.comboBox3.Text = "00";
-            this.comboBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox3_KeyPress);
+            this.comboBox3.TextChanged += new System.EventHandler(this.ComboBox3_TextChanged);
             this.comboBox3.Leave += new System.EventHandler(this.ComboBox3_Leave);
             // 
             // label8
@@ -748,7 +748,7 @@
             this.comboBox2.Size = new System.Drawing.Size(45, 28);
             this.comboBox2.TabIndex = 65;
             this.comboBox2.Text = "00";
-            this.comboBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox2_KeyPress);
+            this.comboBox2.TextChanged += new System.EventHandler(this.ComboBox2_TextChanged);
             this.comboBox2.Leave += new System.EventHandler(this.ComboBox2_Leave);
             // 
             // label7
@@ -825,7 +825,7 @@
             this.comboBox1.Size = new System.Drawing.Size(45, 28);
             this.comboBox1.TabIndex = 60;
             this.comboBox1.Text = "0";
-            this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox1_KeyPress);
+            this.comboBox1.TextChanged += new System.EventHandler(this.ComboBox1_TextChanged);
             this.comboBox1.Leave += new System.EventHandler(this.ComboBox1_Leave);
             // 
             // label17
