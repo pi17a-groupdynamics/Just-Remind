@@ -65,7 +65,13 @@ namespace Just_Remind
             this.Location = new Point(XStartCoord, YStartCoord);
             comboBox1.SelectedIndex = 0;
             this.Height = DEFAULT_HEAIGHT;
-            label1.Text = Notification.Text;
+            string notifText = string.Empty;
+            if (notification.IsImportant)
+                notifText += "Важно!\n";
+            if (notification.Category == NotifCategories.Birthdays)
+                notifText += "День рождения\n";
+            notifText += notification.Text;
+            label1.Text = notifText;
             this.WindowState = FormWindowState.Normal;
         }
 
@@ -78,6 +84,7 @@ namespace Just_Remind
                 notification.IsRepeatByDate = false;
                 notification.IsRepeatByDay = false;
                 notification.IsRepeatByDaysOfWeek = false;
+                notification.Category = NotifCategories.Personal;
                 switch (comboBox1.SelectedIndex)
                 {
                     case 0:

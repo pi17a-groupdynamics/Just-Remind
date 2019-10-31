@@ -200,6 +200,7 @@ namespace Just_Remind
                     {
                         Notification notification = new Notification();
                         short rowsNum = short.Parse(line);
+                        notification.RowsNum = rowsNum;
                         short day = short.Parse(reader.ReadLine());
                         short month = short.Parse(reader.ReadLine());
                         short year = short.Parse(reader.ReadLine());
@@ -297,6 +298,7 @@ namespace Just_Remind
                 {
                     Notification notification = new Notification();
                     short rowsNum = short.Parse(line);
+                    notification.RowsNum = rowsNum;
                     short day = short.Parse(reader.ReadLine());
                     short month = short.Parse(reader.ReadLine());
                     short year = short.Parse(reader.ReadLine());
@@ -338,6 +340,7 @@ namespace Just_Remind
                     for (int i = 0; i < rowsNum; i++)
                         notificationText += reader.ReadLine();
                     notification.Text = notificationText;
+                    notification.IsRepeatByDate = true;
                     notificationList.Insert(notification);
                 }
             }
