@@ -12,17 +12,29 @@ namespace Just_Remind
 {
     public partial class NotificationWindow : Form
     {
-        // Высота формы по умолчанию
+        /// <summary>
+        /// Высота формы по умолчанию
+        /// </summary>
         private static readonly int DEFAULT_HEAIGHT = 167;
-        // Высота формы после нажатия кнопки "Отложить"
+
+        /// <summary>
+        /// Высота формы после нажатия кнопки "Отложить"
+        /// </summary>
         private static readonly int ALT_HEIGHT = 200;
-        // Номер элемента в комбобоксе с вариантом "не откладывать"
+
+        /// <summary>
+        /// Номер элемента в комбобоксе с вариантом "не откладывать"
+        /// </summary>
         private static readonly int NO_PUTOFF = 8;
 
-        // Переходит в true при нажатии кнопки "Отложить"
+        /// <summary>
+        /// Переходит в true при нажатии кнопки "Отложить"
+        /// </summary>
         private bool puttoffClicked = false;
 
-        // Основная форма
+        /// <summary>
+        /// Основная форма
+        /// </summary>
         private Form1 mainForm;
 
         private Notification notification;
@@ -50,7 +62,9 @@ namespace Just_Remind
         public static int XStartCoord { get; set; }
         public static int YStartCoord { get; set; }
 
-        // Конструктор принимает объект главной формы
+        /// <summary>
+        /// Конструктор принимает объект главной формы
+        /// </summary>
         public NotificationWindow(Form1 mainForm, Notification notification)
         {
             this.TopMost = true;
@@ -59,7 +73,9 @@ namespace Just_Remind
             this.Notification = notification;
         }
 
-        // Вызывается при загрузке формы (когда форма отображается пользователю)
+        /// <summary>
+        /// Вызывается при загрузке формы (когда форма отображается пользователю)
+        /// </summary>
         private void NotificationWindow_Load(object sender, EventArgs e)
         {
             this.Location = new Point(XStartCoord, YStartCoord);
@@ -75,7 +91,9 @@ namespace Just_Remind
             this.WindowState = FormWindowState.Normal;
         }
 
-        // Нажатие на кнопку "Ок"
+        /// <summary>
+        /// Нажатие "Ок"
+        /// </summary>
         private void Button2_Click(object sender, EventArgs e)
         {
             if (puttoffClicked && comboBox1.SelectedIndex != NO_PUTOFF)
@@ -117,7 +135,9 @@ namespace Just_Remind
             this.Close();
         }
 
-        // Нажатие на кнопку "Отлолжить"
+        /// <summary>
+        /// Нажатие "Отлолжить"
+        /// </summary>
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Height = ALT_HEIGHT;

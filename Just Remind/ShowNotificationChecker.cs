@@ -9,15 +9,21 @@ namespace Just_Remind
 {
     class ShowNotificationChecker
     {
-        // Делегат, необходимый для вызова метода BeginInvoke()
-        // в методе Work()
+        /// <summary>
+        /// Делегат, необходимый для вызова метода BeginInvoke()
+        /// в методе Work()
+        /// </summary>
         private delegate void InvokeDelegate();
 
-        // Флаг, указывающий, должен ли метод Work
-        // остановить работу
+        /// <summary>
+        /// Флаг, указывающий, должен ли метод Work
+        /// остановить работу
+        /// </summary>
         private volatile bool stopped;
 
-        // Объект главной формы
+        /// <summary>
+        /// Объект главной формы
+        /// </summary>
         private Form1 mainForm;
 
         /// <summary>
@@ -28,6 +34,9 @@ namespace Just_Remind
             this.mainForm = mainForm;
         }
 
+        /// <summary>
+        /// В этом методе производится основная работа класса
+        /// </summary>
         private void Work()
         {
             while (!stopped)

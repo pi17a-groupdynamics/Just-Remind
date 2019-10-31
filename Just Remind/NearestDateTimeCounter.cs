@@ -62,7 +62,9 @@ namespace Just_Remind
                 return -1;
         }
 
-        // Добавляет время к уже готовой дате, если эта дата - не сегодня
+        /// <summary>
+        /// Добавляет время к уже готовой дате, если эта дата - не сегодня
+        /// </summary>
         private static DateTime CountTimeNotToday(Notification notification,
             DateTime notificationDate)
         {
@@ -77,7 +79,9 @@ namespace Just_Remind
 
         #region RepeatByDaysOfWeek
 
-        // Отвечает, является ли day подходящим днём недели для показа уведомления
+        /// <summary>
+        /// Отвечает, является ли day подходящим днём недели для показа уведомления
+        /// </summary>
         private static bool IsSuitableDay(Notification notification, DateTime day)
         {
             DayOfWeek dayOfWeek = day.DayOfWeek;
@@ -115,8 +119,10 @@ namespace Just_Remind
             return false;
         }
 
-        // Считает, на склоько дней нужно переместиться вперёд относительно day,
-        // чтобы напоминание было показано в нужный день
+        /// <summary>
+        /// Считает, на склоько дней нужно переместиться вперёд относительно day,
+        /// чтобы напоминание было показано в нужный день
+        /// </summary>
         private static int CountDaysToCarryover(Notification notification, DateTime day)
         {
             DayOfWeek dayOfWeek = day.DayOfWeek;
@@ -238,8 +244,10 @@ namespace Just_Remind
             return 0;
         }
 
-        // Фрагмент RepeatByDaysOfWeek_CountTimeToday. Считает, как добавлять время, если
-        // напоминание не нужно повторять в течении дня
+        /// <summary>
+        /// Фрагмент RepeatByDaysOfWeek_CountTimeToday. Считает, как добавлять время, если
+        /// напоминание не нужно повторять в течении дня
+        /// </summary>
         private static DateTime RepeatByDaysOfWeek_CountTimeToday_NotRepeatByDay(Notification notification,
             DateTime dateTimeNow)
         {
@@ -264,9 +272,11 @@ namespace Just_Remind
             return nearestDateTime;
         }
 
-        // Фрагмент RepeatByDaysOfWeek_CountTimeToday_RepeatByDay. Считает дату и время,
-        // если текущая дата совпадает с датой напоминания, а текущее время
-        // находится в интервале повторения напоминания
+        /// <summary>
+        /// Фрагмент RepeatByDaysOfWeek_CountTimeToday_RepeatByDay. Считает дату и время,
+        /// если текущая дата совпадает с датой напоминания, а текущее время
+        /// находится в интервале повторения напоминания
+        /// </summary>
         private static DateTime RepeatByDaysOfWeek_TimeInInterval(Notification notification,
             DateTime dateTimeNow, DateTime endTime)
         {
@@ -304,8 +314,10 @@ namespace Just_Remind
             }
         }
 
-        // Фрагмент RepeatByDaysOfWeek_CountTimeToday. Считает, как добавлять время, если
-        // напоминание нужно повторять в течении дня
+        /// <summary>
+        /// Фрагмент RepeatByDaysOfWeek_CountTimeToday. Считает, как добавлять время, если
+        /// напоминание нужно повторять в течении дня
+        /// </summary>
         private static DateTime RepeatByDaysOfWeek_CountTimeToday_RepeatByDay(Notification notification,
             DateTime dateTimeNow)
         {
@@ -339,11 +351,13 @@ namespace Just_Remind
                 return RepeatByDaysOfWeek_TimeInInterval(notification, dateTimeNow, endTime);
         }
 
-        // Добавляет время к дате, если эта дата - сегодня.
-        // Если текущее время больше времени, когда должно быть показано уведомление - 
-        // переносит дату до следующего дня недедели, когда должно быть показано уведомление.
-        // Если напоминание должно показываться в течении интервала - высчитывает, когда
-        // должно быть показано напоминание (сегодня ли, или в другой день недели, и в какое время)
+        /// <summary>
+        /// Добавляет время к дате, если эта дата - сегодня.
+        /// Если текущее время больше времени, когда должно быть показано уведомление - 
+        /// переносит дату до следующего дня недедели, когда должно быть показано уведомление.
+        /// Если напоминание должно показываться в течении интервала - высчитывает, когда
+        /// должно быть показано напоминание (сегодня ли, или в другой день недели, и в какое время)
+        /// </summary>
         private static DateTime RepeatByDaysOfWeek_CountTimeToday(Notification notification,
             DateTime dateTimeNow, DateTime notificationDate)
         {
@@ -355,7 +369,9 @@ namespace Just_Remind
                         dateTimeNow);
         }
 
-        // Если повтор по дням недели
+        /// <summary>
+        /// Если повтор по дням недели
+        /// </summary>
         private static DateTime CountIfRepeatByDaysOfWeek(Notification notification,
             DateTime dateTimeNow)
         {
@@ -384,8 +400,10 @@ namespace Just_Remind
 
         #region RepeatByDate
 
-        // Фрагмент RepeatByDate_CountTimeToday. Считает, как добавлять время, если
-        // напоминание не нужно повторять в течении дня
+        /// <summary>
+        /// Фрагмент RepeatByDate_CountTimeToday. Считает, как добавлять время, если
+        /// напоминание не нужно повторять в течении дня
+        /// </summary>
         private static DateTime RepeatByDate_CountTimeToday_NotRepeatByDay(Notification notification,
             DateTime dateTimeNow)
         {
@@ -405,9 +423,11 @@ namespace Just_Remind
             return nearestDateTime;
         }
 
-        // Фрагмент RepeatByDate_CountTimeToday_RepeatByDay. Считает дату и время,
-        // если текущая дата совпадает с датой напоминания, а текущее время
-        // находится в интервале повторения напоминания
+        /// <summary>
+        /// Фрагмент RepeatByDate_CountTimeToday_RepeatByDay. Считает дату и время,
+        /// если текущая дата совпадает с датой напоминания, а текущее время
+        /// находится в интервале повторения напоминания
+        /// </summary>
         private static DateTime RepeatByDate_TimeInInterval(Notification notification,
             DateTime dateTimeNow, DateTime endTime)
         {
@@ -443,8 +463,10 @@ namespace Just_Remind
             }
         }
 
-        // Фрагмент RepeatByDate_CountTimeToday. Считает, как добавлять время, если
-        // напоминание нужно повторять в течении дня
+        /// <summary>
+        /// Фрагмент RepeatByDate_CountTimeToday. Считает, как добавлять время, если
+        /// напоминание нужно повторять в течении дня
+        /// </summary>
         private static DateTime RepeatByDate_CountTimeToday_RepeatByDay(Notification notification,
             DateTime dateTimeNow)
         {
@@ -476,11 +498,13 @@ namespace Just_Remind
                 return RepeatByDate_TimeInInterval(notification, dateTimeNow, endTime);
         }
 
-        // Добавляет время к дате, если эта дата - сегодня.
-        // Если текущее время больше времени, когда должно быть показано уведомление - 
-        // переносит дату на год.
-        // Если напоминание должно показываться в течении интервала - высчитывает, когда
-        // должно быть показано напоминание (сегодня ли, или через год, и в какое время)
+        /// <summary>
+        /// Добавляет время к дате, если эта дата - сегодня.
+        /// Если текущее время больше времени, когда должно быть показано уведомление - 
+        /// переносит дату на год.
+        /// Если напоминание должно показываться в течении интервала - высчитывает, когда
+        /// должно быть показано напоминание (сегодня ли, или через год, и в какое время)
+        /// </summary>
         private static DateTime RepeatByDate_CountTimeToday(Notification notification,
             DateTime dateTimeNow)
         {
@@ -492,7 +516,9 @@ namespace Just_Remind
                         dateTimeNow);
         }
 
-        // Если повтор по определённой дате в году
+        /// <summary>
+        /// Если повтор по определённой дате в году
+        /// </summary>
         private static DateTime CountIfRepeatByDate(Notification notification,
             DateTime dateTimeNow)
         {
@@ -524,8 +550,10 @@ namespace Just_Remind
 
         #region RepeatOnlyByDay
 
-        // Считает, в какое время должно быть показано напоминание, если текущее время
-        // попадает в интервал повторения
+        /// <summary>
+        /// Считает, в какое время должно быть показано напоминание, если текущее время
+        /// попадает в интервал повторения
+        /// </summary>
         private static DateTime RepeatOnlyByDay_TimeInInterval(Notification notification,
             DateTime dateTimeNow, DateTime endTime)
         {
@@ -555,7 +583,9 @@ namespace Just_Remind
             }
         }
 
-        // Если повтор только в течении дня
+        /// <summary>
+        /// Если повтор только в течении дня
+        /// </summary>
         private static DateTime CountIfRepeatOnlyByDay(Notification notification,
             DateTime dateTimeNow)
         {

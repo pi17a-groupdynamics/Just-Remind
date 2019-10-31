@@ -28,9 +28,14 @@ namespace Just_Remind
         private bool formClosedOk = false;
         private bool catchMonthCalendar1_SelectionChange = false;
 
-        // Цвет кнопки по умолчанию
+        /// <summary>
+        /// Цвет кнопки по умолчанию
+        /// </summary>
         private Color defButtonColor = Color.FromKnownColor(KnownColor.ButtonFace);
-        // Цвет кнопки при нажатии
+
+        /// <summary>
+        /// Цвет кнопки при нажатии
+        /// </summary>
         private Color altButtonColor = Color.FromKnownColor(KnownColor.ControlDark);
 
         public AddNotificationForm()
@@ -39,7 +44,9 @@ namespace Just_Remind
             comboBox1.SelectedIndex = 0;
         }
 
-        // Возвращение формы в первозданный вид
+        /// <summary>
+        /// Возвращение формы в первозданный вид
+        /// </summary>
         private void ClearForm()
         {
             panel2.Visible = false;
@@ -71,7 +78,9 @@ namespace Just_Remind
             radioButton5.Checked = true;
         }
 
-        // Очищает все флаги в напоминании
+        /// <summary>
+        /// Очищает все флаги в напоминании
+        /// </summary>
         private void ClearNotification()
         {
             Notification.IsRepeatByDay = false;
@@ -86,7 +95,9 @@ namespace Just_Remind
             Notification.IsRepeatOnSunday = false;
         }
 
-        // Вызывается при загрузке формы, после конструктора
+        /// <summary>
+        /// Вызывается при загрузке формы, после конструктора
+        /// </summary>
         private void AddNotificationForm_Load(object sender, EventArgs e)
         {
             Button1_Click(sender, e);
@@ -96,7 +107,9 @@ namespace Just_Remind
 
         #region Panel1
 
-        // Нажатие кнопки "Личные" на панели 1
+        /// <summary>
+        /// Нажатие кнопки "Личные" на панели 1
+        /// </summary>
         private void Button1_Click(object sender, EventArgs e)
         {
             button1.BackColor = altButtonColor;
@@ -109,7 +122,9 @@ namespace Just_Remind
             radioButton2.Enabled = true;
         }
 
-        // Нажатие кнопки "Дни рождения" на панели 1
+        /// <summary>
+        /// Нажатие кнопки "Дни рождения" на панели 1
+        /// </summary>
         private void Button2_Click(object sender, EventArgs e)
         {
             button1.BackColor = defButtonColor;
@@ -123,7 +138,9 @@ namespace Just_Remind
             radioButton2.Enabled = false;
         }
 
-        // Нажатие кнопки "Праздники" на панели 1
+        /// <summary>
+        /// Нажатие кнопки "Праздники" на панели 1
+        /// </summary>
         private void Button3_Click(object sender, EventArgs e)
         {
             button1.BackColor = defButtonColor;
@@ -137,7 +154,9 @@ namespace Just_Remind
             radioButton2.Enabled = false;
         }
 
-        // Нажатие кнопки "Далее" на 1й панели
+        /// <summary>
+        /// Нажатие кнопки "Далее" на 1й панели
+        /// </summary>
         private void Button4_Click(object sender, EventArgs e)
         {
             if (richTextBox1.Text == string.Empty)
@@ -156,9 +175,11 @@ namespace Just_Remind
 
         #region Panel2
 
-        // Проверяет, нужно ли ставить в Notification флаг IsRepeatByDaysOfWeek.
-        // Если напоминание должно повторяться хотя бы в один из дней недели, то
-        // флаг будет true.
+        /// <summary>
+        /// Проверяет, нужно ли ставить в Notification флаг IsRepeatByDaysOfWeek.
+        /// Если напоминание должно повторяться хотя бы в один из дней недели, то
+        /// флаг будет true.
+        /// </summary>
         private void CheckRepeatByDayOfWeek()
         {
             if (Notification.IsRepeatOnMonday || Notification.IsRepeatOnTuesday ||
@@ -172,7 +193,9 @@ namespace Just_Remind
                 Notification.IsRepeatByDaysOfWeek = false;
         }
 
-        // Сбрасывает все изменения в повторении по дате
+        /// <summary>
+        /// Сбрасывает все изменения в повторении по дате
+        /// </summary>
         private void DischargeRepeatByDate()
         {
             Notification.IsRepeatByDate = false;
@@ -183,7 +206,9 @@ namespace Just_Remind
             catchMonthCalendar1_SelectionChange = false;
         }
 
-        // Нажатие кнопки "ПН" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "ПН" на 2й панели
+        /// </summary>
         private void Button6_Click(object sender, EventArgs e)
         {
             DischargeRepeatByDate();
@@ -202,7 +227,9 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "ВТ" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "ВТ" на 2й панели
+        /// </summary>
         private void Button8_Click(object sender, EventArgs e)
         {
             DischargeRepeatByDate();
@@ -221,7 +248,9 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "СР" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "СР" на 2й панели
+        /// </summary>
         private void Button10_Click(object sender, EventArgs e)
         {
             DischargeRepeatByDate();
@@ -240,7 +269,9 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "ЧТ" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "ЧТ" на 2й панели
+        /// </summary>
         private void Button12_Click(object sender, EventArgs e)
         {
             DischargeRepeatByDate();
@@ -259,7 +290,9 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "ПТ" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "ПТ" на 2й панели
+        /// </summary>
         private void Button7_Click(object sender, EventArgs e)
         {
             DischargeRepeatByDate();
@@ -278,7 +311,9 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "СБ" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "СБ" на 2й панели
+        /// </summary>
         private void Button9_Click(object sender, EventArgs e)
         {
             DischargeRepeatByDate();
@@ -297,7 +332,9 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие кнопки "ВС" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "ВС" на 2й панели
+        /// </summary>
         private void Button11_Click(object sender, EventArgs e)
         {
             DischargeRepeatByDate();
@@ -316,7 +353,9 @@ namespace Just_Remind
             CheckRepeatByDayOfWeek();
         }
 
-        // Нажатие чекбокса "Будние дни"
+        /// <summary>
+        /// Нажатие чекбокса "Будние дни"
+        /// </summary>
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
@@ -336,7 +375,9 @@ namespace Just_Remind
             }
         }
 
-        // Нажатие чекбокса "Выходные дни"
+        /// <summary>
+        /// Нажатие чекбокса "Выходные дни"
+        /// </summary>
         private void CheckBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
@@ -350,7 +391,9 @@ namespace Just_Remind
             }
         }
 
-        // Сбрасывает все изменения в днях недели
+        /// <summary>
+        /// Сбрасывает все изменения в днях недели
+        /// </summary>
         private void DischargeDaysOfWeek()
         {
             Notification.IsRepeatByDaysOfWeek = false;
@@ -379,7 +422,9 @@ namespace Just_Remind
             Notification.IsRepeatOnSunday = false;
         }
 
-        // Выбрана новая дата на календаре 2й панели
+        /// <summary>
+        /// Выбрана новая дата на календаре 2й панели
+        /// </summary>
         private void MonthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             // Иногда нужно вернуть дату на место, а дни недели сбрасывать не нужно.
@@ -394,7 +439,9 @@ namespace Just_Remind
             }
         }
 
-        // Нажатие кнопки "Назад" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "Назад" на 2й панели
+        /// </summary>
         private void Button14_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
@@ -403,7 +450,9 @@ namespace Just_Remind
             DischargeDaysOfWeek();
         }
 
-        // Нажатие кнопки "Далее" на 2й панели
+        /// <summary>
+        /// Нажатие кнопки "Далее" на 2й панели
+        /// </summary>
         private void Button5_Click(object sender, EventArgs e)
         {
             if (!Notification.IsRepeatByDate && !Notification.IsRepeatByDaysOfWeek)
@@ -421,7 +470,9 @@ namespace Just_Remind
 
         #region Panel3
 
-        // Выбрана новая дата на календаре 3й панели
+        /// <summary>
+        /// Выбрана новая дата на календаре 3й панели
+        /// </summary>
         private void MonthCalendar2_DateChanged(object sender, DateRangeEventArgs e)
         {
             Notification.IsRepeatByDate = true;
@@ -430,7 +481,9 @@ namespace Just_Remind
                 monthCalendarDateTime.Month, monthCalendarDateTime.Day);
         }
 
-        // Нажатие кнопки "Назад" на 3й панели
+        /// <summary>
+        /// Нажатие кнопки "Назад" на 3й панели
+        /// </summary>
         private void Button15_Click(object sender, EventArgs e)
         {
             Notification.IsRepeatByDate = false;
@@ -439,7 +492,9 @@ namespace Just_Remind
             panel1.Visible = true;
         }
 
-        // Нажатие кнопки "Далее" на 3й панели
+        /// <summary>
+        /// Нажатие кнопки "Далее" на 3й панели
+        /// </summary>
         private void Button26_Click(object sender, EventArgs e)
         {
             panel3.Visible = false;
@@ -450,7 +505,9 @@ namespace Just_Remind
 
         #region Panel4
 
-        // Нажатие кнопки "Назад" на 4й панели
+        /// <summary>
+        /// Нажатие кнопки "Назад" на 4й панели
+        /// </summary>
         private void Button16_Click(object sender, EventArgs e)
         {
             panel4.Visible = false;
@@ -460,7 +517,9 @@ namespace Just_Remind
                 panel2.Visible = true;
         }
 
-        // Проверяет, введены ли в комбобоксах корректные цифры
+        /// <summary>
+        /// Проверяет, введены ли в комбобоксах корректные цифры
+        /// </summary>
         private bool CheckRepeatComboboxesCorrect()
         {
             int startHours = int.Parse(comboBox3.Text);
@@ -494,7 +553,9 @@ namespace Just_Remind
             return true;
         }
 
-        //Считает количество строк в тексте
+        /// <summary>
+        ///Считает количество строк в тексте
+        /// </summary>
         private short CountRowsNum(string text)
         {
             short rowsNum = 1;
@@ -507,8 +568,10 @@ namespace Just_Remind
             return rowsNum;
         }
 
-        // Заполняет напоминание с повторением в течении дня 
-        // информацией из комбобоксов 5й панели
+        /// <summary>
+        /// Заполняет напоминание с повторением в течении дня 
+        /// информацией из комбобоксов 5й панели
+        /// </summary>
         private bool FillNotificationRepeatByDay()
         {
             if (!CheckRepeatComboboxesCorrect())
@@ -533,7 +596,9 @@ namespace Just_Remind
             return true;
         }
 
-        // Проверяет, не создаётся ли уведомление без каких-либо повторений в прошлом
+        /// <summary>
+        /// Проверяет, не создаётся ли уведомление без каких-либо повторений в прошлом
+        /// </summary>
         private bool CheckNotifNoRepeats(DateTime dateTimeNow)
         {
             if (Notification.NearestDateTime.CompareTo(dateTimeNow) <= 0)
@@ -546,7 +611,9 @@ namespace Just_Remind
                 return true;
         }
 
-        // Проверяет, не создаётся ли уведомление с повторением в течении дня (и только) в прошлом
+        /// <summary>
+        /// Проверяет, не создаётся ли уведомление с повторением в течении дня (и только) в прошлом
+        /// </summary>
         private bool CheckNotifRepeatByDay(DateTime dateTimeNow)
         {
             if (Notification.NearestDateTime.CompareTo(dateTimeNow) <= 0)
@@ -559,7 +626,9 @@ namespace Just_Remind
                 return true;
         }
 
-        // Выбраны варианты "Напоминать один день" и "Не повторять в течении дня"
+        /// <summary>
+        /// Выбраны варианты "Напоминать один день" и "Не повторять в течении дня"
+        /// </summary>
         private bool CreateNotification(DateTime dateTimeNow)
         {
             Notification.Text = richTextBox1.Text;
@@ -607,7 +676,9 @@ namespace Just_Remind
             return true;
         }
 
-        // Нажатие кнопки "Сохранить" на 4й панели
+        /// <summary>
+        /// Нажатие кнопки "Сохранить" на 4й панели
+        /// </summary>
         private void Button17_Click(object sender, EventArgs e)
         {
             if (!CreateNotification(DateTime.Now))
@@ -619,6 +690,7 @@ namespace Just_Remind
 
         // Запрет на ввод в комбобоксы 4й панели некорректных данных
         #region ComboBoxesPanel4_BanIncorrectData
+
         private void ComboBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             char c = e.KeyChar;
@@ -725,7 +797,9 @@ namespace Just_Remind
 
         #endregion
 
-        // Обработка радиобаттона на 4й панели
+        /// <summary>
+        /// Обработка радиобаттона на 4й панели 
+        /// </summary>
         private void RadioButton6_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton6.Checked)
@@ -744,8 +818,10 @@ namespace Just_Remind
 
         #endregion
 
-        // Вызывается при закрытии формы. Возвращаем всё, как было при открытии
-        // и создаём DialogResult
+        /// <summary>
+        /// Вызывается при закрытии формы. Возвращаем всё, как было при открытии
+        /// и создаём DialogResult
+        /// </summary>
         private void AddNotificationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (formClosedOk)

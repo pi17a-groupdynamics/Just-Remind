@@ -20,8 +20,10 @@ namespace Just_Remind
         private AddNotificationForm addNotificationForm = new AddNotificationForm();
         private ShowNotificationChecker showNotificationChecker;
 
-        // Зарезервированная дата и время, которую возвращает NearestDateTimeCounter
-        // в том случае, если напоминание больше не нужно повторять
+        /// <summary>
+        /// Зарезервированная дата и время, которую возвращает NearestDateTimeCounter
+        /// в том случае, если напоминание больше не нужно повторять
+        /// </summary>
         private readonly DateTime DELETE_NOTIFICATION = new DateTime(2200, 1, 1);
 
         /// <summary>
@@ -29,8 +31,10 @@ namespace Just_Remind
         /// </summary>
         public Notification NearestNotification { get; set; }
 
-        // Определяет ближайшее напоминание, если хотя бы один из списков 
-        // с напоминаниями является путым
+        /// <summary>
+        /// Определяет ближайшее напоминание, если хотя бы один из списков 
+        /// с напоминаниями является путым
+        /// </summary>
         private void DetermineNearestNotif_EmptyLists()
         {
             int personalNotifCount = personalNotifications.Count;
@@ -83,9 +87,11 @@ namespace Just_Remind
                 NearestNotification = holidayNotifications[0];
         }
 
-        // Сравнивает ближайшие напоминания во всех списках, выбирает из них
-        // то, которое должно быть показано раньше всего, и сохраняет его в
-        // свойство NearestNotification
+        /// <summary>
+        /// Сравнивает ближайшие напоминания во всех списках, выбирает из них
+        /// то, которое должно быть показано раньше всего, и сохраняет его в
+        /// свойство NearestNotification
+        /// </summary>
         private void DetermineNearestNotif()
         {
             Notification nearestNotif;
@@ -111,7 +117,9 @@ namespace Just_Remind
         // Загрузка формы
         #region Load
 
-        // Тестовое уведомление и значения в таблице
+        /// <summary>
+        /// Тестовое уведомление и значения в таблице
+        /// </summary>
         private void SetTestOptions()
         {
             // Настраиваем системное уведомление (тестовое)
@@ -120,8 +128,10 @@ namespace Just_Remind
             notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon.Icon = this.Icon;
         }
-
-        // Конструктор формы
+            
+        /// <summary>
+        /// Конструктор формы
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -139,9 +149,11 @@ namespace Just_Remind
             SetTestOptions();
         }
 
-        // Проверяет, существует ли директория пользователя и файлы в ней в 
-        // AppData/Local. Если не существует - создаёт её и файлы. Если
-        // нет какого-то файла - создаёт его
+        /// <summary>
+        /// Проверяет, существует ли директория пользователя и файлы в ней в 
+        /// AppData/Local. Если не существует - создаёт её и файлы. Если
+        /// нет какого-то файла - создаёт его
+        /// </summary>
         private string CheckUserDirectory()
         {
             string appDataPath = 
@@ -169,7 +181,9 @@ namespace Just_Remind
             return applicationPath;
         }
 
-        // Тут думаю всё понятно
+        /// <summary>
+        /// Тут думаю всё понятно
+        /// </summary>
         private bool StrToBool(string str)
         {
             if (str == "0")
@@ -178,7 +192,9 @@ namespace Just_Remind
                 return true;
         }
 
-        // Загружает данные из "Personal.dat"
+        /// <summary>
+        /// Загружает данные из "Personal.dat"
+        /// </summary>
         private void LoadDataFromPersonal(string appPath)
         {
             try
@@ -280,8 +296,10 @@ namespace Just_Remind
             }
         }
 
-        // Загружает данные из "Birthdays.dat" или из "Holidays.dat"
-        // в зависимости от переданных аргументов
+        /// <summary>
+        /// Загружает данные из "Birthdays.dat" или из "Holidays.dat"
+        /// в зависимости от переданных аргументов
+        /// </summary>
         private void LoadDataFromBirthdaysOrHolidays(string filePath, 
             NotificationList notificationList)
         {
@@ -346,7 +364,9 @@ namespace Just_Remind
             }
         }
 
-        // Загружает данные из "Birthdays.dat"
+        /// <summary>
+        /// Загружает данные из "Birthdays.dat"
+        /// </summary>
         private void LoadDataFromBirthdays(string appPath)
         {
             try
@@ -365,7 +385,9 @@ namespace Just_Remind
             }
         }
 
-        // Загружает данные из "Holidays.dat"
+        /// <summary>
+        /// Загружает данные из "Holidays.dat"
+        /// </summary>
         private void LoadDataFromHolidays(string appPath)
         {
             try
@@ -384,8 +406,10 @@ namespace Just_Remind
             }
         }
 
-        // Загружает данные из файлов программы в AppData оперативную память
-        // (списки NotificationList)
+        /// <summary>
+        /// Загружает данные из файлов программы в AppData оперативную память
+        /// (списки NotificationList) 
+        /// </summary>
         private void LoadDataFromFiles(string appPath)
         {
             // Проверять наличие папки Just Remind и файлов не обязательно, так как
@@ -401,7 +425,9 @@ namespace Just_Remind
             this.Cursor = Cursors.Default;
         }
 
-        // Вызывается при загрузке формы, после конструктора
+        /// <summary>
+        /// Вызывается при загрузке формы, после конструктора
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             string appPath = CheckUserDirectory();
@@ -416,7 +442,9 @@ namespace Just_Remind
         //Показ уведомлений
         #region NotificationsShow
 
-        // Показывает ближайшее уведомление (NearestNotification)
+        /// <summary>
+        /// Показывает ближайшее уведомление (NearestNotification)
+        /// </summary>
         public void ShowNearestNotification()
         {
             NotificationWindow notificationWindow = new NotificationWindow(this, NearestNotification);
@@ -464,7 +492,9 @@ namespace Just_Remind
             showNotificationChecker.StartAsync();
         }
 
-        // Нажатие Отладка -> Показать всплывающее окно
+        /// <summary>
+        /// Нажатие Отладка -> Показать всплывающее окно
+        /// </summary>
         private void ShowPopupWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Так вызывается событие показа уведомления ввиде окна
@@ -473,7 +503,9 @@ namespace Just_Remind
             nWindow.Show();
         }
 
-        // Нажатие Отладка -> Показать простое уведомление
+        /// <summary>
+        /// Нажатие Отладка -> Показать простое уведомление
+        /// </summary>
         private void ShowSimpleNotifToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Так вызывается событие показа стандартного уведомления Windows
@@ -486,9 +518,11 @@ namespace Just_Remind
         // То, что происходит при нажатии кнопки "+"
         #region ButtonPlus
 
-        // Создаёт директорию Just Remind в AppData, если она была удалена
-        // и файл в этой директории, имя которого передаётся в fileName.
-        // Возвращает путь к файлу
+        /// <summary>
+        /// Создаёт директорию Just Remind в AppData, если она была удалена
+        /// и файл в этой директории, имя которого передаётся в fileName.
+        /// Возвращает путь к файлу
+        /// </summary>
         private string CreateDirAndFile(string fileName)
         {
             string appDataPath =
@@ -503,7 +537,9 @@ namespace Just_Remind
             return filePath;
         }
 
-        // Обновляет таблицу dataGridView, используя данные из notificationList
+        /// <summary>
+        /// Обновляет таблицу dataGridView, используя данные из notificationList
+        /// </summary>
         private void UpdateNotifTable(DataGridView dataGridView, 
             NotificationList notificationList)
         {
@@ -522,13 +558,17 @@ namespace Just_Remind
             }
         }
 
-        // Обновляет таблицу с важными уведомлениями
+        /// <summary>
+        /// Обновляет таблицу с важными уведомлениями
+        /// </summary>
         private void UpdateImportantNotifTable()
         {
             // !дописать!
         }
 
-        // Перезаписывает файл "Personal.dat"
+        /// <summary>
+        /// Перезаписывает файл "Personal.dat"
+        /// </summary>
         private void RewritePersonalFile()
         {
             try
@@ -633,8 +673,10 @@ namespace Just_Remind
             }
         }
 
-        // Перезаписывает файл "Birthdays.dat" или "Holidays.dat" в зависимости
-        // от того, какие notificationList и fileName были переданы в качестве аргументов
+        /// <summary>
+        /// Перезаписывает файл "Birthdays.dat" или "Holidays.dat" в зависимости
+        /// от того, какие notificationList и fileName были переданы в качестве аргументов
+        /// </summary>
         private void RewriteBirthdaysOrHolidaysFile(NotificationList notificationList,
             string fileName)
         {
@@ -693,7 +735,9 @@ namespace Just_Remind
             }
         }
 
-        // Нажатие кнопки "+"
+        /// <summary>
+        /// Нажатие кнопки "+"
+        /// </summary>
         private void Button1_Click(object sender, EventArgs e)
         {
             Notification notification = new Notification();
@@ -728,8 +772,10 @@ namespace Just_Remind
 
         #endregion
 
-        // Тут программа выбирает, что показывать после "Ваши задачи"
-        // в зависимости от того, какая вкладка сейчас открыта
+        /// <summary>
+        /// Тут программа выбирает, что показывать после "Ваши задачи"
+        /// в зависимости от того, какая вкладка сейчас открыта 
+        /// </summary>
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (tabControl1.SelectedIndex)
@@ -757,8 +803,10 @@ namespace Just_Remind
             }
         }
 
-        // Вставляет отложенное напоминание в необходимый список, пересчитывает
-        // NearestNotification, обновляет таблицы
+        /// <summary>
+        /// Вставляет отложенное напоминание в необходимый список, пересчитывает
+        /// NearestNotification, обновляет таблицы
+        /// </summary>
         public void InsertPutedoffNotification(Notification notification)
         {
             switch (notification.Category)
