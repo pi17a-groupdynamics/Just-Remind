@@ -815,62 +815,8 @@ namespace Just_Remind
 
         #endregion
 
-        /// <summary>
-        /// Тут программа выбирает, что показывать после "Ваши задачи"
-        /// в зависимости от того, какая вкладка сейчас открыта 
-        /// </summary>
-        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (tabControl1.SelectedIndex)
-            {
-                case 0:
-                    comboBox1.Visible = false;
-                    label2.Visible = false;
-                    label3.Visible = false;
-                    break;
-                case 1:
-                    comboBox1.Visible = true;
-                    label2.Visible = false;
-                    label3.Visible = false;
-                    break;
-                case 2:
-                    comboBox1.Visible = false;
-                    label2.Visible = true;
-                    label3.Visible = false;
-                    break;
-                case 3:
-                    comboBox1.Visible = false;
-                    label2.Visible = false;
-                    label3.Visible = true;
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Вставляет отложенное напоминание в необходимый список, пересчитывает
-        /// NearestNotification, обновляет таблицы
-        /// </summary>
-        public void InsertPutedoffNotification(Notification notification)
-        {
-            switch (notification.Category)
-            {
-                case NotifCategories.Personal:
-                    personalNotifications.Insert(notification);
-                    UpdateNotifTable(dataGridView2, personalNotifications);
-                    break;
-                case NotifCategories.Birthdays:
-                    birthdayNotifications.Insert(notification);
-                    UpdateNotifTable(dataGridView3, birthdayNotifications);
-                    break;
-                case NotifCategories.Holidays:
-                    holidayNotifications.Insert(notification);
-                    UpdateNotifTable(dataGridView4, holidayNotifications);
-                    break;
-            }
-            showNotificationChecker.Stop();
-            DetermineNearestNotif();
-            showNotificationChecker.StartAsync();
-        }
+        // Нажатия на ячейки таблиц
+        #region DataGridViewClicks
 
         /// <summary>
         /// Нажатие звёздочки в таблице "Важные"
@@ -965,6 +911,65 @@ namespace Just_Remind
                 RewriteBirthdaysOrHolidaysFile(holidayNotifications, "Holidasy.dat");
                 UpdateImportantNotifTable();
             }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Тут программа выбирает, что показывать после "Ваши задачи"
+        /// в зависимости от того, какая вкладка сейчас открыта 
+        /// </summary>
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    comboBox1.Visible = false;
+                    label2.Visible = false;
+                    label3.Visible = false;
+                    break;
+                case 1:
+                    comboBox1.Visible = true;
+                    label2.Visible = false;
+                    label3.Visible = false;
+                    break;
+                case 2:
+                    comboBox1.Visible = false;
+                    label2.Visible = true;
+                    label3.Visible = false;
+                    break;
+                case 3:
+                    comboBox1.Visible = false;
+                    label2.Visible = false;
+                    label3.Visible = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Вставляет отложенное напоминание в необходимый список, пересчитывает
+        /// NearestNotification, обновляет таблицы
+        /// </summary>
+        public void InsertPutedoffNotification(Notification notification)
+        {
+            switch (notification.Category)
+            {
+                case NotifCategories.Personal:
+                    personalNotifications.Insert(notification);
+                    UpdateNotifTable(dataGridView2, personalNotifications);
+                    break;
+                case NotifCategories.Birthdays:
+                    birthdayNotifications.Insert(notification);
+                    UpdateNotifTable(dataGridView3, birthdayNotifications);
+                    break;
+                case NotifCategories.Holidays:
+                    holidayNotifications.Insert(notification);
+                    UpdateNotifTable(dataGridView4, holidayNotifications);
+                    break;
+            }
+            showNotificationChecker.Stop();
+            DetermineNearestNotif();
+            showNotificationChecker.StartAsync();
         }
     }
 }
