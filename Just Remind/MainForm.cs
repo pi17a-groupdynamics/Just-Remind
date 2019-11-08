@@ -415,6 +415,52 @@ namespace Just_Remind
         }
 
         /// <summary>
+        /// После загрузки напоминаний из файлов удаляет напоминания, которые
+        /// уже поздно показывать
+        /// </summary>
+        private void DeleteOutOFDateNotifs()
+        {
+            for (int i = 0; i < personalNotifications.Count; i++)
+            {
+                Notification notification = personalNotifications[i];
+                DateTime nearestDateTime = NearestDateTimeCounter.CountNearestDateTime(notification);
+                personalNotifications.RemoveAt(i);
+                if (nearestDateTime.Equals(DELETE_NOTIFICATION))
+                    i--;
+                else
+                {
+                    notification.NearestDateTime = nearestDateTime;
+                    int insertIndex = personalNotifications.Insert(notification);
+                    if (insertIndex > i)
+                        i--;
+                }
+            }
+            RewritePersonalFile();
+            for (int i = 0; i < birthdayNotifications.Count; i++)
+            {
+                Notification notification = birthdayNotifications[i];
+                DateTime nearestDateTime = NearestDateTimeCounter.CountNearestDateTime(notification);
+                birthdayNotifications.RemoveAt(i);
+                notification.NearestDateTime = nearestDateTime;
+                int insertIndex = birthdayNotifications.Insert(notification);
+                if (insertIndex > i)
+                    i--;
+            }
+            RewriteBirthdaysOrHolidaysFile(birthdayNotifications, "Birthdays.dat");
+            for (int i = 0; i < holidayNotifications.Count; i++)
+            {
+                Notification notification = holidayNotifications[i];
+                DateTime nearestDateTime = NearestDateTimeCounter.CountNearestDateTime(notification);
+                holidayNotifications.RemoveAt(i);
+                notification.NearestDateTime = nearestDateTime;
+                int insertIndex = holidayNotifications.Insert(notification);
+                if (insertIndex > i)
+                    i--;
+            }
+            RewriteBirthdaysOrHolidaysFile(holidayNotifications, "Holidays.dat");
+        }
+
+        /// <summary>
         /// Загружает данные из файлов программы в AppData оперативную память
         /// (списки NotificationList) 
         /// </summary>
@@ -426,6 +472,7 @@ namespace Just_Remind
             LoadDataFromPersonal(appPath);
             LoadDataFromBirthdays(appPath);
             LoadDataFromHolidays(appPath);
+            DeleteOutOFDateNotifs();
             UpdateNotifTable(dataGridView2, personalNotifications);
             UpdateNotifTable(dataGridView3, birthdayNotifications);
             UpdateNotifTable(dataGridView4, holidayNotifications);

@@ -13,9 +13,9 @@ namespace Just_Remind
         /// <summary>
         /// Этот метод вставляет напоминание в список так, что напоминания
         /// оказываются отсортированными от самого раннего (0й) элемент к
-        /// самому позднему (последний элемент)
+        /// самому позднему (последний элемент). Возвращает индекс вставленного напоминания.
         /// </summary>
-        public void Insert(Notification notification)
+        public int Insert(Notification notification)
         {
             int i;
             bool indexFound = false;
@@ -33,6 +33,7 @@ namespace Just_Remind
             if (indexFound)
                 i--;
             this.Insert(i, notification);
+            return i;
         }
     }
 }
